@@ -1,0 +1,30 @@
+binds {
+    /* П Р И Л О Ж Е Н И Я */
+    Mod+Q hotkey-overlay-title="Open a Terminal: foot"      { spawn "foot"; }
+    Mod+D hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
+    Mod+F hotkey-overlay-title="Run a file manager: thunar" { spawn "thunar"; }
+    Mod+W hotkey-overlay-title="Run a browser: chromium"    { spawn "chromium" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland"; }
+    Mod+T hotkey-overlay-title="Run a telegram"             { spawn "Telegram"; }
+    Mod+R hotkey-overlay-title="Run a apps launcher: wofi"  { spawn "wofi" "--show" "drun"; }
+    Mod+O hotkey-overlay-title="Run a obsidian"             { spawn "obsidian"; }
+    Mod+B hotkey-overlay-title="Run a bottom"               { spawn "foot" "btm"; }
+    Mod+G hotkey-overlay-title="Run a GIMP"                 { spawn "flatpak" "run" "org.gimp.GIMP"; }
+    Mod+L hotkey-overlay-title="Run a Librewolf"            { spawn "librewolf"; }
+
+
+    /* С К Р И Н Ш О Т Ы */
+    Print       { spawn "flameshot" "gui"; }
+    Ctrl+Print  { screenshot-screen; }
+    Alt+Print   { screenshot-window; }
+
+
+    /* V I M - m o d e */
+    Mod+E       { spawn "foot" "/home/soundwave/.config/niri/scripts/filer"; }
+    // Mod+Shift+F { spawn "foot" "yazi"; }
+    Shift+N     { spawn "foot" "vim" "/home/soundwave/.config/niri"; }
+    Shift+W     { spawn "foot" "vim" "/home/soundwave/Workspace"; }
+    // Shift+O     { spawn "foot" "sudoedit" "/etc/nixos/configuration.nix"; }
+
+    /* A T L A S   E C O S Y S T E M */
+    Mod+A       { spawn "foot" "/home/soundwave/nixos-config/home/modules/niri/scripts/atlas_ecosystem/atlas_minimalism"; }
+}
