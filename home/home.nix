@@ -6,6 +6,13 @@
   home.homeDirectory = "/home/soundwave";
   home.stateVersion = "25.11"; 
 
+  # programs.niri.enable = true;
+
+  xdg.configFile."niri" = {
+    source = ./modules/niri; # Путь относительно home.nix
+    recursive = true;
+  };
+
   gtk = {
     enable = true;
     

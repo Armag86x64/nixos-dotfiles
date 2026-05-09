@@ -8,7 +8,7 @@
     environment.systemPackages = with pkgs; [
         # W M s
         hyprland
-        niri
+        # niri
         waybar
         mako
         libnotify
@@ -32,7 +32,6 @@
  
         # D e s k t o p   A p p s
         # telegram-desktop
-        # google-chrome
         chromium
         librewolf
         flameshot
