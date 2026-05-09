@@ -22,8 +22,7 @@
       MESA_LOADER_DRIVER_OVERRIDE = "iris"; 
     };
 
-    # 3. Тонкая настройка ядра для экономии и производительности GPU
-    
+    # 3. Тонкая настройка ядра для экономии и производительности GPU 
     boot.kernelParams = [
       "i915.enable_guc=3"        # Планирование задач внутри GPU (уже было, отлично)
       "i915.enable_fbc=1"        # Сжатие данных в памяти (Frame Buffer Compression)
