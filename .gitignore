@@ -1,0 +1,10 @@
+result
+result-*
+
+*.pem
+*.key
+secrets.yaml
+
+*.swp
+*~
+.DS_Store
