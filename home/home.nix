@@ -1,17 +1,23 @@
 { config, pkgs, ... }:
 
 {
-  # Настройки Home Manager
-  home.username = "soundwave"; # Добавьте это для надежности
+  home.username = "soundwave";
   home.homeDirectory = "/home/soundwave";
   home.stateVersion = "25.11"; 
 
   # programs.niri.enable = true;
 
   xdg.configFile."niri" = {
-    source = ./modules/niri; # Путь относительно home.nix
+    source = ./modules/niri;
     recursive = true;
   };
+
+  xdg.configFile."foot/foot.ini".source = ./modules/foot/foot.ini;
+
+  xdg.configFile."fastfetch/config.jsonc".source = ./modules/fastfetch/config.jsonc;
+
+  xdg.configFile."wofi/config".source = ./modules/wofi/config;
+  xdg.configFile."wofi/style.css".source = ./modules/wofi/style.css;
 
   # Пробрасываем основной файл конфига в корень( ~/.vimrc )
   home.file.".vimrc".source = ./modules/vim/vimrc;
@@ -38,13 +44,12 @@
     };
 
     iconTheme = {
-      name = "Tela-circle-black-dark"; # Название варианта внутри пакета
+      name = "Tela-circle-black-dark";
       package = pkgs.tela-circle-icon-theme.override {
-        colorVariants = [ "black" ]; # Генерируем только черную версию
+        colorVariants = [ "black" ];
       };
     };
 
-    # 2. ИНЖЕНЕРНЫЙ ШРИФТ: JetBrains Mono или Iosevka
     font = {
       name = "JetBrains Mono";
       package = pkgs.jetbrains-mono;
@@ -54,7 +59,7 @@
 
   home.pointerCursor = {
     package = pkgs.phinger-cursors;
-    name = "phinger-cursors-dark"; # or "phinger-cursors-light"
+    name = "phinger-cursors-dark";
     size = 24;
     gtk.enable = true;
     x11.enable = true;
