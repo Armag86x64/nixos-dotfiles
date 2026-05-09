@@ -19,12 +19,12 @@ binds {
 
 
     /* V I M - m o d e */
-    Mod+E       { spawn "foot" "/home/soundwave/.config/niri/scripts/filer"; }
+    // Mod+E       { spawn "foot" "/home/soundwave/.config/niri/scripts/filer"; }
     // Mod+Shift+F { spawn "foot" "yazi"; }
-    Shift+N     { spawn "foot" "vim" "/home/soundwave/.config/niri"; }
-    Shift+W     { spawn "foot" "vim" "/home/soundwave/Workspace"; }
+    Shift+N     { spawn-sh "foot vim $HOME/nixos-config"; }
+    Shift+W     { spawn-sh "foot vim $HOME/Workspace"; }
     // Shift+O     { spawn "foot" "sudoedit" "/etc/nixos/configuration.nix"; }
 
     /* A T L A S   E C O S Y S T E M */
-    Mod+A       { spawn "foot" "/home/soundwave/nixos-config/home/modules/niri/scripts/atlas_ecosystem/atlas_minimalism"; }
+    Mod+A       { spawn-sh "foot $HOME/nixos-config/home/modules/niri/scripts/atlas_ecosystem/atlas_minimalism"; }
 }
