@@ -1,0 +1,5 @@
+{
+  "rust-analyzer.diagnostics.enable": false,
+  "rust-analyzer.checkOnSave": false,
+  "rust-analyzer.server.path": "rust-analyzer"
+}
