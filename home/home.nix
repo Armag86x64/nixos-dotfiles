@@ -12,6 +12,8 @@
     recursive = true;
   };
 
+  xdg.configFile."mako/config".source = ./modules/mako/config;
+
   xdg.configFile."foot/foot.ini".source = ./modules/foot/foot.ini;
 
   xdg.configFile."fastfetch/config.jsonc".source = ./modules/fastfetch/config.jsonc;
@@ -19,12 +21,15 @@
   xdg.configFile."wofi/config".source = ./modules/wofi/config;
   xdg.configFile."wofi/style.css".source = ./modules/wofi/style.css;
 
-  # Пробрасываем основной файл конфига в корень( ~/.vimrc )
   home.file.".vimrc".source = ./modules/vim/vimrc;
 
-  # Пробрасываем папку со всей структурой( ~/.vim/ )
   home.file.".vim" = {
     source = ./modules/vim/dot-vim;
+    recursive = true;
+  };
+
+  xdg.configFile."waybar" = {
+    source = ./modules/waybar;
     recursive = true;
   };
 
