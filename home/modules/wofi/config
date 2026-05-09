@@ -24,6 +24,8 @@ prompt=Search programm
 show_icons=true
 allow_images=true
 
+columns=3
+
 # Указываем тему иконок (если хочешь принудительно)
 icon_theme=Colloid-Red-Dark
 # Размер иконок (16-32 обычно выглядит аккуратнее всего)

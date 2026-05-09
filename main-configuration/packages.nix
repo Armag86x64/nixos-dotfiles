@@ -40,6 +40,7 @@
         blueman
         obsidian
         libreoffice
+        waypaper
         foliate
         neohtop
         wofi
