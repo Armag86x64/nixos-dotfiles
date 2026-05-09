@@ -13,6 +13,15 @@
     recursive = true;
   };
 
+  # Пробрасываем основной файл конфига в корень( ~/.vimrc )
+  home.file.".vimrc".source = ./modules/vim/vimrc;
+
+  # Пробрасываем папку со всей структурой( ~/.vim/ )
+  home.file.".vim" = {
+    source = ./modules/vim/dot-vim;
+    recursive = true;
+  };
+
   gtk = {
     enable = true;
     
