@@ -363,28 +363,8 @@ else
     exit 1
 fi
 
-# Step 10: Set passwords in target system
-info "Setting user passwords..."
 
-# Set root password
-echo "root:$root_password" | nixos-enter --root /mnt --command "chpasswd"
-
-if [[ $? -ne 0 ]]; then
-    error "Failed to set root password"
-    exit 1
-fi
-
-# Set soundwave password
-echo "soundwave:$user_password" | nixos-enter --root /mnt --command "chpasswd"
-
-if [[ $? -ne 0 ]]; then
-    error "Failed to set soundwave password"
-    exit 1
-fi
-
-success "Passwords set"
-
-# Step 11: Install system
+# Step 10: Install system
 info "Starting NixOS installation..."
 echo "=========================================="
 echo "This may take several minutes..."
@@ -412,3 +392,35 @@ else
     error "Check the logs above and try again"
     exit 1
 fi
+
+# Step 11: Set passwords in the installed system (using chroot)
+info "Setting user passwords in the installed system..."
+
+# Set root password using chroot
+if echo "root:$root_password" | chroot /mnt /usr/sbin/chpasswd 2>/dev/null; then
+    success "Root password set successfully"
+else
+    warning "First method failed, trying alternative..."
+    # Alternative method using passwd
+    if chroot /mnt /bin/bash -c "echo 'root:$root_password' | chpasswd"; then
+        success "Root password set successfully (alternative method)"
+    else
+        error "Failed to set root password"
+        exit 1
+    fi
+fi
+
+# Set soundwave password using chroot
+if echo "soundwave:$user_password" | chroot /mnt /usr/sbin/chpasswd 2>/dev/null; then
+    success "Soundwave password set successfully"
+else
+    warning "First method failed, trying alternative..."
+    if chroot /mnt /bin/bash -c "echo 'soundwave:$user_password' | chpasswd"; then
+        success "Soundwave password set successfully (alternative method)"
+    else
+        error "Failed to set soundwave password"
+        exit 1
+    fi
+fi
+
+success "All passwords have been set"
