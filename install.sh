@@ -364,6 +364,10 @@ else
 fi
 
 
+info "Debug: checking copied config..."
+find /mnt/home -name "flake.nix" 2>/dev/null || echo "flake.nix NOT FOUND anywhere under /mnt/home"
+ls -la /mnt/home/soundwave/ 2>/dev/null || echo "/mnt/home/soundwave does not exist"
+
 # Step 10: Install system
 info "Starting NixOS installation..."
 echo "=========================================="
