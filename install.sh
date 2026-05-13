@@ -377,11 +377,12 @@ echo "=========================================="
 mkdir -p /mnt/etc/nix
 echo "experimental-features = nix-command flakes" > /mnt/etc/nix/nix.conf
 
-# Find flake.nix location
-flake_dir=$(dirname "$(find /mnt/home/soundwave -name "flake.nix" 2>/dev/null | head -1)")
+# Hardcode the known path directly
+flake_dir="/mnt/home/soundwave/nixos-config"
 
-if [[ -z "$flake_dir" || "$flake_dir" == "." ]]; then
-    error "flake.nix not found under /mnt/home/soundwave"
+if [[ ! -f "$flake_dir/flake.nix" ]]; then
+    error "flake.nix not found at $flake_dir/flake.nix"
+    ls -la "$flake_dir/" 2>/dev/null || echo "Directory does not exist"
     exit 1
 fi
 
