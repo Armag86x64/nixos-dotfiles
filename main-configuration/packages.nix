@@ -57,6 +57,7 @@
         wget
         yazi
         ncdu
+        tree
         git
 
         # C o d i n g
