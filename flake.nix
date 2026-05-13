@@ -1,9 +1,13 @@
 {
-  description = "Мой первый конфиг на флейках";
+  description = "My flakes";
 
   inputs = {
-    # Берем пакеты самой NixOS (ветка unstable для 25.11)
+    # Берем пакеты самой NixOS (ветка unstable)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # Подключаем инструмент автоматической разметки дисков Disko
+    disko.url = "github:nix-community/disko";
+    disko.inputs.nixpkgs.follows = "nixpkgs";
 
     # Берем Home Manager, который совместим с этими пакетами
     home-manager = {
@@ -12,20 +16,28 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: {
     nixosConfigurations.altair = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux"; # или ваша архитектура
+      system = "x86_64-linux";
     
-      # ВОТ ЭТА СТРОКА ВАЖНА:
       specialArgs = { inherit inputs; }; 
 
       modules = [
+        # Подключаем модуль Disko в систему
+        disko.nixosModules.disko
+        
+        # Подключаем декларативную конфигурацию дисков
+        ./main-configuration/disk-config.nix
+
+        # ЗАЩИТА: отключаем генерацию файловых систем на живой системе altair.
+        # Это гарантирует, что nixos-rebuild switch НЕ затронет ваши текущие диски.
+        { disko.enableConfig = false; }
+
         ./configuration.nix
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          # ПРАВИЛЬНОЕ МЕСТО ДЛЯ ПОДКЛЮЧЕНИЯ:
           home-manager.users.soundwave = ./home/home.nix;
         }
       ];
