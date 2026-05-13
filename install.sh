@@ -328,21 +328,40 @@ fi
 
 success "hardware-configuration.nix updated"
 
-# Step 9: Create symbolic link in /etc/nixos
+# Step 9: Create symbolic link in /etc/nixos (robust version)
 info "Creating symbolic link /etc/nixos..."
 
-# Remove existing link/directory in target system
-nixos-enter --root /mnt --command "rm -rf /etc/nixos"
+# Debug: Check what exists
+info "Debug: Checking current state in /mnt"
+ls -la /mnt/etc/ | grep nixos || echo "No nixos in /mnt/etc"
+ls -la /mnt/home/soundwave/ | grep nixos-config || echo "No nixos-config in /mnt/home/soundwave"
 
-# Create symbolic link
-nixos-enter --root /mnt --command "ln -s /home/soundwave/nixos-config /etc/nixos"
-
-if [[ $? -ne 0 ]]; then
-    error "Failed to create symbolic link"
+# Ensure source directory exists
+if [[ ! -d "/mnt/home/soundwave/nixos-config" ]]; then
+    error "Source directory /mnt/home/soundwave/nixos-config does not exist!"
     exit 1
 fi
 
-success "Symbolic link created"
+# Remove existing file/directory/symlink (multiple methods for safety)
+rm -rf /mnt/etc/nixos 2>/dev/null || true
+unlink /mnt/etc/nixos 2>/dev/null || true
+
+# Create the symlink directly on the host system (not through chroot)
+info "Creating symlink directly on host system..."
+if ln -sf /home/soundwave/nixos-config /mnt/etc/nixos; then
+    success "Symbolic link created successfully"
+    
+    # Verify
+    if [[ -L "/mnt/etc/nixos" ]]; then
+        success "Symlink verified: $(ls -la /mnt/etc/nixos)"
+    else
+        warning "Symlink created but verification failed"
+    fi
+else
+    error "Failed to create symlink"
+    error "Check permissions: ls -la /mnt/etc/"
+    exit 1
+fi
 
 # Step 10: Set passwords in target system
 info "Setting user passwords..."
