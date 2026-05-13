@@ -370,41 +370,27 @@ echo "=========================================="
 echo "This may take several minutes..."
 echo "=========================================="
 
-# Write nix.conf to mounted system before install
 mkdir -p /mnt/etc/nix
 echo "experimental-features = nix-command flakes" > /mnt/etc/nix/nix.conf
 
-# Run nixos-install without any experimental-features flags
-nixos-install --flake "/mnt/home/soundwave/nixos-config#altair" --no-root-passwd
+# Find flake.nix location
+flake_dir=$(dirname "$(find /mnt/home/soundwave -name "flake.nix" 2>/dev/null | head -1)")
 
-# Step 11: Set passwords in the installed system (using chroot)
+if [[ -z "$flake_dir" || "$flake_dir" == "." ]]; then
+    error "flake.nix not found under /mnt/home/soundwave"
+    exit 1
+fi
+
+info "Found flake at: $flake_dir"
+
+nixos-install --flake "$flake_dir#altair" --no-root-passwd
+
+
+# Step 11: Set passwords
 info "Setting user passwords in the installed system..."
 
-# Set root password using chroot
-if echo "root:$root_password" | chroot /mnt /usr/sbin/chpasswd 2>/dev/null; then
-    success "Root password set successfully"
-else
-    warning "First method failed, trying alternative..."
-    # Alternative method using passwd
-    if chroot /mnt /bin/bash -c "echo 'root:$root_password' | chpasswd"; then
-        success "Root password set successfully (alternative method)"
-    else
-        error "Failed to set root password"
-        exit 1
-    fi
-fi
+nixos-enter --root /mnt --command "echo 'root:$root_password' | chpasswd" && \
+    success "Root password set" || error "Failed to set root password"
 
-# Set soundwave password using chroot
-if echo "soundwave:$user_password" | chroot /mnt /usr/sbin/chpasswd 2>/dev/null; then
-    success "Soundwave password set successfully"
-else
-    warning "First method failed, trying alternative..."
-    if chroot /mnt /bin/bash -c "echo 'soundwave:$user_password' | chpasswd"; then
-        success "Soundwave password set successfully (alternative method)"
-    else
-        error "Failed to set soundwave password"
-        exit 1
-    fi
-fi
-
-success "All passwords have been set"
+nixos-enter --root /mnt --command "echo 'soundwave:$user_password' | chpasswd" && \
+    success "Soundwave password set" || error "Failed to set soundwave password"
