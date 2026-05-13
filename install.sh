@@ -1,180 +1,180 @@
 #!/usr/bin/env bash
 
-# Цвета для вывода
+# Colors for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
-# Функции для вывода
+# Output functions
 error() {
-    echo -e "${RED}[ОШИБКА]${NC} $1" >&2
+    echo -e "${RED}[ERROR]${NC} $1" >&2
 }
 
 success() {
-    echo -e "${GREEN}[УСПЕХ]${NC} $1"
+    echo -e "${GREEN}[SUCCESS]${NC} $1"
 }
 
 info() {
-    echo -e "${BLUE}[ИНФО]${NC} $1"
+    echo -e "${BLUE}[INFO]${NC} $1"
 }
 
 warning() {
-    echo -e "${YELLOW}[ПРЕДУПРЕЖДЕНИЕ]${NC} $1"
+    echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
-# Функция для выбора диска
+# Function to select disk
 select_disk() {
     echo
-    info "Доступные диски в системе:"
+    info "Available disks in system:"
     echo "----------------------------------------"
     lsblk -d -o NAME,SIZE,MODEL | grep -v "^loop"
     echo "----------------------------------------"
     echo
     
-    # Получаем список дисков (исключая loop устройства)
+    # Get list of disks (excluding loop devices)
     disks=($(lsblk -d -n -o NAME | grep -v "^loop"))
     
     if [[ ${#disks[@]} -eq 0 ]]; then
-        error "Не найдено ни одного диска в системе"
+        error "No disks found in system"
         exit 1
     fi
     
-    PS3="Выберите номер диска для установки: "
+    PS3="Select disk number for installation: "
     select disk in "${disks[@]}"; do
         if [[ -n "$disk" ]]; then
             selected_disk="/dev/$disk"
-            info "Выбран диск: $selected_disk"
+            info "Selected disk: $selected_disk"
             break
         else
-            warning "Неверный выбор. Попробуйте снова."
+            warning "Invalid choice. Try again."
         fi
     done
 }
 
-# Функция для проверки, пустой ли диск
+# Function to check if disk is empty
 is_disk_empty() {
     local disk=$1
-    # Проверяем количество разделов на диске
+    # Check number of partitions on disk
     local partitions=$(lsblk -n -o NAME "$disk" | wc -l)
     
     if [[ $partitions -le 1 ]]; then
-        return 0  # Диск пустой
+        return 0  # Disk is empty
     else
-        return 1  # На диске есть разделы
+        return 1  # Disk has partitions
     fi
 }
 
-# Функция для подтверждения очистки диска
+# Function to confirm disk wipe
 confirm_disk_wipe() {
     local disk=$1
     
-    warning "Диск $disk НЕ пустой! На нём обнаружены существующие разделы."
-    echo "Содержимое диска:"
+    warning "Disk $disk is NOT empty! Existing partitions detected."
+    echo "Disk contents:"
     lsblk "$disk"
     echo
     
-    read -p "Вы уверены, что хотите стереть ВЕСЬ диск $disk и установить на него NixOS? (yes/NO): " confirm
+    read -p "Are you sure you want to wipe ENTIRE disk $disk and install NixOS on it? (yes/NO): " confirm
     if [[ "$confirm" != "yes" ]]; then
-        error "Установка отменена пользователем"
+        error "Installation cancelled by user"
         exit 0
     fi
     
-    warning "Будет выполнена полная очистка диска $disk"
-    read -p "Последнее подтверждение: введите 'ERASE ALL DATA' для продолжения: " final_confirm
+    warning "Full disk wipe will be performed on $disk"
+    read -p "Final confirmation: type 'ERASE ALL DATA' to continue: " final_confirm
     if [[ "$final_confirm" != "ERASE ALL DATA" ]]; then
-        error "Установка отменена"
+        error "Installation cancelled"
         exit 0
     fi
     
-    success "Подтверждена очистка диска $disk"
+    success "Confirmed wipe of disk $disk"
 }
 
-# Проверка прав root
+# Check root privileges
 if [[ $EUID -ne 0 ]]; then
-    error "Скрипт должен запускаться с правами root (sudo)"
+    error "Script must be run with root privileges (sudo)"
     exit 1
 fi
 
-# Запрос паролей
+# Password prompts
 echo
-info "Настройка паролей пользователей"
+info "User Password Setup"
 echo "================================="
 
-# Пароль для root
+# Root password
 while true; do
-    read -s -p "Введите пароль для root: " root_password
+    read -s -p "Enter password for root: " root_password
     echo
-    read -s -p "Подтвердите пароль для root: " root_password_confirm
+    read -s -p "Confirm password for root: " root_password_confirm
     echo
     
     if [[ "$root_password" == "$root_password_confirm" ]] && [[ -n "$root_password" ]]; then
         break
     else
-        warning "Пароли не совпадают или пустые. Попробуйте снова."
+        warning "Passwords do not match or are empty. Try again."
     fi
 done
 
-# Пароль для soundwave
+# Soundwave user password
 while true; do
-    read -s -p "Введите пароль для пользователя soundwave: " user_password
+    read -s -p "Enter password for user soundwave: " user_password
     echo
-    read -s -p "Подтвердите пароль для пользователя soundwave: " user_password_confirm
+    read -s -p "Confirm password for user soundwave: " user_password_confirm
     echo
     
     if [[ "$user_password" == "$user_password_confirm" ]] && [[ -n "$user_password" ]]; then
         break
     else
-        warning "Пароли не совпадают или пустые. Попробуйте снова."
+        warning "Passwords do not match or are empty. Try again."
     fi
 done
 
-# Выбор диска
+# Select disk
 select_disk
 
-# Проверка диска на наличие данных
+# Check disk for existing data
 if ! is_disk_empty "$selected_disk"; then
     confirm_disk_wipe "$selected_disk"
 fi
 
-# Создание временной директории
+# Create temporary directory
 temp_dir=$(mktemp -d)
 cd "$temp_dir" || exit 1
 
-info "Рабочая директория: $temp_dir"
+info "Working directory: $temp_dir"
 
-# Шаг 1: Установка необходимых пакетов в live-системе
-info "Установка необходимых пакетов (git, disko)..."
+# Step 1: Install required packages in live system
+info "Installing required packages (git, disko)..."
 
-# Обновление каналов
+# Update channels
 nix-channel --update
 
-# Установка git и других инструментов через nix-shell
+# Install git and other tools via nix-shell
 nix-shell -p git nixos-generators --run "echo 'Packages installed'"
 
 if ! command -v git &> /dev/null; then
-    error "Не удалось установить git"
+    error "Failed to install git"
     exit 1
 fi
 
-success "Необходимые пакеты установлены"
+success "Required packages installed"
 
-# Шаг 2: Клонирование репозитория с конфигурацией
-info "Клонирование репозитория nixos-dotfiles..."
-git clone https://github.com/Armag86x64/nixos-dotfiles.git
+# Step 2: Clone repository with configuration
+info "Cloning nixos-dotfiles repository..."
+git clone -b feature/builder https://github.com/Armag86x64/nixos-dotfiles.git
 
 if [[ ! -d "nixos-dotfiles" ]]; then
-    error "Не удалось клонировать репозиторий"
+    error "Failed to clone repository"
     exit 1
 fi
 
-success "Репозиторий склонирован"
+success "Repository cloned"
 
-# Шаг 3: Создание временного disk-config.nix с правильным устройством
-info "Подготовка конфигурации диска..."
+# Step 3: Create temporary disk-config.nix with correct device
+info "Preparing disk configuration..."
 
-# Создаем временный файл конфигурации диска с подставленным устройством
+# Create temporary disk config file with substituted device
 temp_disk_config="$temp_dir/disk-config-temp.nix"
 
 cat > "$temp_disk_config" << EOF
@@ -213,119 +213,119 @@ cat > "$temp_disk_config" << EOF
 }
 EOF
 
-success "Конфигурация диска создана для $selected_disk"
+success "Disk configuration created for $selected_disk"
 
-# Шаг 4: Разметка дисков через disko
-info "Выполняется разметка дисков с помощью disko..."
+# Step 4: Partition disks using disko
+info "Partitioning disks with disko..."
 
-# Запуск disko
+# Run disko
 nix run github:nix-community/disko -- --mode disko "$temp_disk_config"
 
 if [[ $? -ne 0 ]]; then
-    error "Ошибка при разметке дисков"
+    error "Error during disk partitioning"
     exit 1
 fi
 
-success "Разметка дисков завершена"
+success "Disk partitioning completed"
 
-# Шаг 5: Монтирование (disko уже смонтировал всё в /mnt, но проверим)
-info "Проверка монтирования..."
+# Step 5: Check mounting
+info "Checking mount..."
 
 if ! mountpoint -q /mnt; then
-    error "/mnt не смонтирован. Что-то пошло не так при разметке"
+    error "/mnt is not mounted. Something went wrong with partitioning"
     exit 1
 fi
 
-success "Система смонтирована в /mnt"
+success "System mounted at /mnt"
 
-# Шаг 6: Генерация hardware-configuration.nix
-info "Генерация hardware-configuration.nix..."
+# Step 6: Generate hardware-configuration.nix
+info "Generating hardware-configuration.nix..."
 
-# Создаем директорию для hardware конфигурации
+# Create directory for hardware config
 mkdir -p /mnt/etc/nixos
 
-# Генерируем новую конфигурацию
+# Generate new configuration
 nixos-generate-config --root /mnt
 
 if [[ -f "/mnt/etc/nixos/hardware-configuration.nix" ]]; then
-    success "hardware-configuration.nix сгенерирован"
+    success "hardware-configuration.nix generated"
 else
-    error "Не удалось сгенерировать hardware-configuration.nix"
+    error "Failed to generate hardware-configuration.nix"
     exit 1
 fi
 
-# Шаг 7: Перенос конфигурации в целевую систему
-info "Перенос конфигурации в систему..."
+# Step 7: Copy configuration to target system
+info "Copying configuration to system..."
 
-# Создаем пользователя soundwave в целевой системе (временно, для копирования)
+# Create soundwave user in target system (temporarily, for copying)
 nixos-enter --root /mnt --command "useradd -m -G wheel -s /bin/bash soundwave 2>/dev/null || true"
 
-# Копируем конфигурацию в домашнюю директорию
+# Copy configuration to home directory
 cp -r nixos-dotfiles /mnt/home/soundwave/nixos-config
-chown -R 1000:100 /mnt/home/soundwave/nixos-config  # 1000 - типичный UID первого пользователя
+chown -R 1000:100 /mnt/home/soundwave/nixos-config  # 1000 is typical UID for first user
 
-success "Конфигурация скопирована в /mnt/home/soundwave/nixos-config"
+success "Configuration copied to /mnt/home/soundwave/nixos-config"
 
-# Шаг 8: Замена hardware-configuration.nix в конфигурации
-info "Замена hardware-configuration.nix..."
+# Step 8: Replace hardware-configuration.nix in config
+info "Replacing hardware-configuration.nix..."
 
-# Удаляем старый и копируем новый
+# Remove old and copy new
 rm -f /mnt/home/soundwave/nixos-config/main-configuration/hardware/hardware-configuration.nix
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/home/soundwave/nixos-config/main-configuration/hardware/hardware-configuration.nix
 
-success "hardware-configuration.nix обновлен"
+success "hardware-configuration.nix updated"
 
-# Шаг 9: Создание символической ссылки в /etc/nixos
-info "Создание символической ссылки /etc/nixos..."
+# Step 9: Create symbolic link in /etc/nixos
+info "Creating symbolic link /etc/nixos..."
 
-# Удаляем существующую ссылку/директорию в целевой системе
+# Remove existing link/directory in target system
 nixos-enter --root /mnt --command "rm -rf /etc/nixos"
 
-# Создаем символическую ссылку
+# Create symbolic link
 nixos-enter --root /mnt --command "ln -s /home/soundwave/nixos-config /etc/nixos"
 
-success "Символическая ссылка создана"
+success "Symbolic link created"
 
-# Шаг 10: Установка паролей в целевой системе
-info "Установка паролей пользователей..."
+# Step 10: Set passwords in target system
+info "Setting user passwords..."
 
-# Установка пароля root
+# Set root password
 echo "root:$root_password" | nixos-enter --root /mnt --command "chpasswd"
 
-# Установка пароля soundwave
+# Set soundwave password
 echo "soundwave:$user_password" | nixos-enter --root /mnt --command "chpasswd"
 
-success "Пароли установлены"
+success "Passwords set"
 
-# Шаг 11: Установка системы
-info "Начинается установка NixOS..."
+# Step 11: Install system
+info "Starting NixOS installation..."
 echo "=========================================="
-echo "Это может занять несколько минут..."
+echo "This may take several minutes..."
 echo "=========================================="
 
-# Установка через flake
+# Install via flake
 nixos-install --flake "/mnt/home/soundwave/nixos-config#altair"
 
 if [[ $? -eq 0 ]]; then
     success "=========================================="
-    success "УСТАНОВКА УСПЕШНО ЗАВЕРШЕНА!"
+    success "INSTALLATION COMPLETED SUCCESSFULLY!"
     success "=========================================="
     echo
-    success "Имя хоста: altair"
-    success "Пользователь: soundwave"
-    success "Пароль для soundwave и root установлен"
+    success "Hostname: altair"
+    success "User: soundwave"
+    success "Password for soundwave and root has been set"
     echo
-    warning "ВАЖНО: После перезагрузки выполните:"
+    warning "IMPORTANT: After reboot, run:"
     warning "  sudo nixos-rebuild switch --flake /home/soundwave/nixos-config#altair"
     echo
-    read -p "Нажмите Enter для перезагрузки или Ctrl+C для выхода..."
+    read -p "Press Enter to reboot or Ctrl+C to exit..."
     reboot
 else
-    error "Ошибка при установке NixOS"
-    error "Проверьте логи выше и попробуйте снова"
+    error "Error during NixOS installation"
+    error "Check the logs above and try again"
     exit 1
 fi
 
-# Очистка
+# Cleanup
 cd /
 rm -rf "$temp_dir"
