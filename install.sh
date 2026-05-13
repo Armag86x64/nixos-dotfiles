@@ -364,23 +364,46 @@ else
 fi
 
 
-# Step 10: Install system
+# Step 10: Install system (corrected)
 info "Starting NixOS installation..."
 echo "=========================================="
 echo "This may take several minutes..."
 echo "=========================================="
 
-# Install via flake
-nixos-install --extra-experimental-features "nix-command flakes" --flake "/mnt/home/soundwave/nixos-config#altair"
+# Method 1: Set NIX_CONFIG environment variable (recommended)
+export NIX_CONFIG="experimental-features = nix-command flakes"
+
+# Run nixos-install without the --extra-experimental-features flag
+nixos-install --flake "/mnt/home/soundwave/nixos-config#altair"
 
 if [[ $? -eq 0 ]]; then
+    success "NixOS installation completed successfully!"
+    
+    # Set passwords after successful installation
+    info "Setting user passwords in the installed system..."
+    
+    # Set root password
+    if echo "root:$root_password" | chroot /mnt /usr/sbin/chpasswd 2>/dev/null; then
+        success "Root password set"
+    else
+        warning "Could not set root password automatically"
+        warning "You will need to set it manually after reboot"
+    fi
+    
+    # Set soundwave password
+    if echo "soundwave:$user_password" | chroot /mnt /usr/sbin/chpasswd 2>/dev/null; then
+        success "Soundwave password set"
+    else
+        warning "Could not set soundwave password automatically"
+        warning "You will need to set it manually after reboot"
+    fi
+    
     success "=========================================="
     success "INSTALLATION COMPLETED SUCCESSFULLY!"
     success "=========================================="
     echo
     success "Hostname: altair"
     success "User: soundwave"
-    success "Password for soundwave and root has been set"
     echo
     warning "IMPORTANT: After reboot, run:"
     warning "  sudo nixos-rebuild switch --flake /home/soundwave/nixos-config#altair"
