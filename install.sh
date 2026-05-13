@@ -300,14 +300,27 @@ success "hardware-configuration.nix generated"
 # Step 7: Copy configuration to target system
 info "Copying configuration to system..."
 
-# Create soundwave user in target system (temporarily, for copying)
-nixos-enter --root /mnt --command "useradd -m -G wheel -s /bin/bash soundwave 2>/dev/null || true"
+mkdir -p /mnt/home/soundwave
 
-# Copy configuration to home directory
-cp -r nixos-dotfiles /mnt/home/soundwave/nixos-config
+if [[ ! -d "$temp_dir/nixos-dotfiles" ]]; then
+    error "nixos-dotfiles not found at $temp_dir/nixos-dotfiles"
+    ls -la "$temp_dir/"
+    exit 1
+fi
 
-# Fix permissions (UID 1000 is typical for first user)
-chown -R 1000:1000 /mnt/home/soundwave/nixos-config 2>/dev/null || true
+cp -r "$temp_dir/nixos-dotfiles" /mnt/home/soundwave/nixos-config
+
+if [[ ! -d "/mnt/home/soundwave/nixos-config" ]]; then
+    error "Failed to copy nixos-dotfiles to /mnt/home/soundwave/nixos-config"
+    exit 1
+fi
+
+chown -R 1000:1000 /mnt/home/soundwave/nixos-config
+
+info "Contents of nixos-config:"
+find /mnt/home/soundwave/nixos-config -name "flake.nix" 2>/dev/null || echo "WARNING: flake.nix not found!"
+
+success "Configuration copied to /mnt/home/soundwave/nixos-config"
 
 success "Configuration copied to /mnt/home/soundwave/nixos-config"
 
