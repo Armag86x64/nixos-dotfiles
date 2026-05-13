@@ -24,6 +24,35 @@ warning() {
     echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
+# Cleanup function for trap
+cleanup() {
+    info "Cleaning up..."
+    umount -R /mnt 2>/dev/null || true
+    if [[ -n "$temp_dir" && -d "$temp_dir" ]]; then
+        rm -rf "$temp_dir"
+    fi
+}
+
+# Function to enable nix experimental features globally
+enable_nix_features() {
+    mkdir -p /etc/nix
+    if ! grep -q "experimental-features" /etc/nix/nix.conf 2>/dev/null; then
+        echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
+        success "Nix experimental features enabled (nix-command and flakes)"
+    fi
+}
+
+# Function to check internet connectivity
+check_internet() {
+    info "Checking internet connection..."
+    if ! ping -c 1 github.com &> /dev/null; then
+        error "No internet connection. Please configure network first."
+        error "You can use: sudo systemctl start NetworkManager && nmtui"
+        exit 1
+    fi
+    success "Internet connection detected"
+}
+
 # Function to select disk
 select_disk() {
     echo
@@ -34,7 +63,7 @@ select_disk() {
     echo
     
     # Get list of disks (excluding loop devices)
-    disks=($(lsblk -d -n -o NAME | grep -v "^loop"))
+    mapfile -t disks < <(lsblk -d -n -o NAME | grep -v "^loop")
     
     if [[ ${#disks[@]} -eq 0 ]]; then
         error "No disks found in system"
@@ -97,6 +126,15 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
+# Set trap for cleanup
+trap cleanup EXIT INT TERM
+
+# Enable Nix experimental features
+enable_nix_features
+
+# Check internet connection
+check_internet
+
 # Password prompts
 echo
 info "User Password Setup"
@@ -147,14 +185,16 @@ info "Working directory: $temp_dir"
 # Step 1: Install required packages in live system
 info "Installing required packages (git, disko)..."
 
-# Update channels
-nix-channel --update
-
-# Install git and other tools via nix-shell
-nix-shell -p git nixos-generators --run "echo 'Packages installed'"
+# Install git and disko using nix profile
+nix profile install nixpkgs#git nixpkgs#disko 2>/dev/null || nix-env -iA nixos.git nixos.disko
 
 if ! command -v git &> /dev/null; then
     error "Failed to install git"
+    exit 1
+fi
+
+if ! command -v disko &> /dev/null; then
+    error "Failed to install disko"
     exit 1
 fi
 
@@ -193,7 +233,7 @@ cat > "$temp_disk_config" << EOF
               content = {
                 type = "filesystem";
                 format = "vfat";
-                mountpoint = "/mnt/boot";
+                mountpoint = "/boot";
                 mountOptions = [ "defaults" ];
               };
             };
@@ -202,7 +242,7 @@ cat > "$temp_disk_config" << EOF
               content = {
                 type = "filesystem";
                 format = "ext4";
-                mountpoint = "/mnt";
+                mountpoint = "/";
               };
             };
           };
@@ -219,7 +259,7 @@ success "Disk configuration created for $selected_disk"
 info "Partitioning disks with disko..."
 
 # Run disko
-nix run github:nix-community/disko -- --mode disko "$temp_disk_config"
+disko --mode disko "$temp_disk_config"
 
 if [[ $? -ne 0 ]]; then
     error "Error during disk partitioning"
@@ -230,6 +270,9 @@ success "Disk partitioning completed"
 
 # Step 5: Check mounting
 info "Checking mount..."
+
+# Wait a bit for mounts to settle
+sleep 2
 
 if ! mountpoint -q /mnt; then
     error "/mnt is not mounted. Something went wrong with partitioning"
@@ -247,12 +290,12 @@ mkdir -p /mnt/etc/nixos
 # Generate new configuration
 nixos-generate-config --root /mnt
 
-if [[ -f "/mnt/etc/nixos/hardware-configuration.nix" ]]; then
-    success "hardware-configuration.nix generated"
-else
+if [[ ! -f "/mnt/etc/nixos/hardware-configuration.nix" ]]; then
     error "Failed to generate hardware-configuration.nix"
     exit 1
 fi
+
+success "hardware-configuration.nix generated"
 
 # Step 7: Copy configuration to target system
 info "Copying configuration to system..."
@@ -262,16 +305,26 @@ nixos-enter --root /mnt --command "useradd -m -G wheel -s /bin/bash soundwave 2>
 
 # Copy configuration to home directory
 cp -r nixos-dotfiles /mnt/home/soundwave/nixos-config
-chown -R 1000:100 /mnt/home/soundwave/nixos-config  # 1000 is typical UID for first user
+
+# Fix permissions (UID 1000 is typical for first user)
+chown -R 1000:1000 /mnt/home/soundwave/nixos-config 2>/dev/null || true
 
 success "Configuration copied to /mnt/home/soundwave/nixos-config"
 
 # Step 8: Replace hardware-configuration.nix in config
 info "Replacing hardware-configuration.nix..."
 
+# Ensure hardware directory exists
+mkdir -p /mnt/home/soundwave/nixos-config/main-configuration/hardware
+
 # Remove old and copy new
 rm -f /mnt/home/soundwave/nixos-config/main-configuration/hardware/hardware-configuration.nix
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/home/soundwave/nixos-config/main-configuration/hardware/hardware-configuration.nix
+
+if [[ ! -f "/mnt/home/soundwave/nixos-config/main-configuration/hardware/hardware-configuration.nix" ]]; then
+    error "Failed to copy hardware-configuration.nix"
+    exit 1
+fi
 
 success "hardware-configuration.nix updated"
 
@@ -284,6 +337,11 @@ nixos-enter --root /mnt --command "rm -rf /etc/nixos"
 # Create symbolic link
 nixos-enter --root /mnt --command "ln -s /home/soundwave/nixos-config /etc/nixos"
 
+if [[ $? -ne 0 ]]; then
+    error "Failed to create symbolic link"
+    exit 1
+fi
+
 success "Symbolic link created"
 
 # Step 10: Set passwords in target system
@@ -292,8 +350,18 @@ info "Setting user passwords..."
 # Set root password
 echo "root:$root_password" | nixos-enter --root /mnt --command "chpasswd"
 
+if [[ $? -ne 0 ]]; then
+    error "Failed to set root password"
+    exit 1
+fi
+
 # Set soundwave password
 echo "soundwave:$user_password" | nixos-enter --root /mnt --command "chpasswd"
+
+if [[ $? -ne 0 ]]; then
+    error "Failed to set soundwave password"
+    exit 1
+fi
 
 success "Passwords set"
 
@@ -304,7 +372,7 @@ echo "This may take several minutes..."
 echo "=========================================="
 
 # Install via flake
-nixos-install --flake "/mnt/home/soundwave/nixos-config#altair"
+nixos-install --extra-experimental-features "nix-command flakes" --flake "/mnt/home/soundwave/nixos-config#altair"
 
 if [[ $? -eq 0 ]]; then
     success "=========================================="
@@ -325,7 +393,3 @@ else
     error "Check the logs above and try again"
     exit 1
 fi
-
-# Cleanup
-cd /
-rm -rf "$temp_dir"
