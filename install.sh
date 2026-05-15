@@ -322,8 +322,6 @@ find /mnt/home/soundwave/nixos-config -name "flake.nix" 2>/dev/null || echo "WAR
 
 success "Configuration copied to /mnt/home/soundwave/nixos-config"
 
-success "Configuration copied to /mnt/home/soundwave/nixos-config"
-
 # Step 8: Replace hardware-configuration.nix in config
 info "Replacing hardware-configuration.nix..."
 
@@ -341,13 +339,49 @@ fi
 
 success "hardware-configuration.nix updated"
 
+# Step 8.5: Create safe cpu.nix and gpu.nix (empty templates)
+info "Creating safe hardware templates (cpu.nix and gpu.nix)..."
+
+# Create empty cpu.nix template
+cat > "/mnt/home/soundwave/nixos-config/main-configuration/hardware/cpu.nix" << 'EOF'
+{ config, lib, pkgs, ... }: {
+
+  # CPU-specific configuration
+  # This file is intentionally minimal to ensure compatibility across different hardware
+  # Add your CPU-specific optimizations here if needed
+  
+}
+EOF
+
+# Create empty gpu.nix template
+cat > "/mnt/home/soundwave/nixos-config/main-configuration/hardware/gpu.nix" << 'EOF'
+{ config, lib, pkgs, ... }: {
+
+  # GPU-specific configuration
+  # This file is intentionally minimal to ensure compatibility across different hardware
+  # Add your GPU-specific drivers and settings here if needed
+  
+  # Example for NVIDIA:
+  # hardware.nvidia = {
+  #   modesetting.enable = true;
+  #   powerManagement.enable = false;
+  #   open = false;
+  # };
+  
+  # Example for AMD:
+  # services.xserver.videoDrivers = [ "amdgpu" ];
+  
+}
+EOF
+
+# Set proper ownership
+chown 1000:1000 "/mnt/home/soundwave/nixos-config/main-configuration/hardware/cpu.nix"
+chown 1000:1000 "/mnt/home/soundwave/nixos-config/main-configuration/hardware/gpu.nix"
+
+success "Hardware templates created (cpu.nix and gpu.nix)"
+
 # Step 9: Create symbolic link in /etc/nixos (robust version)
 info "Creating symbolic link /etc/nixos..."
-
-# Debug: Check what exists
-info "Debug: Checking current state in /mnt"
-ls -la /mnt/etc/ | grep nixos || echo "No nixos in /mnt/etc"
-ls -la /mnt/home/soundwave/ | grep nixos-config || echo "No nixos-config in /mnt/home/soundwave"
 
 # Ensure source directory exists
 if [[ ! -d "/mnt/home/soundwave/nixos-config" ]]; then
@@ -355,31 +389,21 @@ if [[ ! -d "/mnt/home/soundwave/nixos-config" ]]; then
     exit 1
 fi
 
-# Remove existing file/directory/symlink (multiple methods for safety)
+# Remove existing file/directory/symlink
 rm -rf /mnt/etc/nixos 2>/dev/null || true
 unlink /mnt/etc/nixos 2>/dev/null || true
 
-# Create the symlink directly on the host system (not through chroot)
-info "Creating symlink directly on host system..."
+# Create the symlink directly on the host system
 if ln -sf /home/soundwave/nixos-config /mnt/etc/nixos; then
     success "Symbolic link created successfully"
     
-    # Verify
     if [[ -L "/mnt/etc/nixos" ]]; then
         success "Symlink verified: $(ls -la /mnt/etc/nixos)"
-    else
-        warning "Symlink created but verification failed"
     fi
 else
     error "Failed to create symlink"
-    error "Check permissions: ls -la /mnt/etc/"
     exit 1
 fi
-
-
-info "Debug: checking copied config..."
-find /mnt/home -name "flake.nix" 2>/dev/null || echo "flake.nix NOT FOUND anywhere under /mnt/home"
-ls -la /mnt/home/soundwave/ 2>/dev/null || echo "/mnt/home/soundwave does not exist"
 
 # Step 10: Install system with correct bootloader setup
 info "Starting NixOS installation..."
@@ -462,6 +486,10 @@ success "=========================================="
 echo
 success "Hostname: altair"
 success "User: soundwave"
+echo
+info "Hardware templates created at:"
+info "  - /home/soundwave/nixos-config/main-configuration/hardware/cpu.nix"
+info "  - /home/soundwave/nixos-config/main-configuration/hardware/gpu.nix"
 echo
 warning "Before reboot, you may want to verify:"
 warning "  - Bootloader is installed: ls /mnt/boot/"
