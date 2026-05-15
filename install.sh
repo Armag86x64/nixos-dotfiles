@@ -381,18 +381,18 @@ info "Debug: checking copied config..."
 find /mnt/home -name "flake.nix" 2>/dev/null || echo "flake.nix NOT FOUND anywhere under /mnt/home"
 ls -la /mnt/home/soundwave/ 2>/dev/null || echo "/mnt/home/soundwave does not exist"
 
-# Step 10: Install system
+# Step 10: Install system with correct bootloader setup
 info "Starting NixOS installation..."
 echo "=========================================="
 echo "This may take several minutes..."
 echo "=========================================="
 
+# Create nix.conf in target system
 mkdir -p /mnt/etc/nix
 echo "experimental-features = nix-command flakes" > /mnt/etc/nix/nix.conf
 
-# Hardcode the known path directly
+# Verify flake exists
 flake_dir="/mnt/home/soundwave/nixos-config"
-
 if [[ ! -f "$flake_dir/flake.nix" ]]; then
     error "flake.nix not found at $flake_dir/flake.nix"
     ls -la "$flake_dir/" 2>/dev/null || echo "Directory does not exist"
@@ -401,14 +401,71 @@ fi
 
 info "Found flake at: $flake_dir"
 
-nixos-install --flake "$flake_dir#altair" --no-root-passwd
+# Run nixos-install WITHOUT --no-root-passwd (let it set root password)
+# And ensure bootloader is installed
+NIXOS_INSTALL_BOOTLOADER=1 nixos-install --flake "$flake_dir#altair"
 
+if [[ $? -ne 0 ]]; then
+    error "nixos-install failed"
+    exit 1
+fi
 
-# Step 11: Set passwords
-info "Setting user passwords in the installed system..."
+success "NixOS installation completed"
 
-nixos-enter --root /mnt --command "echo 'root:$root_password' | chpasswd" && \
-    success "Root password set" || error "Failed to set root password"
+# Step 11: Set user password and finalize bootloader
+info "Finalizing system setup..."
 
-nixos-enter --root /mnt --command "echo 'soundwave:$user_password' | chpasswd" && \
-    success "Soundwave password set" || error "Failed to set soundwave password"
+# Set soundwave password
+nixos-enter --root /mnt --command "echo 'soundwave:$user_password' | chpasswd"
+if [[ $? -eq 0 ]]; then
+    success "Soundwave password set"
+else
+    warning "Failed to set soundwave password, you'll need to set it manually"
+fi
+
+# IMPORTANT: Force bootloader installation/update
+info "Installing/updating bootloader..."
+
+# Try to rebuild the bootloader configuration
+nixos-enter --root /mnt --command "nixos-rebuild boot --flake /home/soundwave/nixos-config#altair"
+
+if [[ $? -eq 0 ]]; then
+    success "Bootloader updated successfully"
+else
+    warning "Failed to update bootloader automatically"
+    
+    # Alternative method: manually reinstall bootloader
+    info "Attempting manual bootloader installation..."
+    
+    # Check if using systemd-boot or grub
+    if nixos-enter --root /mnt --command "grep -q 'systemd-boot' /etc/nixos/configuration.nix 2>/dev/null"; then
+        info "Detected systemd-boot, reinstalling..."
+        nixos-enter --root /mnt --command "bootctl install"
+    elif nixos-enter --root /mnt --command "grep -q 'grub' /etc/nixos/configuration.nix 2>/dev/null"; then
+        info "Detected GRUB, reinstalling..."
+        nixos-enter --root /mnt --command "grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=NixOS"
+        nixos-enter --root /mnt --command "grub-mkconfig -o /boot/grub/grub.cfg"
+    fi
+fi
+
+# Verify bootloader files exist
+info "Verifying bootloader installation..."
+if nixos-enter --root /mnt --command "test -d /boot/EFI || test -d /boot/grub"; then
+    success "Bootloader files found"
+else
+    warning "Bootloader files may be missing, manual intervention may be needed"
+fi
+
+success "=========================================="
+success "INSTALLATION COMPLETED SUCCESSFULLY!"
+success "=========================================="
+echo
+success "Hostname: altair"
+success "User: soundwave"
+echo
+warning "Before reboot, you may want to verify:"
+warning "  - Bootloader is installed: ls /mnt/boot/"
+warning "  - EFI partition has NixOS entry: ls /mnt/boot/EFI/"
+echo
+read -p "Press Enter to reboot or Ctrl+C to exit..."
+reboot
