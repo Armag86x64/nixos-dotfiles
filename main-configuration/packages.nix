@@ -1,5 +1,5 @@
 { config, lib, pkgs, ... }: {
-    programs.hyprland.enable = true;
+    # programs.hyprland.enable = true;
     services.blueman.enable = true;
 
     virtualisation.virtualbox.host.enable = true;
@@ -7,7 +7,7 @@
 
     environment.systemPackages = with pkgs; [
         # W M s
-        hyprland
+        # hyprland
         # niri
         waybar
         mako

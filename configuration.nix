@@ -28,6 +28,7 @@
     programs.niri.enable = true;
 
     services.envfs.enable = true;
+    programs.nix-ld.enable = true;
 
     xdg.portal = {
         enable = true;
