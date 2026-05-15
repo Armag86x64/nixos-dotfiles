@@ -1,6 +1,10 @@
 { config, lib, pkgs, ... }: {
     # programs.hyprland.enable = true;
+
+    programs.niri.enable = true;
+
     services.blueman.enable = true;
+    services.udisks2.enable = true;
 
     virtualisation.virtualbox.host.enable = true;
     users.extraGroups.vboxusers.members = [ "soundwave" ];
