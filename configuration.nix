@@ -23,10 +23,6 @@
         inputs.home-manager.packages.${pkgs.system}.default
     ];
 
-    services.udisks2.enable = true;  
-
-    programs.niri.enable = true;
-
     services.envfs.enable = true;
     programs.nix-ld.enable = true;
 
