@@ -6,8 +6,16 @@
     services.blueman.enable = true;
     services.udisks2.enable = true;
 
-    virtualisation.virtualbox.host.enable = true;
-    users.extraGroups.vboxusers.members = [ "soundwave" ];
+    # virtualisation.virtualbox.host.enable = true;
+    # users.extraGroups.vboxusers.members = [ "soundwave" ];
+
+    virtualisation.libvirtd.enable = true;
+    programs.virt-manager.enable = true;
+
+    virtualisation.docker.enable = true;
+
+    users.users.soundwave.extraGroups = [ "libvirtd" "docker"];
+
 
     environment.systemPackages = with pkgs; [
         # W M s
@@ -16,6 +24,10 @@
         waybar
         mako
         libnotify
+
+        # D e v O p s
+        docker-compose
+        docker
 
         # UI
         swww

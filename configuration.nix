@@ -12,7 +12,8 @@
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    boot.kernelPackages = pkgs.lib.mkForce pkgs.linuxPackages_6_12;
+    # boot.kernelPackages = pkgs.lib.mkForce pkgs.linuxPackages_6_12;
+    boot.kernelPackages = pkgs.linuxPackages_latest;
 
     documentation.enable = false;
     documentation.nixos.enable = false;

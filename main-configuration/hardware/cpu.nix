@@ -20,6 +20,8 @@
     services.tlp = {
       enable = true;
       settings = {
+        THERMALD_IGNORE_INVALID_INTEL_CONFIG = 1;
+
         # Регулятор частоты для драйвера intel_pstate
         CPU_SCALING_GOVERNOR_ON_AC = "powersave";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -37,14 +39,24 @@
         CPU_MAX_PERF_ON_BAT = 100;
 
         # Интеллектуальное управление графикой Intel
+        INTEL_GPU_MAX_FREQ_ON_AC = 1400;   # Аппаратный максимум от сети
+        INTEL_GPU_MAX_FREQ_ON_BAT = 800;    # Ограничение на батарее для экономии заряда
         INTEL_GPU_MIN_FREQ_ON_AC = 300;
         INTEL_GPU_MIN_FREQ_ON_BAT = 300;
         INTEL_GPU_BOOST_ON_AC = 1;
         INTEL_GPU_BOOST_ON_BAT = 0; 
 
+        # Фикс частот Boost
+        INTEL_GPU_BOOST_FREQ_ON_AC = 1400;  # Максимум при разгоне от сети
+        INTEL_GPU_BOOST_FREQ_ON_BAT = 800;   # Ограничение разгона на батарее
+
+        # Пороги заряда:
+        START_CHARGE_THRESH_BAT0 = 70;
+        STOP_CHARGE_THRESH_BAT0 = 80;
+
         # Энергосбережение периферии
         PCIE_ASPM_ON_BAT = "powersave";
-        SOUND_POWER_SAVE_ON_AC = 1;
+        SOUND_POWER_SAVE_ON_AC = 0;
         SOUND_POWER_SAVE_ON_BAT = 1;
         USB_AUTOSUSPEND = 1;
         SATA_LINKPWR_ON_BAT = "med_power_with_dipm";
@@ -54,7 +66,7 @@
     # Параметры ядра
     boot.kernelParams = [ 
       "intel_pstate=active"  # Явно форсируем современный драйвер pstate
-      "pcie_aspm=force"      # Агрессивное энергосбережение линий PCIe
+      # "pcie_aspm=force"      # Агрессивное энергосбережение линий PCIe
       # "loglevel=3"           # Скрывает некритичные ошибки ACPI BIOS из консоли при загрузке
     ];
 
