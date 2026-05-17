@@ -18,7 +18,13 @@
     documentation.enable = false;
     documentation.nixos.enable = false;
 
-    # services.flatpak.enable = true;
+    nix = {
+      gc = {
+        automatic = true;
+        dates = "weekly";
+        options = "--delete-older-than 7d";
+      };
+    };
 
     environment.systemPackages = [
         inputs.home-manager.packages.${pkgs.system}.default
