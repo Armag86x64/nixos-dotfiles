@@ -74,6 +74,7 @@
         yazi
         ncdu
         tree
+        zsh
         git
 
         # C o d i n g
