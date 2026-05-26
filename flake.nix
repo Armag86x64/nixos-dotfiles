@@ -14,13 +14,18 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    freesmlauncher = {
+      url = "github:FreesmTeam/FreesmLauncher";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, disko, home-manager, freesmlauncher, ... }@inputs: {
     nixosConfigurations.altair = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
     
-      specialArgs = { inherit inputs; }; 
+      specialArgs = { inherit inputs; freesmlauncher = freesmlauncher; }; 
 
       modules = [
         # Подключаем модуль Disko в систему

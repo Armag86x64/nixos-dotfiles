@@ -23,11 +23,11 @@
         THERMALD_IGNORE_INVALID_INTEL_CONFIG = 1;
 
         # Регулятор частоты для драйвера intel_pstate
-        CPU_SCALING_GOVERNOR_ON_AC = "powersave";
+        CPU_SCALING_GOVERNOR_ON_AC = "performance";
         CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
         # EPP: нативная поддержка для процессоров Intel 12-14 поколений
-        CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
+        CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
         CPU_ENERGY_PERF_POLICY_ON_BAT = "balance_power";
 
         # Отключаем Turbo Boost на батарее для экономии заряда (сберегает до 30% батареи)
@@ -76,6 +76,7 @@
 
     # Полезные пакеты для мониторинга
     environment.systemPackages = with pkgs; [
-        powertop
+      powertop
+      s-tui
     ];
 }

@@ -8,6 +8,8 @@
 
     programs.zsh = {
       enable = true;
+
+      enableCompletion = true;
       autosuggestions.enable = true;
       syntaxHighlighting.enable = true;
 
@@ -21,4 +23,6 @@
         PROMPT='[%n:%~] '
       '';
     };
+
+    environment.pathsToLink = [ "/share/zsh" ];
 }

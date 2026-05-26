@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, pkgs, freesmlauncher, ... }: {
     # programs.hyprland.enable = true;
 
     programs.niri.enable = true;
@@ -16,6 +16,9 @@
 
     users.users.soundwave.extraGroups = [ "libvirtd" "docker"];
 
+    # security.polkit.enable = true;
+
+    programs.gamemode.enable = true;
 
     environment.systemPackages = with pkgs; [
         # W M s
@@ -28,6 +31,12 @@
         # D e v O p s
         docker-compose
         docker
+
+        # V P N
+        # v2raya
+        # xray
+        # v2ray-geoip
+        # v2ray-domain-list-community
 
         # UI
         swww
@@ -44,6 +53,7 @@
         grim # Захват экрана
 
         # G A M E S
+        freesmlauncher.packages.${system}.freesmlauncher
         unciv
  
         # D e s k t o p   A p p s

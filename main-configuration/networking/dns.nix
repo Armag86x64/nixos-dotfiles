@@ -2,6 +2,7 @@
     # Добавляем пакет zapret
   # environment.systemPackages = [ pkgs.zapret ];
 
+  # boot.kernelParams = [ "ipv6.disable=1" ];
   networking.enableIPv6 = false;
 
   environment.systemPackages = [ pkgs.byedpi ];

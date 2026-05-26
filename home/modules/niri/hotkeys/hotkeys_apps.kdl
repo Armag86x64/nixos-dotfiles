@@ -22,7 +22,7 @@ binds {
     // Mod+E       { spawn "foot" "/home/soundwave/.config/niri/scripts/filer"; }
     // Mod+Shift+F { spawn "foot" "yazi"; }
     Shift+N     { spawn-sh "foot vim $HOME/nixos-config"; }
-    Shift+W     { spawn-sh "foot vim $HOME/Workspace"; }
+    // Shift+W     { spawn-sh "foot vim $HOME/Workspace"; }
     // Shift+O     { spawn "foot" "sudoedit" "/etc/nixos/configuration.nix"; }
 
     /* A T L A S   E C O S Y S T E M */
