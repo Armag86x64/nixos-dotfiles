@@ -1,14 +1,17 @@
-{ config, pkgs, ... }: # Начало файла
+{ config, pkgs, ... }: {
+  networking.enableIPv6 = false;
 
-{
-  # Правила файрвола
-  /*
-  networking.firewall = {
-    checkReversePath = false;
-    extraCommands = ''
-      iptables -t mangle -A POSTROUTING -p tcp --dport 443 -j NFQUEUE --queue-num 200 --queue-bypass
-      iptables -t mangle -A POSTROUTING -p udp --dport 443 -j NFQUEUE --queue-num 200 --queue-bypass
-    '';
+  environment.systemPackages = [ pkgs.byedpi ];
+
+  systemd.services.byedpi = {
+    description = "ByeDPI Proxy Service";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      # Параметры -d 1 -f 1 -e 1 разбивают HTTP/HTTPS запросы
+      ExecStart = "${pkgs.byedpi}/bin/ciadpi -i 127.0.0.1 -p 1080 -d 1 -f 1 -e 1";
+      Restart = "always";
+      User = "nobody";
+    };
   };
-  */
 }
