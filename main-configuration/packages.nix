@@ -1,112 +1,97 @@
-{ config, lib, pkgs, freesmlauncher, ... }: {
-    # programs.hyprland.enable = true;
-
+{ config, lib, stable, unstable, freesmlauncher, ... }:
+let
+  system = builtins.currentSystem;
+in {
     programs.niri.enable = true;
 
     services.blueman.enable = true;
     services.udisks2.enable = true;
-
-    # virtualisation.virtualbox.host.enable = true;
-    # users.extraGroups.vboxusers.members = [ "soundwave" ];
 
     virtualisation.libvirtd.enable = true;
     programs.virt-manager.enable = true;
 
     virtualisation.docker.enable = true;
 
-    users.users.soundwave.extraGroups = [ "libvirtd" "docker"];
-
-    # security.polkit.enable = true;
+    users.users.soundwave.extraGroups = [ "libvirtd" "docker" ];
 
     programs.gamemode.enable = true;
 
-    environment.systemPackages = with pkgs; [
-        # W M s
-        # hyprland
-        # niri
-        waybar
-        mako
-        libnotify
+    environment.systemPackages = [
+        # W M s (из нестабильного)
+        unstable.waybar
+        unstable.mako
+        unstable.libnotify
 
         # D e v O p s
-        docker-compose
-        docker
-
-        # V P N
-        # v2raya
-        # xray
-        # v2ray-geoip
-        # v2ray-domain-list-community
+        unstable.docker-compose
+        unstable.docker
 
         # UI
-        swww
-        nerd-fonts.caskaydia-cove
-        capitaine-cursors
-        eww
-        xfce.tumbler
-        imagemagick
+        unstable.swww
+        unstable.nerd-fonts.caskaydia-cove
+        unstable.capitaine-cursors
+        unstable.eww
+        unstable.xfce.tumbler
+        unstable.imagemagick
 
         # W A Y L A N D
-        xwayland
-        xwayland-satellite       
-        wl-clipboard
-        grim # Захват экрана
+        unstable.xwayland
+        unstable.xwayland-satellite       
+        unstable.wl-clipboard
+        unstable.grim
 
         # G A M E S
         freesmlauncher.packages.${system}.freesmlauncher
-        unciv
+        unstable.unciv
  
         # D e s k t o p   A p p s
-        # telegram-desktop
-        chromium
-        librewolf
-        flameshot
-        foot
-        xfce.thunar
-        blueman
-        obsidian
-        libreoffice
-        waypaper
-        foliate
-        neohtop
-        wofi
-        eog
+        unstable.chromium
+        unstable.librewolf
+        unstable.flameshot
+        unstable.foot
+        unstable.xfce.thunar
+        unstable.blueman
+        unstable.obsidian
+        unstable.libreoffice
+        unstable.waypaper
+        unstable.foliate
+        unstable.neohtop
+        unstable.wofi
+        unstable.eog
 
-        # C L I   u t i l s
-        # vim 
-        brightnessctl
-        fastfetch
-        vim-full
-        udiskie
-        bottom
-        nano
-        wget
-        yazi
-        ncdu
-        tree
-        zsh
-        git
+        # C L I   u t i l s (стабильные версии для базовых утилит)
+        stable.brightnessctl
+        stable.fastfetch
+        stable.vim-full
+        stable.udiskie
+        stable.bottom
+        stable.nano
+        stable.wget
+        stable.yazi
+        stable.ncdu
+        stable.tree
+        stable.zsh
+        stable.git
 
-        # C o d i n g
-        rust-analyzer
-        zed-editor
-        python311
-        poetry
-        rustup
-        nodejs
-        helix
-        gcc
-       # xclip
+        # C o d i n g (смешанный подход)
+        unstable.rust-analyzer
+        unstable.zed-editor
+        unstable.python311
+        unstable.poetry
+        unstable.rustup
+        unstable.helix
+        stable.gcc          # стабильный компилятор
+        stable.nodejs       # стабильный Node.js
 
-        # C o m p r e s s i o n
-        unzip
-        p7zip
+        # C o m p r e s s i o n (стабильные)
+        stable.unzip
+        stable.p7zip
 
-        # G a m i n g
-        jdk8
+        # G a m i n g (стабильный)
+        stable.jdk8
     ];
 
-    fonts.packages = with pkgs; [
+    fonts.packages = with unstable; [
         cascadia-code
         nerd-fonts.caskaydia-cove
     ];

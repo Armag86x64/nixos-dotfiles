@@ -1,30 +1,61 @@
 {
   disko.devices = {
     disk = {
-      # Имя диска в системе(в скрипте мы передадим реальное имя, например /dev/nvme0n1)
       main = {
         type = "disk";
-        device = ""; # Оставляем пустым, Disko заполнит это через аргументы командной строки
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
-            ESP = {
-              type = "EF00"; # Тип раздела EFI
-              size = "512M";
+            # Незашифрованный загрузочный раздел
+            boot = {
+              size = "500M";
               content = {
                 type = "filesystem";
                 format = "vfat";
                 mountpoint = "/boot";
-                mountOptions = [ "defaults" ];
               };
             };
-            root = {
+            
+            # Шифрованный раздел(всё остальное место)
+            luks = {
               size = "100%";
               content = {
-                type = "filesystem";
-                format = "ext4";
-                mountpoint = "/";
+                type = "luks";
+                name = "crypted";
+                settings.allowDiscards = true;
+                content = {
+                  type = "lvm_pv";
+                  vg = "pool";
+                };
               };
+            };
+          };
+        };
+      };
+    };
+    
+    # LVM-тома внутри расшифрованного раздела
+    lvm_vg = {
+      pool = {
+        type = "lvm_vg";
+        lvs = {
+          # Раздел подкачки
+          swap = {
+            size = "8G";
+            content = {
+              type = "swap";
+              resumeDevice = true;
+            };
+          };
+          
+          # Корневой раздел
+          root = {
+            size = "100%";
+            content = {
+              type = "filesystem";
+              format = "ext4";
+              mountpoint = "/";
             };
           };
         };

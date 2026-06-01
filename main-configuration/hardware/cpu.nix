@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: { 
+{ config, lib, unstable, ... }: { 
     hardware.cpu.intel.updateMicrocode = true;
 
     # Основные сервисы термоконтроля
@@ -75,7 +75,7 @@
     boot.blacklistedKernelModules = [ "i801_smbus" ];
 
     # Полезные пакеты для мониторинга
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with unstable; [
       powertop
       s-tui
     ];

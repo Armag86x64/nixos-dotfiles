@@ -2,30 +2,33 @@
   description = "My flakes";
 
   inputs = {
-    # Берем пакеты самой NixOS (ветка unstable)
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # Подключаем инструмент автоматической разметки дисков Disko
+    stable.url = "github:nixos/nixpkgs/nixos-25.11";
+
     disko.url = "github:nix-community/disko";
-    disko.inputs.nixpkgs.follows = "nixpkgs";
+    disko.inputs.nixpkgs.follows = "unstable";
 
-    # Берем Home Manager, который совместим с этими пакетами
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
 
     freesmlauncher = {
       url = "github:FreesmTeam/FreesmLauncher";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "unstable";
     };
   };
 
-  outputs = { self, nixpkgs, disko, home-manager, freesmlauncher, ... }@inputs: {
-    nixosConfigurations.altair = nixpkgs.lib.nixosSystem {
+  outputs = { self, stable, unstable disko, home-manager, freesmlauncher, ... }@inputs: {
+    nixosConfigurations.altair = stable.lib.nixosSystem {
       system = "x86_64-linux";
     
-      specialArgs = { inherit inputs; freesmlauncher = freesmlauncher; }; 
+      specialArgs = { 
+        inherit inputs;
+        inherit stable unstable;
+        freesmlauncher = freesmlauncher; 
+      }; 
 
       modules = [
         # Подключаем модуль Disko в систему

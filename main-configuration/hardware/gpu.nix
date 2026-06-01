@@ -1,4 +1,4 @@
-{ pkgs, ... }: {
+{ unstable, ... }: {
     # Включаем графику (актуально для NixOS 24.11+)
     hardware.graphics = {
         enable = true;
@@ -33,7 +33,7 @@
     # boot.kernelPackages = pkgs.linuxPackages_latest;
 
     # Полезный софт для проверки
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with unstable; [
         intel-gpu-tools # Команда: sudo intel_gpu_top
         libva-utils     # Команда: vainfo
         vulkan-tools    # Проверка Vulkan: vulkaninfo или vkcube

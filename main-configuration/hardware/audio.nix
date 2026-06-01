@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, unstable, ... }: {
     services.pulseaudio.enable = false;
 
     security.rtkit.enable = true;
@@ -10,7 +10,7 @@
         pulse.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with unstable; [
         pavucontrol
         alsa-utils
     ];

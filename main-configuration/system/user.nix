@@ -1,9 +1,9 @@
-{ config, lib, pkgs, ... }: {
+{ config, lib, stable, ... }: {
     users.users.soundwave = {
         isNormalUser = true;
         extraGroups = [ "wheel" ];
         packages = with pkgs; [];
-        shell = pkgs.zsh;
+        shell = stable.zsh;
     };
 
     programs.zsh = {
