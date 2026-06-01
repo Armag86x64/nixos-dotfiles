@@ -3,7 +3,7 @@
     hardware.graphics = {
         enable = true;
         enable32Bit = true;
-        extraPackages = with pkgs; [
+        extraPackages = with unstable; [
           intel-media-driver   # Основной драйвер для видео (iHD)
           vpl-gpu-rt           # Runtime для новых приложений Intel (Video Processing Library)
           intel-compute-runtime # OpenCL для вычислений на GPU

@@ -10,23 +10,41 @@
     disko.inputs.nixpkgs.follows = "unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "unstable";
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "stable";
     };
 
     freesmlauncher = {
       url = "github:FreesmTeam/FreesmLauncher";
-      inputs.nixpkgs.follows = "unstable";
+      inputs.nixpkgs.follows = "stable";
     };
   };
 
-  outputs = { self, stable, unstable disko, home-manager, freesmlauncher, ... }@inputs: {
+  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, ... }@inputs: 
+  let
+    system = "x86_64-linux";
+    
+    nixpkgsConfig = {
+      allowUnfree = true;
+    };
+
+    stable-pkgs = import stable {
+      inherit system;
+      config = nixpkgsConfig;
+    };
+
+    unstable-pkgs = import unstable {
+      inherit system;
+      config = nixpkgsConfig;
+    };
+  in {
     nixosConfigurations.altair = stable.lib.nixosSystem {
       system = "x86_64-linux";
     
       specialArgs = { 
         inherit inputs;
-        inherit stable unstable;
+        stable = stable-pkgs; 
+        unstable = unstable-pkgs; 
         freesmlauncher = freesmlauncher; 
       }; 
 

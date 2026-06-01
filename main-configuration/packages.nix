@@ -1,6 +1,8 @@
-{ config, lib, stable, unstable, freesmlauncher, ... }:
+{ pkgs, config, lib, stable, unstable, freesmlauncher, ... }:
 let
-  system = builtins.currentSystem;
+  # Извлекаем текущую систему напрямую из pkgs
+  system = pkgs.system; 
+  
 in {
     programs.niri.enable = true;
 
