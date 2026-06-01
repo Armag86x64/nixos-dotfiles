@@ -25,15 +25,15 @@
         "libnbtplusplus": "libnbtplusplus",
         "nix-filter": "nix-filter",
         "nixpkgs": [
-          "stable"
+          "unstable"
         ]
       },
       "locked": {
-        "lastModified": 1778860875,
-        "narHash": "sha256-gQAJnb2sPKdykl7+CP6j8qlt2d5ron1+juu1XlPD5WM=",
+        "lastModified": 1780231241,
+        "narHash": "sha256-ZV2qdhQ4lWH+qckI/oHAzP1g3QNWjsMb/BNl9AIlz7k=",
         "owner": "FreesmTeam",
         "repo": "FreesmLauncher",
-        "rev": "cc1f766b1cc53c6aa9602b3b2384a5e00a76c56f",
+        "rev": "c5e133fe06f58fa745dec262b826c9fd17f06a1c",
         "type": "github"
       },
       "original": {
