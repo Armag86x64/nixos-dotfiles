@@ -8,8 +8,8 @@
     after = [ "network.target" ];
     wantedBy = [ "multi-user.target" ];
     serviceConfig = {
-      # Параметры -d 1 -f 1 -e 1 разбивают HTTP/HTTPS запросы
-      ExecStart = "${pkgs.byedpi}/bin/ciadpi -i 127.0.0.1 -p 1080 -d 1 -f 1 -e 1";
+      # Проверенный синтаксис коротких флагов (комбинация против жесткого ТСПУ)
+      ExecStart = "${pkgs.byedpi}/bin/ciadpi -i 127.0.0.1 -p 1080 -o 1 -d 3 -s 8 -s 8+s -o 30+s -r 26+s -T 5 -A t -X -b 65536";
       Restart = "always";
       User = "nobody";
     };
