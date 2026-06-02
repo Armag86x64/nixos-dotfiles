@@ -29,7 +29,7 @@ in {
         unstable.docker
 
         # UI
-        unstable.swww
+        stable.swww
         unstable.nerd-fonts.caskaydia-cove
         unstable.capitaine-cursors
         unstable.eww
