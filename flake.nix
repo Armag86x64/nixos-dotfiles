@@ -53,7 +53,7 @@
         disko.nixosModules.disko
         
         # Подключаем декларативную конфигурацию дисков
-        ./main-configuration/disk-config.nix
+        ./main-configuration/disko-config.nix
 
         # ЗАЩИТА: отключаем генерацию файловых систем на живой системе altair.
         # Это гарантирует, что nixos-rebuild switch НЕ затронет ваши текущие диски.
