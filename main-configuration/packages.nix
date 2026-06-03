@@ -4,7 +4,7 @@ let
   system = pkgs.system; 
   
 in {
-    programs.niri.enable = true;
+    # programs.niri.enable = true;
 
     services.blueman.enable = true;
     services.udisks2.enable = true;

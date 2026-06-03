@@ -18,9 +18,14 @@
       url = "github:FreesmTeam/FreesmLauncher";
       inputs.nixpkgs.follows = "unstable"; 
     };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "stable"; # Следуем за вашей основной системной веткой
+    };
   };
 
-  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, ... }@inputs: 
+  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, niri, ... }@inputs: 
   let
     system = "x86_64-linux";
     
@@ -64,6 +69,13 @@
         {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
+
+          home-manager.extraSpecialArgs = {
+            inherit inputs;
+            stable = stable-pkgs;
+            unstable = unstable-pkgs;
+          };
+
           home-manager.users.soundwave = ./home/home.nix;
         }
       ];

@@ -7,7 +7,7 @@
 
       "Super+Alt+S" = {
         allow-when-locked = true;
-        hotkey-overlay-title = null;
+        hotkey-overlay.title = ""; # Заменили null на пустую строку для прохождения типизации
         action.spawn-sh = [ "pkill orca || exec orca" ];
       };
 

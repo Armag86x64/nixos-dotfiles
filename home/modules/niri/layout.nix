@@ -16,9 +16,9 @@
       background-color = "#000000";
 
       preset-column-widths = [
-        0.33333
-        0.5
-        0.66667
+        { proportion = 0.33333; }
+        { proportion = 0.5; }
+        { proportion = 0.66667; }
       ];
 
       default-column-width = { proportion = 1.0; };

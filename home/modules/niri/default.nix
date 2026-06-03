@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  # Подключаем подмодули с настройками
   imports = [
+    # Подключаем официальный модуль Home Manager из флейка
+    inputs.niri.homeModules.niri
+
     ./autostart.nix
     ./input.nix
     ./output.nix
@@ -14,12 +16,14 @@
   programs.niri = {
     enable = true;
     
-    # Добавляем новые глобальные параметры
+    # Решаем проблему рекурсии: берем пакет из pkgs и убираем тесты
+    package = pkgs.niri.overrideAttrs (oldAttrs: {
+      doCheck = false;
+    });
+
     settings = {
-      # Отключаем анимации интерфейса
       animations.enable = false;
 
-      # Декларируем статические рабочие пространства
       workspaces = {
         "1" = { };
         "2" = { };
