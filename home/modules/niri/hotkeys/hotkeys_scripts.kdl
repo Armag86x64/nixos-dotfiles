@@ -1,8 +1,0 @@
-binds {
-    // Если хотите именно Shift+W без Super (но осторожно, это перекроет ввод текста)
-    // Shift+W { spawn "~/.config/niri/scripts/wallpaper_change.sh"; }
-
-    // Рекомендуемый вариант (Super+Shift+W)
-    // Mod+Shift+W { spawn "sh" "-c" "/home/soundwave/.config/niri/scripts/wallpapers_change.sh > /tmp/niri-script.log 2>&1"; }
-    Mod+Shift+W { spawn "waypaper"; }
-}
