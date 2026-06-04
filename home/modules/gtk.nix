@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ config, pkgs, stable, unstable, ... }: {
   gtk = {
     enable = true;
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
@@ -19,13 +19,15 @@
     };
 
     font = {
-      name = "JetBrains Mono";
-      package = pkgs.jetbrains-mono;
-      size = 10;
+      name = "JetBrainsMono Nerd Font"; # Имя шрифта и его размер
+      size = 11;
+      package = unstable.nerd-fonts.jetbrains-mono; # Автоматическая установка пакета
     };
   };
 
   gtk.gtk4.theme = config.gtk.theme;
+
+  # fonts.fontconfig.enable = true;
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 }

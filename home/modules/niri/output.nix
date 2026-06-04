@@ -1,24 +1,17 @@
 { ... }:
 
 {
-  programs.niri.settings.outputs."eDP-1" = {
-    # Исправление ошибки типов: разбиваем строку разрешения на отдельные параметры
-    mode = {
-      width = 1600;
-      height = 900;
-      refresh = 60.0;
-    };
+  programs.niri.settings.outputs = {
+    "eDP-1" = {
+      mode = {
+        width = 1600;
+        height = 900;
+        refresh = 60.0;
+      };
 
-    # Оставляем пустой блок для стандартной ориентации экрана
-    transform = { };
-    
-    # Позиционирование экрана на координатной сетке
-    position = {
-      x = 0;
-      y = 0;
+      transform = { };
+      position = { x = 0; y = 0; };
+      focus-at-startup = true;
     };
-
-    # Автофокус на этот монитор при старте системы
-    focus-at-startup = true;
   };
 }

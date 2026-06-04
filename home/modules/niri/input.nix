@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  programs.niri.settings.gestures.hot-corners.enable = false;
+
   programs.niri.settings.input = {
     keyboard.xkb = {
       layout = "us,ru";

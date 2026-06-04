@@ -28,6 +28,8 @@
       "i915.enable_fbc=1"        # Сжатие данных в памяти (Frame Buffer Compression)
       "i915.enable_psr=1"        # Panel Self Refresh (Огромный плюс к батарее)
       #"i915.fastboot=1"          # Убирает мерцание при загрузке
+      "video=eDP-1:1600x900M@60"
+
     ];
     
     # boot.kernelPackages = pkgs.linuxPackages_latest;

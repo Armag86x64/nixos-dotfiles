@@ -1,3 +1,0 @@
-binds {
-    Mod+Shift+W { spawn "waypaper"; }
-}
