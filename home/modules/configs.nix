@@ -3,6 +3,7 @@
     ./niri
     ./foot
     ./wofi
+    ./mako
   ];
   /*
   xdg.configFile."niri" = {
@@ -11,7 +12,7 @@
   };
   */
 
-  xdg.configFile."mako/config".source = ./mako/config;
+  # xdg.configFile."mako/config".source = ./mako/config;
   # xdg.configFile."foot/foot.ini".source = ./foot/foot.ini;
   xdg.configFile."fastfetch/config.jsonc".source = ./fastfetch/config.jsonc;
   # xdg.configFile."wofi/config".source = ./wofi/config;
