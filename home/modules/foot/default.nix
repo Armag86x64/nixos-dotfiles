@@ -13,7 +13,7 @@
         title = "Foot";
       };
 
-      colors-dark = {
+      colors = {
         foreground = "ffffff";
         background = "000000";
 
