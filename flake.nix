@@ -6,6 +6,10 @@
 
     stable.url = "github:nixos/nixpkgs/nixos-25.11";
 
+    nixvim = {
+      url = "github:nix-community/nixvim";
+    };
+
     disko.url = "github:nix-community/disko";
     disko.inputs.nixpkgs.follows = "unstable";
 
@@ -25,7 +29,7 @@
     };
   };
 
-  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, niri, ... }@inputs: 
+  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, niri, nixvim, ... }@inputs: 
   let
     system = "x86_64-linux";
     
@@ -76,7 +80,12 @@
             unstable = unstable-pkgs;
           };
 
-          home-manager.users.soundwave = ./home/home.nix;
+          home-manager.users.soundwave = {
+            imports = [
+              nixvim.homeModules.nixvim
+              ./home/home.nix
+            ];
+          };
         }
       ];
     };

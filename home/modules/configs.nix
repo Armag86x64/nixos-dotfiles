@@ -5,6 +5,7 @@
     ./wofi
     ./mako
     ./waybar
+    ./nixvim
     ./fastfetch
   ];
   /*
