@@ -1,5 +1,5 @@
 { config, unstable, ... }: {
-  networking.enableIPv6 = false;
+  /*networking.enableIPv6 = false;
 
   environment.systemPackages = [ unstable.byedpi ];
 
@@ -14,4 +14,5 @@
       User = "nobody";
     };
   };
+  */
 }

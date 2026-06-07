@@ -27,6 +27,11 @@
 
   gtk.gtk4.theme = config.gtk.theme;
 
+  xdg.portal = {
+    enable = true;
+    config.common.default = "gtk";
+  };
+
   # fonts.fontconfig.enable = true;
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
