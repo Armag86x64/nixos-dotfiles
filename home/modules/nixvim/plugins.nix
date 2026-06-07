@@ -53,6 +53,7 @@
             "<Up>" = "cmp.mapping.select_prev_item()";
             "S" = "cmp.mapping.select_next_item()";
             "<Down>" = "cmp.mapping.select_next_item()";
+            "<Tab>" = "cmp.mapping.select_next_item()";
             "<C-e>" = "cmp.mapping.close()";
           };
         };
