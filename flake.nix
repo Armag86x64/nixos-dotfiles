@@ -3,8 +3,12 @@
 
   inputs = {
     unstable.url = "github:nixos/nixpkgs/nixos-unstable";
-
     stable.url = "github:nixos/nixpkgs/nixos-25.11";
+
+    firefox-addons = {
+      url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
+      inputs.nixpkgs.follows = "unstable";
+    };
 
     nixvim = {
       url = "github:nix-community/nixvim";
@@ -29,7 +33,7 @@
     };
   };
 
-  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, niri, nixvim, ... }@inputs: 
+  outputs = { self, stable, unstable, disko, home-manager, freesmlauncher, niri, nixvim, firefox-addons, ... }@inputs: 
   let
     system = "x86_64-linux";
     

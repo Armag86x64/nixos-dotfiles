@@ -6,6 +6,7 @@
     ./mako
     ./waybar
     ./nixvim
+    ./firefox
     ./fastfetch
   ];
   /*

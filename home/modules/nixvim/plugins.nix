@@ -12,6 +12,14 @@
         settings.highlight.enable = true;
       };
 
+      nvim-autopairs = {
+        enable = true;
+        # Дополнительные настройки (необязательно)
+        settings = {
+          check_ts = true; # Использовать Treesitter для проверки контекста
+        };
+      };
+
       telescope.enable = true;
       neo-tree.enable = true;
 
