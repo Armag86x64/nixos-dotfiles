@@ -26,11 +26,5 @@
     source = ./waybar;
     recursive = true;
   };*/
-
-  home.file.".vimrc".source = ./vim/vimrc;
-  home.file.".vim" = {
-    source = ./vim/dot-vim;
-    recursive = true;
-  };
 }
 
