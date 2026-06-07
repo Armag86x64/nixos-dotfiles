@@ -7,6 +7,7 @@
     ./waybar
     ./nixvim
     ./firefox
+    ./hyprland
     ./fastfetch
   ];
   /*

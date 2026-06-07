@@ -18,6 +18,8 @@ in {
 
     programs.gamemode.enable = true;
 
+    programs.hyprland.enable = true;
+
     environment.systemPackages = [
         # W M s (из нестабильного)
         unstable.waybar
