@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }: {
     users.users.soundwave = {
         isNormalUser = true;
-        extraGroups = [ "wheel" ];
+        extraGroups = [ "wheel" "networkmanager" ];
         shell = pkgs.zsh;
     };
 
