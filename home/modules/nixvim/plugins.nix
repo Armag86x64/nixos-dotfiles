@@ -14,9 +14,8 @@
 
       nvim-autopairs = {
         enable = true;
-        # Дополнительные настройки (необязательно)
         settings = {
-          check_ts = true; # Использовать Treesitter для проверки контекста
+          check_ts = true; 
         };
       };
 
@@ -26,7 +25,6 @@
       lsp = {
         enable = true;
         servers = {
-          # Надежная и быстрая конфигурация nixd
           nixd = {
             enable = true;
           };
@@ -45,7 +43,7 @@
         enable = true;
         settings = {
           sources = [
-            { name = "nvim_lsp"; priority = 1000; } # Ставим LSP наивысший приоритет
+            { name = "nvim_lsp"; priority = 1000; }
             { name = "buffer"; priority = 500; }
             { name = "path"; priority = 250; }
           ];
@@ -75,11 +73,34 @@
     opts.updatetime = 300;
 
     extraConfigLua = ''
+      -- 1. Сохраняем оригинальный метод записи диагностики Neovim
+      local original_set_diagnostic = vim.diagnostic.set
+
+      -- 2. Переопределяем метод на самом глубоком системном уровне ядра
+      vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
+        -- Проверяем тип файла для буфера, куда пришла диагностика
+        if vim.bo[bufnr].filetype == "nix" then
+          -- Разрешаем запись в память и обработку ТОЛЬКО для nix-файлов
+          original_set_diagnostic(namespace, bufnr, diagnostics, opts)
+        else
+          -- Для всех остальных файлов (Rust и др.) полностью очищаем кэш и игнорируем входящие данные
+          original_set_diagnostic(namespace, bufnr, {}, opts)
+        end
+      end
+
+      -- 3. Настройка внешнего вида (отработает только там, где диагностика разрешена)
       vim.diagnostic.config({
-        virtual_text = false,
-        signs = false,
-        underline = false,
-        float = false,
+        virtual_text = {
+          prefix = '●',
+          severity_sort = true,
+        },
+        signs = true,
+        underline = true,
+        update_in_insert = false,
+        float = {
+          border = "rounded",
+          source = "always",
+        },
       })
     '';
   };

@@ -1,4 +1,4 @@
-{ config, lib, pkgs, inputs, ... }: {
+{ pkgs, inputs, ... }: {
     imports =
       [
           #./home/default.nix
@@ -6,7 +6,7 @@
           ./main-configuration/hardware
           ./main-configuration/networking
           ./main-configuration/packages.nix
-      ];  
+      ];
 
     time.timeZone = "Europe/Moscow";
 
