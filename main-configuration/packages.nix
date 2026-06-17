@@ -61,7 +61,7 @@ in {
         unstable.foliate
         unstable.neohtop
         unstable.wofi
-        unstable.eog
+        unstable.eog 
 
         # C L I   u t i l s (стабильные версии для базовых утилит)
         stable.brightnessctl

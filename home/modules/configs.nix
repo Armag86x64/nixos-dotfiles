@@ -1,5 +1,6 @@
 { config, ... }: {
   imports = [
+    ./mpv
     ./niri
     ./foot
     ./wofi
