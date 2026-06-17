@@ -1,4 +1,4 @@
-{ config, pkgs, ... }: {
+{ ... }: {
   home.username = "soundwave";
   home.homeDirectory = "/home/soundwave";
   home.stateVersion = "25.11"; 

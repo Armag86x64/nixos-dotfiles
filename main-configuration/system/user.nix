@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }: {
+{ pkgs, ... }: {
     users.users.soundwave = {
         isNormalUser = true;
         extraGroups = [ "wheel" "networkmanager" ];

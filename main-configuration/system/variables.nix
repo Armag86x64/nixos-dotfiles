@@ -1,4 +1,4 @@
-{ config, lib,  ... }: {
+{ ... }: {
     environment.variables.EDITOR = "vim";
     environment.variables.VISUAL = "vim";
  

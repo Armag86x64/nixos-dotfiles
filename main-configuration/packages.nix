@@ -5,6 +5,7 @@ let
   
 in {
     # programs.niri.enable = true;
+    nixpkgs.config.allowUnfree = true;
 
     services.blueman.enable = true;
     services.udisks2.enable = true;
@@ -31,6 +32,7 @@ in {
         unstable.docker
 
         # UI
+        stable.mpvpaper
         stable.swww
         unstable.nerd-fonts.caskaydia-cove
         unstable.capitaine-cursors

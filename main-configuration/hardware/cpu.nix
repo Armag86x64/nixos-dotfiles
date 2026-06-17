@@ -1,4 +1,4 @@
-{ config, lib, unstable, ... }: { 
+{ unstable, ... }: { 
     hardware.cpu.intel.updateMicrocode = true;
 
     # Основные сервисы термоконтроля
