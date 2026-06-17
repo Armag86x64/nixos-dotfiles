@@ -17,7 +17,8 @@
     };
     "Mod+W" = {
       hotkey-overlay.title = "Run a browser: chromium";
-      action.spawn = [ "chromium" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" ];
+      action.spawn = [ "env" "MOZ_ENABLE_WAYLAND=1" "firefox" ];
+      # action.spawn = [ "chromium" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" ];
     };
     "Mod+T" = {
       hotkey-overlay.title = "Run a telegram";

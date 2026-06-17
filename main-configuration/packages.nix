@@ -1,4 +1,4 @@
-{ pkgs, config, lib, stable, unstable, freesmlauncher, ... }:
+{ pkgs, stable, unstable, freesmlauncher, ... }:
 let
   # Извлекаем текущую систему напрямую из pkgs
   system = pkgs.system; 
