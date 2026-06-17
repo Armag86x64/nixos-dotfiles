@@ -13,7 +13,7 @@
       { mode = [ "n" "i" ]; key = "<C-f>"; action = "<cmd>Telescope current_buffer_fuzzy_find<CR>"; options.desc = "Find string in current file"; }
 
       # --- Сохранение и Выход ---
-      { mode = [ "n" "i" "v" ]; key = "<C-s>"; action = "<Esc><cmd>w<CR>"; options.desc = "Save file"; }
+      { mode = [ "n" "i" "v" ]; key = "<C-s>"; action = "<cmd>stopinsert | w<CR>"; options = { desc = "Save file and go to Normal mode"; silent = true; }; }
       { mode = "n"; key = "<C-q>"; action = "<cmd>q<CR>"; options.desc = "Quit Vim"; }
 
       # --- Навигация по строке и файлу ---

@@ -46,9 +46,26 @@
           "https://youtube.com"
           "https://www.youtube.com"
 
+          # Pinterest
+          "https://pinterest.com"
+          "https://www.pinterest.com"
+          "https://ru.pinterest.com"
+
           # Хабр
           "https://habr.com"
           "https://www.habr.com"
+
+          # Reddit
+          "https://reddit.com"
+          "https://www.reddit.com"
+          "https://old.reddit.com"      # если используете старую версию
+          "https://new.reddit.com"      # если используете новую версию
+          "https://i.redd.it"           # для изображений
+          "https://preview.redd.it"     # для превью изображений
+          "https://v.redd.it"           # для видео
+          "https://external-preview.redd.it"  # для внешних превью
+          "https://a.thumbs.redditmedia.com"   # для миниатюр
+          "https://b.thumbs.redditmedia.com"   # для миниатюр
         ];
         # Параметр Default убран, чтобы избежать блокировки сохранения
       };
