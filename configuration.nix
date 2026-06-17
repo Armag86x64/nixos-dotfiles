@@ -4,6 +4,7 @@ let
 in
 {
   imports = [
+    ./services
     ./main-configuration/system
     ./main-configuration/hardware
     ./main-configuration/networking
