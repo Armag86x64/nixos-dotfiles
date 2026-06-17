@@ -1,7 +1,10 @@
+;; Переменные звука (оставляем легкий poll, так как wpctl не имеет встроенного демона событий)
 (defpoll current_volume :interval "0.2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}'")
 (defpoll is_muted :interval "0.2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED' && echo 'true' || echo 'false'")
-(defpoll track_title :interval "1s" "playerctl metadata --format '{{ artist }} - {{ title }}' 2>/dev/null || echo 'No media playing'")
 (defpoll sink_json :interval "2s" "wpctl-helper sinks")
+
+;; ПОЛНАЯ ОПТИМИЗАЦИЯ: Мгновенный перехват изменения трека по событиям D-Bus (0% нагрузки на CPU)
+(deflisten track_title "playerctl metadata --follow --format '{{ artist }} - {{ title }}' 2>/dev/null || echo 'No media playing'")
 
 (defwindow bw-volume-applet
   :monitor 0

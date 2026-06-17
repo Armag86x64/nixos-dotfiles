@@ -39,19 +39,28 @@ let
     esac
   '';
 
-  # Копируем конфигурационные файлы eww из текущей папки (.) в store
+  # Копируем конфигурационные файлы eww без изменений
   eww-config-dir = pkgs.stdenv.mkDerivation {
     name = "eww-bw-config";
     src = ./.;
+    
+    dontUnpack = false;
+    dontBuild = true;
+    
     installPhase = ''
       mkdir -p $out
-      cp eww.yuck eww.css $out/
+      cp $src/eww.yuck $src/eww.css $out
     '';
   };
 
 in {
-  # Добавляем скрипт-хелпер в окружение пользователя, чтобы eww видел команду "wpctl-helper"
-  home.packages = [ wpctl-helper pkgs.playerctl ];
+  # Пробрасываем все необходимые утилиты в пользовательский PATH, 
+  # чтобы Eww и его скрипты видели их "из коробки"
+  home.packages = [ 
+    wpctl-helper 
+    pkgs.playerctl 
+    pkgs.wireplumber 
+  ];
 
   programs.eww = {
     enable = true;
