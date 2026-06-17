@@ -1,5 +1,7 @@
 { inputs, pkgs, ... }:
-
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
 {
   programs.firefox = {
     enable = true;
@@ -74,7 +76,7 @@
     profiles.soundwave = {
       isDefault = true;
 
-      extensions.packages = with inputs.firefox-addons.packages.${pkgs.system}; [
+      extensions.packages = with inputs.firefox-addons.packages.${system}; [
         ublock-origin
         bitwarden
         darkreader

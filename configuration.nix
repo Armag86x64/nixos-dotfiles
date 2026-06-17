@@ -1,42 +1,44 @@
-{ pkgs, inputs, ... }: {
-    imports =
-      [
-          #./home/default.nix
-          ./main-configuration/system
-          ./main-configuration/hardware
-          ./main-configuration/networking
-          ./main-configuration/packages.nix
-      ];
+{ pkgs, inputs, ... }: 
+let
+  system = pkgs.stdenv.hostPlatform.system;
+in
+{
+  imports = [
+    ./main-configuration/system
+    ./main-configuration/hardware
+    ./main-configuration/networking
+    ./main-configuration/packages.nix
+  ];
 
-    time.timeZone = "Europe/Moscow";
+  time.timeZone = "Europe/Moscow";
 
-    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-    # boot.kernelPackages = pkgs.lib.mkForce pkgs.linuxPackages_6_12;
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.lib.mkForce pkgs.linuxPackages_6_12;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
-    documentation.enable = false;
-    documentation.nixos.enable = false;
+  documentation.enable = false;
+  documentation.nixos.enable = false;
 
-    nix = {
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
+  nix = {
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
     };
+  };
 
-    environment.systemPackages = [
-        inputs.home-manager.packages.${pkgs.system}.default
-    ];
+  environment.systemPackages = [
+    inputs.home-manager.packages.${system}.default
+  ];
 
-    services.envfs.enable = true;
-    programs.nix-ld.enable = true;
+  services.envfs.enable = true;
+  programs.nix-ld.enable = true;
 
-    xdg.portal = {
-        enable = true;
-        extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-    };
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  };
 
-    system.stateVersion = "25.11"; 
+  system.stateVersion = "25.11"; 
 }
