@@ -1,0 +1,122 @@
+/* Убираем дефолтный серый фон самого окна */
+window {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Сброс для всех элементов */
+* {
+  font-family: "JetBrains Mono", "Iosevka", monospace;
+  font-size: 13px;
+}
+
+/* Главный контейнер апплета — жестко задаем черный цвет и гладкие углы */
+.bw-window {
+  background-color: #000000;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #ffffff;
+  border-radius: 16px; 
+  color: #ffffff;
+  padding: 20px;
+}
+
+.bw-section {
+  margin-bottom: 4px;
+}
+
+.bw-divider {
+  background-color: #ffffff;
+  min-height: 1px;
+  margin: 14px 0;
+}
+
+.bw-label-bold { 
+  font-weight: bold; 
+}
+
+.bw-label-dim { 
+  color: #666666; 
+  font-size: 11px;
+  font-weight: bold;
+  margin-bottom: 6px; 
+}
+
+.bw-track-title { 
+  font-style: italic; 
+  margin-bottom: 10px; 
+}
+
+/* Кнопки плеера */
+.bw-controls button {
+  color: #ffffff;
+  background-color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+  border-radius: 8px;
+  padding: 6px 12px;
+}
+
+.bw-controls button:hover {
+  color: #000000;
+  background-color: #ffffff; 
+}
+
+/* Слайдер громкости */
+scale.bw-slider {
+  margin-top: 10px;
+}
+  
+scale.bw-slider trough {
+  background-color: #1a1a1a;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ffffff;
+  border-radius: 4px;
+  min-height: 6px;
+}
+  
+scale.bw-slider trough highlight { 
+  background-color: #ffffff; 
+}
+  
+scale.bw-slider slider {
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #000000;
+  border-radius: 20px;
+  min-width: 12px;
+  min-height: 12px;
+}
+
+/* Список источников */
+.sink-list button {
+  padding: 8px 10px;
+  margin-top: 4px;
+  border-radius: 6px;
+}
+
+.sink-btn {
+  color: #ffffff;
+  background-color: #0d0d0d;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #222222;
+}
+
+.sink-btn:hover {
+  border-style: dashed;
+  border-width: 1px;
+  border-color: #ffffff;
+}
+
+.sink-btn-active {
+  color: #000000;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+
+.bw-mono { 
+  font-weight: bold; 
+}

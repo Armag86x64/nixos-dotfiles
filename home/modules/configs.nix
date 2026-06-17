@@ -7,6 +7,7 @@
     ./mako
     ./waybar
     ./nixvim
+    ./widgets
     ./firefox
     ./hyprland
     ./fastfetch

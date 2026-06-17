@@ -188,7 +188,8 @@
           tooltip-format = "Output Device: {desc}";
           
           # Управление звуком напрямую через WirePlumber без скриптов
-          on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          # on-click = "${pkgs.wireplumber}/bin/wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+          on-click = "${pkgs.eww}/bin/eww open --toggle bw-volume-applet";
           on-scroll-up = "${pkgs.wireplumber}/bin/wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+";
           on-scroll-down = "${pkgs.wireplumber}/bin/wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-";
         };
