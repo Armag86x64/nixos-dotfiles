@@ -11,7 +11,7 @@
     };
 
     layout = {
-      gaps = 4;
+      gaps = 15;
       center-focused-column = "never";
       background-color = "#000000";
 
