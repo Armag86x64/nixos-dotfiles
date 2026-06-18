@@ -75,7 +75,7 @@ in {
     stable.ncdu
     stable.tree
     stable.zsh
-    stable.git
+    # stable.git
 
     # C o d i n g (смешанный подход)
     unstable.rust-analyzer

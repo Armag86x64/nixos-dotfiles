@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./mpv
+    ./git
     ./niri
     ./foot
     ./wofi
