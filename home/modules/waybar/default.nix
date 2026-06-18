@@ -252,16 +252,29 @@
       }
 
       /* M A I N */
+
       window#waybar {
-          background-color: #000;
-          border-radius: 10px;
+        /* Идеально глубокий черный цвет для всего бара */
+        background-color: #000000;
+    
+        /* Белая линия строго снизу на всю ширину монитора */
+        border-bottom: 1px solid #ffffff;
+    
+        /* Гарантированно острые, прямые углы по краям экрана */
+        border-radius: 0px;
       }
 
       window#waybar > box {
-          margin: 4px;
-          background-color: #000;
-          border-left-width: 40px;
-          border-right-width: 40px;
+        /* Убираем внешние отступы, чтобы не было серых или прозрачных дыр */
+        margin: 0px;
+        background-color: transparent;
+        border: none;
+    
+        /* Внутренние отступы, чтобы текст модулей стоял красиво и не прилипал к краям */
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-top: 4px;
+        padding-bottom: 4px;
       }
 
       /* C E N T E R */

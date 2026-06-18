@@ -10,12 +10,18 @@ window {
 }
 
 /* Главный контейнер апплета — жестко задаем черный цвет и гладкие углы */
+/* Главный контейнер апплета — вылезает из Waybar */
 .bw-window {
   background-color: #000000;
+  
+  /* Рамка только по бокам и снизу, сверху стык чистый */
   border-style: solid;
-  border-width: 2px;
+  border-width: 0px 2px 2px 2px; 
   border-color: #ffffff;
-  border-radius: 16px; 
+  
+  /* Скругление только для нижних углов: (Top-Left Top-Right Bottom-Right Bottom-Left) */
+  border-radius: 0px 0px 16px 16px; 
+  
   color: #ffffff;
   padding: 20px;
 }

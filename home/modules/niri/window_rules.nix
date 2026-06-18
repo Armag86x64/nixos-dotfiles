@@ -30,5 +30,10 @@
         top-right = 0.0;
       };
     }
+    {
+      matches = [ { title = "bw-volume-applet"; } ];
+      # Включаем для него плавное скольжение
+      open-maximized = false;
+    }
   ];
 }

@@ -1,25 +1,40 @@
 @import "theme.css";
 /* Cascadia Code */
 * {
-    font-family: "CaskaydiaCove Nerd Font";
+    font-family: "JetBrainsMono Nerd Font";
     font-weight: bold;
     font-size: 10px;
     color: #fff;
 }
 
+
+
 /* M A I N */
 
 window#waybar {
-    background-color: #000;
-    border-radius: 10px;
+    background-color: transparent;
 }
 
 window#waybar > box {
     margin: 4px;
     background-color: #000;
+    
+    /* Включаем сплошной стиль для всех границ */
+    border-style: solid;
+    /* Обнуляем верх, лево и право, чтобы они не создавали рамок */
+    border-top-width: 0px;
     border-left-width: 40px;
     border-right-width: 40px;
+    
+    /* Задаем толщину и цвет только для НИЖНЕЙ границы */
+    border-bottom-width: 2px;
+    border-bottom-color: #ffffff;
+    
+    /* Добавляем внутренний отступ снизу, чтобы текст не прилипал к линии */
+    padding-bottom: 2px;
 }
+
+
 
 /* C E N T E R */
 

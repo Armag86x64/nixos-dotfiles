@@ -5,6 +5,7 @@
     # Подключаем официальный модуль Home Manager из флейка
     inputs.niri.homeModules.niri
 
+    ./animations.nix
     ./autostart.nix
     ./input.nix
     ./output.nix
@@ -22,8 +23,6 @@
     });
 
     settings = {
-      animations.enable = false;
-
       workspaces = {
         "1" = { };
         "2" = { };
