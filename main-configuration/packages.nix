@@ -21,7 +21,7 @@ in {
 
   environment.systemPackages = [
     # W M s (из нестабильного)
-    unstable.waybar
+    # unstable.waybar
     unstable.mako
     unstable.libnotify
 

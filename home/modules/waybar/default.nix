@@ -1,10 +1,12 @@
-{ pkgs, config, ... }:
+{ unstable, pkgs, config, ... }:
 
 {
   # services.network-manager-applet.enable = true;
 
   programs.waybar = {
     enable = true;
+    package = unstable.waybar;
+
     systemd.enable = true; # Автоматический перезапуск при обновлении конфига
 
     # 1. Конфигурация панелей и модулей
