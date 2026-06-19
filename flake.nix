@@ -29,7 +29,7 @@
 
     niri = {
       url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "stable"; # Следуем за вашей основной системной веткой
+      inputs.nixpkgs.follows = "unstable"; # Следуем за вашей основной системной веткой
     };
   };
 
