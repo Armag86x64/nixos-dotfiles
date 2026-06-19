@@ -16,8 +16,6 @@ in {
   home.packages = [ pkgs.playerctl pkgs.wireplumber pkgs.cava ];
 
   programs.eww = {
-    enable = true;
-    package = pkgs.eww;
     configDir = eww-config-dir;
   };
 }

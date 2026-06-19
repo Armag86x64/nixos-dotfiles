@@ -59,7 +59,7 @@ in {
     unstable.waypaper
     unstable.foliate
     unstable.neohtop
-    unstable.wofi
+    # unstable.wofi
     unstable.eog 
 
     # C L I   u t i l s (стабильные версии для базовых утилит)

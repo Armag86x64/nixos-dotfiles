@@ -1,8 +1,9 @@
-{ ... }:
+{ unstable, ... }:
 
 {
   programs.wofi = {
     enable = true;
+    package = unstable.wofi;
     
     settings = {
       width = 650;        # Немного увеличили ширину для более широкого шрифта
