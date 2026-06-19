@@ -2,7 +2,6 @@
 let
   system = pkgs.stdenv.hostPlatform.system;  
 in {
-  # programs.niri.enable = true;
   nixpkgs.config.allowUnfree = true;
 
   services.blueman.enable = true;
@@ -22,7 +21,7 @@ in {
   environment.systemPackages = [
     # W M s (из нестабильного)
     # unstable.waybar
-    unstable.mako
+    # unstable.mako
     unstable.libnotify
 
     # D e v O p s

@@ -1,8 +1,9 @@
-{ ... }:
+{ unstable, ... }:
 
 {
   programs.foot = {
     enable = true;
+    package = unstable.foot;
     settings = {
       main = {
         pad = "8x8 center";
@@ -13,7 +14,7 @@
         title = "Foot";
       };
 
-      colors = {
+      "colors-dark" = {
         foreground = "ffffff";
         background = "000000";
 

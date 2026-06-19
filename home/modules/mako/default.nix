@@ -1,8 +1,9 @@
-{ ... }:
+{ unstable, ... }:
 
 {
   services.mako = {
     enable = true;
+    package = unstable.mako;
     
     # Новый структурированный формат настроек
     settings = {

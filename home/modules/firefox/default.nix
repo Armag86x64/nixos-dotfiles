@@ -1,10 +1,11 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, stable, ... }:
 let
   system = pkgs.stdenv.hostPlatform.system;
 in
 {
   programs.firefox = {
     enable = true;
+    package = stable.firefox;
 
     # === Глобальные корпоративные политики Firefox ===
     policies = {
