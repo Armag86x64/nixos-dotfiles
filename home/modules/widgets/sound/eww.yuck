@@ -1,0 +1,46 @@
+(defpoll current_volume :interval "0.2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2 * 100}'")
+(defpoll is_muted :interval "0.2s" "wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep -q 'MUTED' && echo 'true' || echo 'false'")
+(deflisten track_title "playerctl metadata --follow --format '{{ artist }} - {{ title }}' 2>/dev/null || echo 'No media playing'")
+
+;; Cava сама рисует полосы текстом в реальном времени
+(deflisten echo_equalizer "cava -p ./cava.conf | stdbuf -o0 awk -F';' '{ split(\"  ▂▃▄▅▆▇█\", c, \"\"); top=\"\"; bot=\"\"; for(i=1;i<=NF;i++) { v=$i; if(v>7) { t=v-7; b=8 } else { t=0; b=v }; top=top c[t+1]; bot=bot c[b+1] }; printf \"%s\\n%s\\n\", top, bot }'")
+
+(defwindow bw-volume-applet
+  :monitor 0
+  :geometry (geometry :x "200px" 
+                      :y "0px"   ;; Прижали окно вплотную к нижней грани Waybar
+                      :width "360px" 
+                      :height "300px" 
+                      :anchor "top right")
+  :stacking "fg"
+  :focusable true
+  (volume_layout))
+
+(defwidget volume_layout []
+  (box :class "bw-window" :orientation "v" :space-evenly false
+    
+    ;; Блок 1: Громкость
+    (box :class "bw-section" :orientation "v" :space-evenly false
+      (box :orientation "h" :space-evenly false
+        (label :text {is_muted == "true" ? "[MUTED]" : "[VOL]"} :class "bw-label-bold")
+        (label :text "${current_volume}%" :hexpand true :halign "end" :class "bw-label-bold"))
+      (scale :min 0 :max 101 :value current_volume :class "bw-slider" :onchange "wpctl set-volume @DEFAULT_AUDIO_SINK@ {}%"))
+    
+    (box :class "bw-divider")
+
+    ;; Блок 2: Плеер
+    (box :class "bw-section" :orientation "v" :space-evenly false
+      (label :text "[NOW PLAYING]" :halign "start" :class "bw-label-dim")
+      (label :text track_title :limit-width 35 :halign "start" :class "bw-track-title")
+      (box :class "bw-controls" :space-evenly true
+        (button :onclick "playerctl previous" "<<")
+        (button :onclick "playerctl play-pause" "||")
+        (button :onclick "playerctl next" ">>")
+        (button :onclick "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle" "[MUTE]")))
+
+    (box :class "bw-divider")
+
+    ;; Блок 3: Эквалайзер
+    (box :class "bw-section" :orientation "v" :space-evenly false :vexpand true
+      (label :text "[AUDIO SPECTRUM]" :halign "start" :class "bw-label-dim")
+      (label :text echo_equalizer :class "eq-text-bars" :halign "center" :vexpand true))))

@@ -1,0 +1,143 @@
+{ ... }:
+
+{
+  programs.fastfetch = {
+    enable = true;
+    settings = {
+      "$schema" = "https://github.com";
+      
+      display = {
+        separator = ": ";
+      };
+
+      logo = {
+        color = {
+          "1" = "#d5d5d5"; # Белый
+          "2" = "#b12a31"; # Красный
+          "3" = "#d5d5d5";
+          "4" = "#b12a31";
+          "5" = "#d5d5d5";
+          "6" = "#b12a31";
+        };
+      };
+
+      modules = [
+        {
+          type = "custom";
+          format = "┌──────────────────────────────────────────┐\n";
+        }
+        {
+          type = "chassis";
+          key = "  Chassis";
+          format = "{1} {2} {3}";
+          keyColor = "#db5158";
+        }
+        {
+          type = "os";
+          key = "  OS";
+          format = "{2}";
+          keyColor = "#db5158";
+        }
+        {
+          type = "kernel";
+          key = "  Kernel";
+          format = "{2}";
+          keyColor = "#db5158";
+        }
+        {
+          type = "packages";
+          key = "  Packages";
+          keyColor = "#db5158";
+        }
+        {
+          type = "display";
+          key = "  Display";
+          format = "{1}x{2} @ {3}Hz [{7}]";
+          keyColor = "#db5158";
+        }
+        {
+          type = "terminal";
+          key = "  Terminal";
+          keyColor = "#db5158";
+        }
+        {
+          type = "wm";
+          key = "  DE/WM";
+          format = "{2}";
+          keyColor = "#db5158";
+        }
+        {
+          type = "custom";
+          format = "";
+        }
+        {
+          type = "custom";
+          format = "└──────────────────────────────────────────┘";
+        }
+        "break"
+        {
+          type = "title";
+          key = " ";
+          color = {
+            user = "#d5d5d5";
+            at = "#d5d5d5";
+            host = "#d5d5d5";
+          };
+        }
+        {
+          type = "custom";
+          format = "┌──────────────────────────────────────────┐\n";
+        }
+        {
+          type = "cpu";
+          format = "{1} @ {7}";
+          key = "  CPU";
+          keyColor = "#db5158";
+        }
+        {
+          type = "gpu";
+          format = "{1} {2}";
+          key = "  GPU:";
+          keyColor = "#db5158";
+        }
+        {
+          type = "gpu";
+          format = "{3}";
+          key = "  GPU Driver";
+          keyColor = "#db5158";
+        }
+        {
+          type = "memory";
+          key = "  Memory";
+          keyColor = "#db5158";
+        }
+        {
+          type = "disk";
+          key = "  OS Age";
+          folders = "/";
+          keyColor = "#db5158";
+          format = "{days} days";
+        }
+        {
+          type = "uptime";
+          key = "  Uptime";
+          keyColor = "#db5158";
+        }
+        {
+          type = "custom";
+          format = "";
+        }
+        {
+          type = "custom";
+          format = "└──────────────────────────────────────────┘";
+        }
+        {
+          type = "colors";
+          paddingLeft = 2;
+          symbol = "circle";
+        }
+        "break"
+      ];
+    };
+  };
+}

@@ -1,0 +1,92 @@
+@import "theme.css";
+/* Cascadia Code */
+* {
+    font-family: "JetBrainsMono Nerd Font";
+    font-weight: bold;
+    font-size: 10px;
+    color: #fff;
+}
+
+
+
+/* M A I N */
+
+window#waybar {
+    background-color: transparent;
+}
+
+window#waybar > box {
+    margin: 4px;
+    background-color: #000;
+    
+    /* Включаем сплошной стиль для всех границ */
+    border-style: solid;
+    /* Обнуляем верх, лево и право, чтобы они не создавали рамок */
+    border-top-width: 0px;
+    border-left-width: 40px;
+    border-right-width: 40px;
+    
+    /* Задаем толщину и цвет только для НИЖНЕЙ границы */
+    border-bottom-width: 2px;
+    border-bottom-color: #ffffff;
+    
+    /* Добавляем внутренний отступ снизу, чтобы текст не прилипал к линии */
+    padding-bottom: 2px;
+}
+
+
+
+/* C E N T E R */
+
+#disk {
+    background-color: #000;
+}
+
+#memory {
+    background-color: #000;
+}
+
+#custom-logo {
+    font-size: 20px;
+    background-image: url("/home/soundwave/.config/waybar/images/main_logo_1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#cpu {
+    background-color: #000;
+}
+
+#temperature {
+    background-color: #000;
+}
+
+/* L E F T */
+
+/* R I G H T */
+
+#battery {
+    background-color: #000;
+}
+
+/* W O R K S P A C E S */
+#workspaces button {
+    /* Это критически важно: обнуляем встроенную высоту GTK */
+    min-height: 0;
+    
+    /* Убираем вертикальные отступы, которые дают лишние пиксели */
+    padding-top: 0;
+    padding-bottom: 0;
+    
+    /* Ограничиваем внешние границы */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#workspaces {
+    /* Убираем отступы у самого контейнера */
+    margin: 0;
+    padding: 0;
+}
+
