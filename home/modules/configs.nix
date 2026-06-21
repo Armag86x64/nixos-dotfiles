@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./xdg
     ./mpv
     ./git
     ./niri
