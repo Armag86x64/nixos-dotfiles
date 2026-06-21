@@ -5,7 +5,6 @@
     enable = true;
     package = unstable.mako;
     
-    # Новый структурированный формат настроек
     settings = {
       font = "JetBrainsMono Nerd Font 10";
       width = 400;

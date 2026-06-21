@@ -70,7 +70,7 @@
 
         # ЗАЩИТА: отключаем генерацию файловых систем на живой системе altair.
         # Это гарантирует, что nixos-rebuild switch НЕ затронет ваши текущие диски.
-        { disko.enableConfig = false; }
+        # { disko.enableConfig = false; }
 
         ./configuration.nix
         home-manager.nixosModules.home-manager

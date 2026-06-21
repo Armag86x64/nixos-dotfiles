@@ -1,49 +1,35 @@
 { unstable, ... }: {
-    # Включаем графику (актуально для NixOS 24.11+)
     hardware.graphics = {
         enable = true;
-        enable32Bit = true;
+        enable32Bit = true;      # Для установки 32-битных приложений
         extraPackages = with unstable; [
-          intel-media-driver   # Основной драйвер для видео (iHD)
-          vpl-gpu-rt           # Runtime для новых приложений Intel (Video Processing Library)
-          intel-compute-runtime # OpenCL для вычислений на GPU
-          # intel-vaapi-driver   # Наследный драйвер для полной совместимости
-          libvdpau-va-gl       # Прослойка для приложений, использующих VDPAU
+          intel-media-driver     # Аппаратное декодирование/кодирование видео(VA-API) для Intel Gen8 и новее 
+          vpl-gpu-rt             # Среда выполнения (oneVPL Runtime) для ускорения видео на GPU Intel Tiger Lake и новее          
+          intel-compute-runtime  # Вычисления OpenCL и Level Zero для вычислений на GPU(blender, иишка и прочие) 
+          libvdpau-va-gl         # Мост-переводчик для запуска старых VDPAU-приложений через современный VA-API
+          # intel-vaapi-driver   # Устаревший драйвер(i965) для старых GPU Intel Gen7 и ниже
         ];
     };
 
-    # 2. Переменные окружения для форсирования аппаратного ускорения
+    # Переменные окружения для форсирования аппаратного ускорения
     environment.sessionVariables = {
-      LIBVA_DRIVER_NAME = "iHD";
-      VDPAU_DRIVER = "va_gl";    # Для старых плееров и софта
-      NIXOS_OZONE_WL = "1";      # Chrome/VSCode/Discord нативно в Wayland
-    
-      # Исправляет артефакты в некоторых приложениях на Intel 13-го поколения
-      MESA_LOADER_DRIVER_OVERRIDE = "iris"; 
+      LIBVA_DRIVER_NAME = "iHD";            # Принудительный выбор аппаратного видеоускорителя(драйвер смотреть через vainfo)
+      VDPAU_DRIVER = "va_gl";               # Указывает видеопроигрывателям и браузерам, какой драйвер использовать для аппаратного декодирования видео через VDPAU
+      MESA_LOADER_DRIVER_OVERRIDE = "iris"; # Принудительное указание драйвера для библиотеки Mesa
+      NIXOS_OZONE_WL = "1";                 # Принудительный запуск chromium и electron-приложений через wayland
     };
 
-    # 3. Тонкая настройка ядра для экономии и производительности GPU 
     boot.kernelParams = [
-      "i915.enable_guc=3"        # Планирование задач внутри GPU (уже было, отлично)
-      "i915.enable_fbc=1"        # Сжатие данных в памяти (Frame Buffer Compression)
-      "i915.enable_psr=1"        # Panel Self Refresh (Огромный плюс к батарее)
-      #"i915.fastboot=1"          # Убирает мерцание при загрузке
-      "video=eDP-1:1600x900M@60"
-
+      "i915.enable_guc=3"         # Активация микроконтроллеров Intel(GuC/HuC): включает аппаратное ускорение видео и разгружает CPU
+      "i915.enable_fbc=1"         # FBC: сжимает графические данные в RAM, снижает нагрузку на шину памяти. ! Может вызывать артефакты 
+      "i915.enable_psr=1"         # Энергосбережение: Если картинка на экране статична, видеокарта перестает постоянно пересылать кадры на дисплей
+      # "video=eDP-1:1600x900M@60"  # Принудительное назначение разрешения 1600x900 и частоты 60Hz
+      # "i915.fastboot=1"          # Ускоренная загрузка: убирает мигание экрана, сохраняя графический режим BIOS/UEFI при старте. Возможен чёрный экран и артефакты
     ];
     
-    # boot.kernelPackages = pkgs.linuxPackages_latest;
-
-    # Полезный софт для проверки
     environment.systemPackages = with unstable; [
         intel-gpu-tools # Команда: sudo intel_gpu_top
         libva-utils     # Команда: vainfo
         vulkan-tools    # Проверка Vulkan: vulkaninfo или vkcube
     ];
 }
-
-/*
-На что обратить внимание:
-i915.enable_psr=1: На некоторых редких матрицах Honor это может вызвать микро-мерцание курсора. Если заметите — измените на 0. Но в 95% случаев на моделях 2024-2025 годов это работает идеально и сильно бережет заряд.
-Wayland: Поскольку вы используете NIXOS_OZONE_WL = "1", убедитесь, что ваш браузер (Chrome/Firefox) действительно использует аппаратное декодирование. В Firefox это включается через media.ffmpeg.vaapi.enabled в about:config.
-*/

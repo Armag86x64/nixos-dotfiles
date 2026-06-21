@@ -33,6 +33,13 @@
             enable = true;
             installCargo = false;
             installRustc = false;
+            settings = {
+              diagnostics = {
+                enable = false;
+                enableExperimental = false;
+              };
+              checkOnSave = false;
+            };
           };
         };
       };
@@ -73,22 +80,7 @@
     opts.updatetime = 300;
 
     extraConfigLua = ''
-      -- 1. Сохраняем оригинальный метод записи диагностики Neovim
-      local original_set_diagnostic = vim.diagnostic.set
-
-      -- 2. Переопределяем метод на самом глубоком системном уровне ядра
-      vim.diagnostic.set = function(namespace, bufnr, diagnostics, opts)
-        -- Проверяем тип файла для буфера, куда пришла диагностика
-        if vim.bo[bufnr].filetype == "nix" then
-          -- Разрешаем запись в память и обработку ТОЛЬКО для nix-файлов
-          original_set_diagnostic(namespace, bufnr, diagnostics, opts)
-        else
-          -- Для всех остальных файлов (Rust и др.) полностью очищаем кэш и игнорируем входящие данные
-          original_set_diagnostic(namespace, bufnr, {}, opts)
-        end
-      end
-
-      -- 3. Настройка внешнего вида (отработает только там, где диагностика разрешена)
+      -- Настройка внешнего вида (отработает только там, где диагностика разрешена)
       vim.diagnostic.config({
         virtual_text = {
           prefix = '●',

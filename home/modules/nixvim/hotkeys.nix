@@ -20,8 +20,13 @@
       # ИСПРАВЛЕНО: Теперь <C-d> работает везде. В Normal переходит к тексту и включает Insert, в Insert — просто прыгает к тексту.
       { mode = "n"; key = "<C-d>"; action = "I"; options.desc = "Go to start of text and insert"; }
       { mode = "i"; key = "<C-d>"; action = "<Esc>I"; options.desc = "Go to start of text and insert"; }
-      
-      { mode = [ "n" "i" ]; key = "<C-Space>"; action = "^"; options.desc = "Go to first non-blank char"; }
+
+      { mode = [ "n" "v" "s" ]; key = "<S-Space>"; action = "w"; options = { desc = "Move forward past spaces"; silent = true; }; }
+      { mode = [ "i" ]; key = "<S-Space>"; action = "<C-o>w"; options = { desc = "Move forward past spaces"; silent = true; }; }
+
+      { mode = [ "n" "v" "s" ]; key = "<C-Space>"; action = "b"; options = { desc = "Move backward past spaces"; silent = true; }; }
+      { mode = [ "i" ]; key = "<C-Space>"; action = "<C-o>b"; options = { desc = "Move backward past spaces"; silent = true; }; }
+
       { mode = [ "n" "i" ]; key = "<C-e>"; action = "gM"; options.desc = "Go to middle of line"; }
       { mode = "n"; key = "<C-a>"; action = "$a"; options.desc = "Go to end of line and insert"; }
       { mode = "i"; key = "<C-a>"; action = "<Esc>$a"; options.desc = "Go to end of line and insert"; }

@@ -3,8 +3,9 @@
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    package = unstable.hyprland;
     xwayland.enable = true;
+
+    package = unstable.hyprland;
 
     importantPrefixes = [ "Hyprland" "systemd-run" ]; 
 

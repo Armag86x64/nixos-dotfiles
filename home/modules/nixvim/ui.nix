@@ -20,9 +20,9 @@
       vim.cmd([[colorscheme ashen]])
 
       -- Кастомизация цветов меню автодополнения (Cmp) под палитру Ashen
-      vim.api.nvim_set_hl(0, "Pmenu", { bg = "#181819", fg = "#c4c4c4" })         -- Фон и текст меню
+      vim.api.nvim_set_hl(0, "Pmenu", { bg = "#181819", fg = "#c4c4c4" })                 -- Фон и текст меню
       vim.api.nvim_set_hl(0, "PmenuSel", { bg = "#2d2d30", fg = "#ffffff", bold = true }) -- Выбранный элемент
-      vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181819", fg = "#3f3f46" })  -- Смягченные границы окон
+      vim.api.nvim_set_hl(0, "FloatBorder", { bg = "#181819", fg = "#3f3f46" })           -- Смягченные границы окон
       vim.api.nvim_set_hl(0, "CmpNormal", { bg = "#181819" })
     '';
 

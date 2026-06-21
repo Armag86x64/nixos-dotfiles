@@ -11,6 +11,8 @@ in
     ./main-configuration/packages.nix
   ];
 
+  services.libinput.enable = true;
+
   time.timeZone = "Europe/Moscow";
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
