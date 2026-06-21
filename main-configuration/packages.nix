@@ -41,7 +41,7 @@ in {
     unstable.xwayland
     unstable.xwayland-satellite       
     unstable.wl-clipboard
-    unstable.grim
+    # unstable.grim
 
     # G A M E S
     freesmlauncher.packages.${system}.freesmlauncher
@@ -50,8 +50,8 @@ in {
     # D e s k t o p   A p p s
     unstable.chromium
     unstable.librewolf
-    unstable.flameshot
-    unstable.foot
+    # unstable.flameshot
+    # unstable.foot
     unstable.thunar
     unstable.blueman
     unstable.obsidian

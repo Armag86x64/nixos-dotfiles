@@ -11,6 +11,7 @@
     ./widgets
     ./firefox
     ./hyprland
+    ./flameshot
     ./fastfetch
   ];
   /*
