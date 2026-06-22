@@ -4,9 +4,7 @@
   home.stateVersion = "25.11"; 
 
   imports = [
-    ./modules/configs.nix
-    ./modules/gtk.nix
-    ./modules/cursor.nix
+    ./modules
   ];
 
   programs.home-manager.enable = true;

@@ -1,20 +1,7 @@
 { ... }: {
   imports = [
-    ./zsh.nix
-    ./xdg 
-    ./mpv
-    ./git
-    ./niri
-    ./foot
-    ./wofi
-    ./mako
-    ./waybar
-    ./nixvim
-    ./widgets
-    ./firefox
-    ./hyprland
-    ./flameshot
-    ./fastfetch
+    ./wm
+    ./programs
   ];
   /*
   xdg.configFile."niri" = {
