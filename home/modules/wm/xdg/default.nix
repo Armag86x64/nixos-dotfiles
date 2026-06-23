@@ -3,6 +3,11 @@
 {
   home.packages = [ unstable.xdg-user-dirs ];
 
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ unstable.xdg-desktop-portal-gtk ];
+  };
+
   xdg = {
     enable = true;
     userDirs = {

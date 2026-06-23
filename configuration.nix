@@ -23,25 +23,12 @@ in
   documentation.enable = false;
   documentation.nixos.enable = false;
 
-  nix = {
-    gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 7d";
-    };
-  };
-
   environment.systemPackages = [
     inputs.home-manager.packages.${system}.default
   ];
 
   services.envfs.enable = true;
   programs.nix-ld.enable = true;
-
-  xdg.portal = {
-    enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-  };
 
   system.stateVersion = "25.11"; 
 }

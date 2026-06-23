@@ -2,6 +2,7 @@
   imports = [
     ./fastfetch
     ./flameshot
+    ./obsidian
     ./firefox
     ./nixvim
     ./shell

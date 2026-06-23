@@ -54,7 +54,7 @@ in {
     # unstable.foot
     unstable.thunar
     unstable.blueman
-    unstable.obsidian
+    # unstable.obsidian
     unstable.libreoffice
     unstable.waypaper
     unstable.foliate
