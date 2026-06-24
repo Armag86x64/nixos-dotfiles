@@ -9,6 +9,7 @@
       General = {
         useGrimAdapter = true;
         disabledGrimWarning = true;
+        showStartupLaunchMessage = false;
       };
     };
   };
