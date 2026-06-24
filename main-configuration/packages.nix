@@ -7,12 +7,9 @@ in {
   services.blueman.enable = true;
   services.udisks2.enable = true;
 
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
-
   virtualisation.docker.enable = true;
 
-  users.users.soundwave.extraGroups = [ "libvirtd" "docker" ];
+  users.users.soundwave.extraGroups = [ "docker" ];
 
   programs.gamemode.enable = true;
 
@@ -45,7 +42,6 @@ in {
 
     # G A M E S
     freesmlauncher.packages.${system}.freesmlauncher
-    unstable.unciv
  
     # D e s k t o p   A p p s
     unstable.chromium

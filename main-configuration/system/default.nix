@@ -1,8 +1,9 @@
 { ... }: {
 	imports = [
+    ./user.nix
+    ./variables.nix
 		./bootloader.nix
-		./nix-settings.nix
-		./user.nix
-		./variables.nix
+    ./nix-settings.nix
+    ./virtualization.nix
 	];
 }
