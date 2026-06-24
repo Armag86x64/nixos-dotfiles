@@ -13,4 +13,9 @@
   users.users.soundwave = {
     extraGroups = [ "libvirtd" "kvm" ];
   };
+
+  programs.virt-manager = {
+    enable = true;
+    package = stable.virt-manager;
+  };
 }

@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./virtualization
     ./fastfetch
     ./flameshot
     ./obsidian
