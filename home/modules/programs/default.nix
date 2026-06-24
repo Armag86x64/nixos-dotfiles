@@ -8,6 +8,7 @@
     ./shell
     ./foot
     ./wofi
+    ./yazi
     ./git
     ./mpv
   ];

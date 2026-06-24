@@ -70,7 +70,7 @@ in {
     stable.bottom
     stable.nano
     stable.wget
-    stable.yazi
+    # stable.yazi
     stable.ncdu
     stable.tree
     stable.zsh
