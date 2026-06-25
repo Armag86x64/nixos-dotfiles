@@ -10,6 +10,9 @@
       
       ports = [ "3522:3000" ];
       volumes = [ "/var/lib/convertx:/app/data" ];
+
+      autoStart = false;
+
       environment = {
         ALLOW_UNAUTHENTICATED = "true";
         HTTP_ALLOWED = "true";

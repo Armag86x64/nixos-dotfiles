@@ -69,6 +69,10 @@ in
           "https://external-preview.redd.it"  # для внешних превью
           "https://a.thumbs.redditmedia.com"   # для миниатюр
           "https://b.thumbs.redditmedia.com"   # для миниатюр
+
+          # Stepik
+          "https://stepik.org"
+          "https://www.stepik.org"
         ];
         # Параметр Default убран, чтобы избежать блокировки сохранения
       };

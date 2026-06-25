@@ -13,7 +13,8 @@
     };
     "Mod+F" = {
       hotkey-overlay.title = "Run a file manager: thunar";
-      action.spawn = [ "thunar" ];
+      # action.spawn = [ "thunar" ];
+      action.spawn = [ "foot" "-e" "yazi" ];
     };
     "Mod+W" = {
       hotkey-overlay.title = "Run a browser: chromium";
