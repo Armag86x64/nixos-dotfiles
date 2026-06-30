@@ -45,6 +45,7 @@ in {
  
     # D e s k t o p   A p p s
     unstable.chromium
+    unstable.telegram-desktop
     unstable.librewolf
     # unstable.flameshot
     # unstable.foot

@@ -86,7 +86,7 @@ in
         bitwarden
         darkreader
         privacy-badger
-        smartproxy
+        # smartproxy
       ];
 
       settings = {
