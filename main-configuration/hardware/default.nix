@@ -10,4 +10,6 @@
 
   hardware.enableRedistributableFirmware = true;
   hardware.enableAllFirmware = true;  
+
+  services.fstrim.enable = true; # Включает фоновую службу, которая очищает удалённые блоки данных для SSDшника
 }
