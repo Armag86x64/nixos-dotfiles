@@ -8,7 +8,7 @@
 (defwindow bw-volume-applet
   :monitor 0
   :geometry (geometry :x "200px" 
-                      :y "0px"   ;; Прижали окно вплотную к нижней грани Waybar
+                      :y "10px"
                       :width "360px" 
                       :height "300px" 
                       :anchor "top right")
