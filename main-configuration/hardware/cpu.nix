@@ -105,5 +105,40 @@
     environment.systemPackages = with unstable; [
       powertop  # Анализ энергопотребления(показывает расход батареи в Ваттах и "пожирателей" заряда)
       s-tui     # Мониторинг процессора в консоли (графики частот, температур, ватт и стресс-тест)
+
+      # Обертка поверх стандартного nixos-rebuild
+      (pkgs.writeShellScriptBin "nixos-rebuild" ''
+        GREEN='\x1b[92m'
+        YELLOW='\033[0;33m'
+        NC='\033[0m' # Reset color
+
+        # Получаем текущий активный профиль TLP
+        CURRENT_MODE=$(${pkgs.tlp}/bin/tlp-stat -m)
+
+        WAS_BATTERY=false
+
+        if [ "$CURRENT_MODE" = "balanced/BAT" ]; then
+          printf "[TLP] Mode: ''${YELLOW}%s''${NC}.\n" "$CURRENT_MODE"
+          printf "[TLP] Forcing AC mode for build...\n"
+          printf "[TLP] " "$CURRENT_MODE"
+          sudo ${pkgs.tlp}/bin/tlp ac
+          WAS_BATTERY=true
+        else
+          printf "[TLP] Mode: ''${GREEN}%s''${NC}.\n" "$CURRENT_MODE"
+        fi
+
+        printf "[NixOS] Start system rebuild...\n"
+        # Вызываем оригинальный nixos-rebuild из /nix/store, передавая все аргументы ($@)
+        ${pkgs.nixos-rebuild}/bin/nixos-rebuild "$@"
+        EXIT_CODE=$?
+
+        # Возвращаем в энергосбережение только если изначально были на батарее
+        if [ "$WAS_BATTERY" = true ]; then
+          printf "[TLP] Rebuild finished. Restoring default power mode...\n"
+          sudo ${pkgs.tlp}/bin/tlp start
+        fi
+
+        exit $EXIT_CODE
+      '')
     ];
 }
