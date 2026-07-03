@@ -35,7 +35,7 @@
       # --- Кастомное перемещение (Заменяет стандартные W и S) ---
       { mode = "n"; key = "W"; action = "k"; options.desc = "Move cursor up"; }
       { mode = "n"; key = "S"; action = "j"; options.desc = "Move cursor down"; }
-      { mode = [ "n" "i" ]; key = "<C-g>"; action = "<cmd>execute 'normal! ' . (winheight(0) / 2) . (mode() == 'i' ? 'k' : 'j')<CR>"; options.desc = "Jump half screen vertically"; }
+      # { mode = [ "n" "i" ]; key = "<C-g>"; action = "<cmd>execute 'normal! ' . (winheight(0) / 2) . (mode() == 'i' ? 'k' : 'j')<CR>"; options.desc = "Jump half screen vertically"; }
 
       # --- Работа с буфером (Копирование / Вставка) ---
       { mode = "v"; key = "<C-c>"; action = "\"+y"; options.desc = "Copy selection to clipboard"; }
@@ -48,6 +48,19 @@
       { mode = "i"; key = "<C-z>"; action = "<Esc>ui"; options.desc = "Undo in insert mode"; }
       { mode = "n"; key = "<C-x>"; action = "<C-r>"; options.desc = "Redo"; }
       { mode = "i"; key = "<C-x>"; action = "<Esc><C-r>i"; options.desc = "Redo in insert mode"; }
+
+      # --- Перемещение по вкладкам ---
+      # Переход по Alt + номер вкладки (1-9)
+      { mode = "n"; key = "<Tab>"; action = "<cmd>tabn<CR>";     options.silent = true; }
+      { mode = "n"; key = "<M-1>"; action = "<cmd>1tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-2>"; action = "<cmd>2tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-3>"; action = "<cmd>3tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-4>"; action = "<cmd>4tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-5>"; action = "<cmd>5tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-6>"; action = "<cmd>6tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-7>"; action = "<cmd>7tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-8>"; action = "<cmd>8tabnext<CR>"; options.silent = true; }
+      { mode = "n"; key = "<M-9>"; action = "<cmd>9tabnext<CR>"; options.silent = true; }
     ];
   };
 }

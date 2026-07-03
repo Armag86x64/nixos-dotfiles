@@ -3,6 +3,8 @@
 {
   programs.niri.settings = {
     binds = {
+      "Alt+Tab".action.spawn = "";
+
       "Mod+Shift+Slash".action.show-hotkey-overlay = [ ];
 
       "Super+Alt+S" = {

@@ -1,4 +1,4 @@
-{ ... }: # Аргумент unstable здесь больше не требуется
+{ ... }:
 
 {
   imports = [
@@ -10,9 +10,6 @@
   programs.nixvim = {
     enable = true;
     defaultEditor = true;
-
-    # УДАЛЕНО: строка package = unstable.neovim; убрана!
-    # NixVim теперь сам возьмет правильный и свежий Neovim из своего инпута.
 
     opts = {
       number = true;

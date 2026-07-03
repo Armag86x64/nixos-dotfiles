@@ -61,13 +61,10 @@
           };
 
           mapping = {
-            "<CR>" = "cmp.mapping.confirm({ select = true })";
-            "W" = "cmp.mapping.select_prev_item()";
-            "<Up>" = "cmp.mapping.select_prev_item()";
-            "S" = "cmp.mapping.select_next_item()";
+            "<CR>"   = "cmp.mapping.confirm({ select = true })";
+            "<Up>"   = "cmp.mapping.select_prev_item()";
             "<Down>" = "cmp.mapping.select_next_item()";
-            "<Tab>" = "cmp.mapping.select_next_item()";
-            "<C-e>" = "cmp.mapping.close()";
+            "<C-e>"  = "cmp.mapping.close()";
           };
         };
       };
