@@ -13,7 +13,7 @@
       logo = {
         color = {
           "1" = "#d5d5d5"; # Белый
-          "2" = "#b12a31"; # Красный
+          "2" = "#6f7987"; # Серый
           "3" = "#d5d5d5";
           "4" = "#b12a31";
           "5" = "#d5d5d5";
@@ -30,41 +30,41 @@
           type = "chassis";
           key = "  Chassis";
           format = "{1} {2} {3}";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "os";
           key = "  OS";
           format = "{2}";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "kernel";
           key = "  Kernel";
           format = "{2}";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "packages";
           key = "  Packages";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "display";
           key = "  Display";
           format = "{1}x{2} @ {3}Hz [{7}]";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "terminal";
           key = "  Terminal";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "wm";
           key = "  DE/WM";
           format = "{2}";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "custom";
@@ -92,36 +92,36 @@
           type = "cpu";
           format = "{1} @ {7}";
           key = "  CPU";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "gpu";
           format = "{1} {2}";
           key = "  GPU:";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "gpu";
           format = "{3}";
           key = "  GPU Driver";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "memory";
           key = "  Memory";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "disk";
           key = "  OS Age";
           folders = "/";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
           format = "{days} days";
         }
         {
           type = "uptime";
           key = "  Uptime";
-          keyColor = "#db5158";
+          keyColor = "#6f7987";
         }
         {
           type = "custom";
