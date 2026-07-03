@@ -15,11 +15,27 @@ in {
 
   programs.hyprland.enable = true;
 
+  programs.throne = {
+    enable = true;
+    tunMode.enable = true;
+  };
+
+  services.v2raya = {
+    enable = true;
+    # Для ветки 25.11 в качестве движка лучше явно указать xray, он стабильнее
+    cliPackage = pkgs.xray; 
+  };
+
   environment.systemPackages = [
     # W M s (из нестабильного)
     # unstable.waybar
     # unstable.mako
     unstable.libnotify
+
+    # V P N 
+    # unstable.throne
+    unstable.v2ray-geoip
+    unstable.v2ray-domain-list-community
 
     # D e v O p s
     unstable.docker-compose
@@ -86,6 +102,7 @@ in {
     # C o m p r e s s i o n (стабильные)
     stable.unzip
     stable.p7zip
+    stable.rar
 
     # G a m i n g (стабильный)
     stable.jdk8

@@ -1,6 +1,6 @@
 { ... }: {
   networking.hostName = "altair";
-  networking.enableIPv6 = false;
+  networking.enableIPv6 = true;
   networking.firewall.enable = true;
   networking.networkmanager.enable = true;
 }
