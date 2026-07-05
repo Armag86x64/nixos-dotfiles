@@ -1,6 +1,6 @@
 { unstable, ... }: {
   services.searx = {
-    enable = true;
+    enable = false;
     package = unstable.searxng;
 
     # configureUwsgi = true;
@@ -25,20 +25,19 @@
         # Основные быстрые движки (работают напрямую)
         "duckduckgo".disabled = false;
         "brave".disabled = false;
-        "qwant".disabled = false;
+        "qwant".disabled = true;
       
         # Капризные движки (заворачиваем в Tor)
         "google" = {
-          disabled = false;
-          use_mobile_ui = true; # Меньше капч
-          use_embedded_visibility = true;
-          send_accept_language_header = true;
+          disabled = true;
+          # use_mobile_ui = true; # Меньше капч
+          # use_embedded_visibility = true;
+          #send_accept_language_header = true;
           # proxies = torProxy;
         };
       
         "yandex" = {
-          disabled = false;
-          # proxies = torProxy;
+          disabled = true;
         };
 
         # Дополнительные полезные источники
