@@ -56,6 +56,10 @@ in {
     unstable.wl-clipboard
     # unstable.grim
 
+    # S E C U R I T Y
+    stable.openssl
+    stable.pkg-config
+
     # G A M E S
     freesmlauncher.packages.${system}.freesmlauncher
  
