@@ -3,6 +3,10 @@ let
   system = pkgs.stdenv.hostPlatform.system;
 in
 {
+  imports = [
+    ./ui.nix
+  ];
+
   programs.firefox = {
     enable = true;
     package = stable.firefox;
@@ -13,6 +17,13 @@ in
         "*" = {
           default_area = "navbar"; # Автоматически выносить все иконки на панель навигации
         };
+
+        ExtensionSettings = {
+          "black21@xi-addons.mozilla.org" = {
+            installation_mode = "force_installed";
+            install_url = "https://mozilla.org";
+          };
+        };
       };
 
       # === УМНАЯ ОЧИСТКА ПРИ ЗАКРЫТИИ ===
@@ -21,13 +32,12 @@ in
         Cache = true;
         Cookies = true;
         History = true;
-        Sessions = true;     # Очищает активные сессии вкладок
-        FormData = true;     # Очищает историю поиска и форм
+        Sessions = true;      # Очищает активные сессии вкладок
+        FormData = true;      # Очищает историю поиска и форм
         SiteSettings = false; # ВАЖНО: сохраняет белый список исключений
       };
 
       # Исключения для куки (белый список). 
-      # Firefox НЕ будет трогать куки, локальное хранилище и авторизацию для этих доменов.
       Cookies = {
         Allow = [
           # Базовые сервисы
@@ -61,8 +71,8 @@ in
           # Reddit
           "https://reddit.com"
           "https://www.reddit.com"
-          "https://old.reddit.com"      # если используете старую версию
-          "https://new.reddit.com"      # если используете новую версию
+          "https://old.reddit.com"
+          "https://new.reddit.com"
           "https://i.redd.it"           # для изображений
           "https://preview.redd.it"     # для превью изображений
           "https://v.redd.it"           # для видео
@@ -86,11 +96,15 @@ in
         bitwarden
         darkreader
         privacy-badger
+
         # smartproxy
       ];
 
       settings = {
         "extensions.autoDisableScopes" = 0;
+
+        # Активация темы black21
+        "lightweightThemes.selectedThemeID" = "black21@xi-addons.mozilla.org";
 
         # УДАЛЕНО: Все параметры "privacy.clearOnShutdown.*" удалены отсюда,
         # чтобы они не перезаписывали поведение белого списка из политик.
@@ -102,6 +116,7 @@ in
         "devtools.theme" = "dark";
         "browser.theme.content-theme" = 0;
         "browser.theme.toolbar-theme" = 0;
+        "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       
         # === 1. АППАРАТНОЕ УСКОРЕНИЕ ===
         "gfx.webrender.all" = true;
