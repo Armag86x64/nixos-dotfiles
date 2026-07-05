@@ -1,0 +1,42 @@
+;; Точный скрипт для расчета CPU через /proc/stat (исправляет проблему 100% в NixOS)
+(defpoll cpu_usage :interval "2s" 
+  `read -r _ u1 n1 s1 id1 io1 ir1 si1 st1 _ < /proc/stat; sleep 0.2; read -r _ u2 n2 s2 id2 io2 ir2 si2 st2 _ < /proc/stat; t1=$((u1+n1+s1+id1+io1+ir1+si1+st1)); t2=$((u2+n2+s2+id2+io2+ir2+si2+st2)); id_d=$((id2+io2 - (id1+io1))); t_d=$((t2-t1)); echo "$((100 - id_d * 100 / t_d))"`)
+
+(defpoll ram_usage :interval "2s" `free | grep Mem | awk '{print int($3/$2 * 100)}'`)
+(defpoll disk_usage :interval "10s" `df / | tail -1 | awk '{print $5}' | sed 's/%//'`)
+
+;; Главное окно (размеры адаптированы под круги)
+(defwindow system_dashboard
+  :monitor 0
+  :geometry (geometry :x "0px"
+                      :y "10px"
+                      :width "460px"
+                      :height "200px"
+                      :anchor "top center")
+  :stacking "fg"
+  :windowtype "normal"
+  :wm-ignore false
+  (dashboard_layout))
+
+;; Макет содержимого: заголовок + 3 круга в ряд
+(defwidget dashboard_layout []
+  (box :class "dashboard-box" :orientation "v" :space-evenly false :spacing 25
+    ;; (label :class "title" :text "Нагрузка на систему")
+    
+    (box :orientation "h" :space-evenly true :spacing 20
+      (circle_metric :label "CPU" :value cpu_usage)
+      (circle_metric :label "RAM" :value ram_usage)
+      (circle_metric :label "Disk" :value disk_usage))))
+
+;; Компонент кругового графика
+(defwidget circle_metric [label value]
+  (box :orientation "v" :space-evenly false :spacing 12 :class "circle-container"
+    ;; Вложенный лейбл внутрь круга выводит проценты по центру
+    (circular-progress :value value
+                       :class "mono-circle"
+                       :thickness 6
+                       :start-at 25
+                       :width 90
+                       :height 90
+      (label :text "${value}%" :class "circle-text"))
+    (label :text label :class "circle-label")))

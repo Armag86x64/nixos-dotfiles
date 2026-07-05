@@ -1,24 +1,22 @@
-/* Убираем дефолтный серый фон самого окна */
+/* Remove default window gray background */
 window {
   background-color: rgba(0, 0, 0, 0);
 }
 
-/* Сброс для всех элементов */
+/* Reset for all elements */
 * {
   font-family: "JetBrainsMono Nerd Font", "Iosevka", monospace;
   font-size: 13px;
 }
 
-/* Главный контейнер апплета — жестко задаем черный цвет и гладкие углы */
+/* Main applet container */
 .bw-window {
   background-color: #000000;
   
-  /* Рамка только по бокам и снизу, сверху стык чистый */
   border-style: solid;
   border-width: 1px 1px 1px 1px; 
   border-color: #ffffff;
   
-  /* Скругление только для нижних углов: (Top-Left Top-Right Bottom-Right Bottom-Left) */
   border-radius: 16px 16px 16px 16px; 
   
   color: #ffffff;
@@ -51,7 +49,7 @@ window {
   margin-bottom: 10px; 
 }
 
-/* Кнопки плеера */
+/* Player buttons */
 .bw-controls button {
   color: #ffffff;
   background-color: #000000;
@@ -67,7 +65,7 @@ window {
   background-color: #ffffff; 
 }
 
-/* Слайдер громкости */
+/* Volume slider */
 scale.bw-slider {
   margin-top: 10px;
 }
@@ -95,7 +93,7 @@ scale.bw-slider slider {
   min-height: 12px;
 }
 
-/* Список источников */
+/* Sink list */
 .sink-list button {
   padding: 8px 10px;
   margin-top: 4px;
@@ -126,7 +124,7 @@ scale.bw-slider slider {
   font-weight: bold; 
 }
 
-/* Контейнер эквалайзера */
+/* Equalizer container */
 .eq-container {
   margin-top: 15px;
   min-height: 100px;
@@ -135,17 +133,17 @@ scale.bw-slider slider {
   padding: 10px;
 }
 
-/* Базовая анимация для плавности прыжков полос */
+/* Bar animation smooth transitions */
 .eq-bar {
   transition: all 0.05s ease-in-out;
 }
 
 .eq-text-bars {
   font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 26px; /* Чуть увеличили масштаб */
+  font-size: 26px; 
   color: #ffffff;
   letter-spacing: 0px;
   padding: 0px;
   margin-top: 40px;
-  margin-bottom: -10px; /* Отодвигаем от нижней рамки, поднимая эквалайзер выше */
+  margin-bottom: -10px; 
 }

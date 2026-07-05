@@ -1,5 +1,5 @@
 { pkgs, ... }:
-
+/* 
 let
   eww-config-dir = pkgs.stdenv.mkDerivation {
     name = "eww-bw-config";
@@ -12,10 +12,12 @@ let
     '';
   };
 
-in {
+in */
+{
   home.packages = [ pkgs.playerctl pkgs.wireplumber pkgs.cava ];
-
+  /*
   programs.eww = {
     configDir = eww-config-dir;
   };
+  */
 }

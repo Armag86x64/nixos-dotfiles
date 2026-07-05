@@ -3,7 +3,7 @@
 (deflisten track_title "playerctl metadata --follow --format '{{ artist }} - {{ title }}' 2>/dev/null || echo 'No media playing'")
 
 ;; Cava сама рисует полосы текстом в реальном времени
-(deflisten echo_equalizer "cava -p ./cava.conf | stdbuf -o0 awk -F';' '{ split(\"  ▂▃▄▅▆▇█\", c, \"\"); top=\"\"; bot=\"\"; for(i=1;i<=NF;i++) { v=$i; if(v>7) { t=v-7; b=8 } else { t=0; b=v }; top=top c[t+1]; bot=bot c[b+1] }; printf \"%s\\n%s\\n\", top, bot }'")
+(deflisten echo_equalizer "cava -p cava -p /home/soundwave/.config/eww/sound/cava.conf | stdbuf -o0 awk -F';' '{ split(\"  ▂▃▄▅▆▇█\", c, \"\"); top=\"\"; bot=\"\"; for(i=1;i<=NF;i++) { v=$i; if(v>7) { t=v-7; b=8 } else { t=0; b=v }; top=top c[t+1]; bot=bot c[b+1] }; printf \"%s\\n%s\\n\", top, bot }'")
 
 (defwindow bw-volume-applet
   :monitor 0

@@ -98,7 +98,8 @@
         "custom/logo" = {
           format = " ";
           min-length = 5;
-          on-click = "wofi --show drun";
+          # on-click = "wofi --show drun";
+          on-click = "eww open --toggle system_dashboard";
         };
 
         cpu = {
