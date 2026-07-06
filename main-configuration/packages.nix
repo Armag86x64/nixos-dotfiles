@@ -62,6 +62,7 @@ in {
 
     # G A M E S
     freesmlauncher.packages.${system}.freesmlauncher
+    unstable.mindustry-wayland
  
     # D e s k t o p   A p p s
     unstable.chromium
