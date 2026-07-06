@@ -92,10 +92,14 @@ in
       isDefault = true;
 
       extensions.packages = with inputs.firefox-addons.packages.${system}; [
-        ublock-origin
-        bitwarden
         darkreader
+        bitwarden
+        vimium
+
+        istilldontcareaboutcookies
         privacy-badger
+        decentraleyes
+        ublock-origin
 
         # smartproxy
       ];
