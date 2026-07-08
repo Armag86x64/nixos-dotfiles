@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, unstable, ... }:
 
 {
   home.packages = with pkgs; [
@@ -6,10 +6,15 @@
   ];
 
   programs.nixvim = {
+    extraPackages = with unstable; [
+      tree-sitter # tree-sitter-cli
+    ];
+
     plugins = {
       treesitter = {
         enable = true;
         settings.highlight.enable = true;
+        ensureInstalled = [ "lua" "nix" "rust" "bash"]; 
       };
 
       nvim-autopairs = {
