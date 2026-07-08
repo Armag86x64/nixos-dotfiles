@@ -5,17 +5,20 @@
     enable = true;
     
     # Включаем перехват UDP (критично для Discord Voice и подавления QUIC)
+    httpSupport = true;
     udpSupport = true;
     udpPorts = [ "443" "50000:65535" ];
 
+    configureFirewall = true;
+
     # Чистый NixOS-синтаксис параметров БЕЗ опасных разделителей --new
+    
     params = [
-      "--dpi-desync=fake,disorder2"
-      "--dpi-desync-repeats=6"
-      "--dpi-desync-ttl=2"
-      "--dpi-desync-autottl=2"
-      "--dpi-desync-fooling=badseq"
+      "--dpi-desync=disorder"
       "--dpi-desync-split-pos=midsld"
+      "--dpi-desync-ttl=3"
+      "--dpi-desync-repeats=6"
+      "--dpi-desync-fooling=badseq,badsum"
       "--dpi-desync-any-protocol=1"
     ];
 
