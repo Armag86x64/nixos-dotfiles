@@ -14,11 +14,12 @@
     # Чистый NixOS-синтаксис параметров БЕЗ опасных разделителей --new
     
     params = [
-      "--dpi-desync=disorder"
-      "--dpi-desync-split-pos=midsld"
-      "--dpi-desync-ttl=3"
+      "--dpi-desync=fake,disorder2"
       "--dpi-desync-repeats=6"
-      "--dpi-desync-fooling=badseq,badsum"
+      "--dpi-desync-ttl=2"
+      "--dpi-desync-autottl=2"
+      "--dpi-desync-fooling=badseq"
+      "--dpi-desync-split-pos=midsld"
       "--dpi-desync-any-protocol=1"
     ];
 
