@@ -5,7 +5,6 @@ in
 {
   imports = [
     ./services
-    ./main-configuration
   ];
 
   services.libinput.enable = true;

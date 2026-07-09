@@ -51,47 +51,47 @@
       config = nixpkgsConfig;
     };
   in {
-    nixosConfigurations.altair = stable.lib.nixosSystem {
-      system = "x86_64-linux";
-    
-      specialArgs = { 
-        inherit inputs;
-        stable = stable-pkgs; 
-        unstable = unstable-pkgs; 
-        freesmlauncher = freesmlauncher; 
-      }; 
+    nixosConfigurations.altair-laptop = stable.lib.nixosSystem {
+        system = "x86_64-linux";
 
-      modules = [
-        # Подключаем модуль Disko в систему
-        disko.nixosModules.disko
-        
-        # Подключаем декларативную конфигурацию дисков
-        ./main-configuration/disko-config.nix
-
-        # ЗАЩИТА: отключаем генерацию файловых систем на живой системе altair.
-        # Это гарантирует, что nixos-rebuild switch НЕ затронет ваши текущие диски.
-        # { disko.enableConfig = false; }
-
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-
-          home-manager.extraSpecialArgs = {
+        specialArgs = { 
             inherit inputs;
-            stable = stable-pkgs;
-            unstable = unstable-pkgs;
-          };
+            stable = stable-pkgs; 
+            unstable = unstable-pkgs; 
+            freesmlauncher = freesmlauncher; 
+        }; 
 
-          home-manager.users.soundwave = {
-            imports = [
-              nixvim.homeModules.nixvim
-              ./home/home.nix
-            ];
-          };
-        }
-      ];
+        modules = [
+            disko.nixosModules.disko
+            ./main-configuration/altair-laptop/disko-config.nix
+
+            # --- ВСЕ НАСТРОЙКИ ---
+            ./main-configuration/altair-laptop/default.nix
+
+            # Фиксация имени хоста
+            ({ ... }: { networking.hostName = "altair-laptop"; })
+            # ------------------------------------------
+
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.extraSpecialArgs = {
+                    inherit inputs;
+                    stable = stable-pkgs;
+                    unstable = unstable-pkgs;
+                };
+
+                home-manager.users.soundwave = {
+                    imports = [
+                        nixvim.homeModules.nixvim
+                        ./home/home.nix
+                    ];
+                };
+            }
+        ];
     };
   };
 }
