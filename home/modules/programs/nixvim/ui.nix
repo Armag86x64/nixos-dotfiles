@@ -2,63 +2,76 @@
 {
   programs.nixvim = {
     opts = {
-      # Превращает табы в пробелы при вводе (очень важно для плагинов отступов)
       expandtab = true;
-      shiftwidth = 2; # или 4, в зависимости от вашего стиля
+      shiftwidth = 2;
       tabstop = 2;
       smarttab = true;
-      # Управление отображением скрытых символов
       list = false;
     };
+   
+    extraPlugins = [
+      (pkgs.vimUtils.buildVimPlugin {
+        name = "monoglow-nvim";
+        src  = pkgs.fetchFromGitHub {
+          owner = "wnkz";
+          repo  = "monoglow.nvim";
+          rev   = "main";
+          hash  = "sha256-EIslqnOIOLfQ7e7L1FvwfVfel6h+UPFIUcSgvp8zf0E=";
+        };
+      })
+    ];
 
-		extraPlugins = [
-		  (pkgs.vimUtils.buildVimPlugin {
-		    name = "bearded-nvim";
-		    src = pkgs.fetchFromGitHub {
-		      owner = "Ferouk";
-		      repo = "bearded-nvim";
-		      rev = "master";
-		      hash = "sha256-o6S6M31EMxl5dDxUNFAqG/3J8LRImGAayq7oUPWRSMo="; 
-		    };
-		  })
-		];
+    colorscheme = "monoglow";
 		
     extraConfigLua = ''
       -- Применяем тему оформления
-      vim.cmd('colorscheme bearded-arc-blueberry')
+      require("monoglow").setup({
+      -- Настройки
+      })
 
       -- Переопределяем цвета для rainbow-delimiters через событие ColorScheme
       vim.api.nvim_create_autocmd('ColorScheme', {
-        pattern = 'bearded-arc-blueberry',
         callback = function()
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterRed',    { fg = '#ec75aa' }) -- Розовый
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#eec45c' }) -- Желтый
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue',   { fg = '#589ed7' }) -- Синий
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { fg = '#f0935d' }) -- Оранжевый
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen',  { fg = '#78ce90' }) -- Зеленый
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { fg = '#ca8bf4' }) -- Фиолетовый
-          vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan',   { fg = '#62dfdb' }) -- Бирюзовый
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterRed',    { fg = '#ffffff' }) -- Внешние скобки
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#e0e0e0' }) 
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue',   { fg = '#bcbcbc' }) 
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { fg = '#9e9e9e' }) 
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen',  { fg = '#757575' }) 
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { fg = '#616161' }) 
+          vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan',   { fg = '#424242' }) -- Самые глубокие скобки
 
           -- Цвета для indent-blankline (ibl)
-          -- Обычные линии: приглушенный сине-серый под фон темы
-          vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#2e3a50', nocombine = true })
-          vim.api.nvim_set_hl(0, 'IblScope',  { fg = '#ec75aa', nocombine = true })
+          vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#262626', nocombine = true }) -- Едва заметные направляющие
+          vim.api.nvim_set_hl(0, 'IblScope',  { fg = '#1bfd9c', nocombine = true }) -- Яркий фокус текущего блока
+
+          -- Перекрашиваем измененные git-папки и файлы в neo-tree
+          vim.api.nvim_set_hl(0, 'NeoTreeGitModified',     { fg = '#1bfd9c' })
+          vim.api.nvim_set_hl(0, 'NeoTreeGitUntracked',    { fg = '#1bfd9c' })
+          vim.api.nvim_set_hl(0, 'NeoTreeGitAdded',        { fg = '#1bfd9c' })
+          vim.api.nvim_set_hl(0, 'GitSignsChange',         { fg = '#1bfd9c' })
         end,
       })
 
-      -- Вызываем один раз принудительно, чтобы цвета встали немедленно при первой загрузке
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterRed',    { fg = '#ec75aa' })
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#eec45c' })
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue',   { fg = '#589ed7' })
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { fg = '#f0935d' })
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen',  { fg = '#78ce90' })
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { fg = '#ca8bf4' })
-      vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan',   { fg = '#62dfdb' })
+      -- Постепенное затухание скобок (от ярко-белого к темно-серому)
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterRed',    { fg = '#ffffff' })
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterYellow', { fg = '#e0e0e0' }) 
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterBlue',   { fg = '#bcbcbc' }) 
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterOrange', { fg = '#9e9e9e' }) 
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterGreen',  { fg = '#757575' }) 
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterViolet', { fg = '#616161' }) 
+      vim.api.nvim_set_hl(0, 'RainbowDelimiterCyan',   { fg = '#424242' })
 
-      vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#2e3a50', nocombine = true })
-      vim.api.nvim_set_hl(0, 'IblScope',  { fg = '#ec75aa', nocombine = true })
+      -- Цвета для indent-blankline (ibl)
+      vim.api.nvim_set_hl(0, 'IblIndent', { fg = '#262626', nocombine = true })
+      vim.api.nvim_set_hl(0, 'IblScope',  { fg = '#4ddb9e', nocombine = true })
 
-      -- Автоматически включаем IBL при открытии любого файла
+      -- Перекрашиваем измененные git-папки и файлы в neo-tree
+      vim.api.nvim_set_hl(0, 'NeoTreeGitModified',     { fg = '#1bfd9c' })
+      vim.api.nvim_set_hl(0, 'NeoTreeGitUntracked',    { fg = '#1bfd9c' })
+      vim.api.nvim_set_hl(0, 'NeoTreeGitAdded',        { fg = '#1bfd9c' })
+      vim.api.nvim_set_hl(0, 'GitSignsChange',         { fg = '#1bfd9c' })
+
+      -- Автоматически включаем IBL при открытии любого файла 
       vim.api.nvim_create_autocmd({ 'BufReadPost', 'BufNewFile' }, {
         pattern = "*",
         command = "IBLEnable",
@@ -94,7 +107,7 @@
 
       settings = {
         indent = {
-          char = "▏"; # Тонкий элегантный символ вертикальной линии
+          char = "▏";
             highlight = [
               "IblIndent"
             ];
@@ -106,10 +119,10 @@
           highlight = [
             "IblScope"
           ];
-          show_start = false; # Горизонтальные линии отключены, чтобы не перегружать Nix-структуру
+          show_start = false; # Горизонтальные линии отключены
           show_end = false;
 
-          # Настройка интеллектуального отслеживания узлов Tree-sitter для Nix
+          # Настройка отслеживания узлов Tree-sitter для Nix
           include = {
             node_type = {
               # Заставляем плагин реагировать только на реальные блоки кода и структуры данных
@@ -177,5 +190,30 @@
       web-devicons.enable = true;
     };
   };
+}
+
+programs.nixvim = {
+    
+		extraPlugins = [
+		  (pkgs.vimUtils.buildVimPlugin {
+		    name = "bearded-nvim";
+		    src = pkgs.fetchFromGitHub {
+		      owner = "Ferouk";
+		      repo = "bearded-nvim";
+		      rev = "master";
+		      hash = "sha256-o6S6M31EMxl5dDxUNFAqG/3J8LRImGAayq7oUPWRSMo="; 
+		    };
+		  })
+		];
+    */
+    
+    /*
+    colorschemes.tokyonight = {
+      enable = true;
+      settings = {
+        style = "night";
+        transparent = true; # Меняйте на false, если не хотите прозрачность
+      };
+    };
 }
 */
