@@ -5,10 +5,7 @@ in
 {
   imports = [
     ./services
-    ./main-configuration/system
-    ./main-configuration/hardware
-    ./main-configuration/networking
-    ./main-configuration/packages.nix
+    ./main-configuration
   ];
 
   services.libinput.enable = true;

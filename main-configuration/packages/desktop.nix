@@ -1,0 +1,12 @@
+{ unstable, ... }: {
+  environment.systemPackages = [
+    unstable.telegram-desktop
+    unstable.libreoffice
+    unstable.librewolf
+    unstable.chromium
+    unstable.waypaper
+    unstable.foliate
+    unstable.thunar
+    unstable.eog     # Eye of GNOME
+  ];
+}
