@@ -62,18 +62,6 @@
       # --- Работа с заметками ---
       # Ctrl+N: Создание заметки Unnamed <Number> (Lua-скрипт сканирует папку на наличие свободных номеров)
       { mode = "n"; key = "<C-n>"; action.__raw = "function() local i = 1; while vim.fn.filereadable(vim.fn.expand('~/Notes/Unnamed ' .. i .. '.md')) == 1 do i = i + 1 end; vim.cmd('edit ~/Notes/Unnamed\\ ' .. i .. '.md'); vim.cmd('startinsert') end"; options.desc = "New Unnamed Note (Insert Mode)"; }
-
-      # Ctrl+T: Открытие ежедневной заметки
-      { mode = "n"; key = "<C-t>"; action = "<cmd>Obsidian today<CR>"; options.desc = "Open Daily Note"; }
-
-      # <leader>of: Полнотекстовый поиск по всем заметкам базы знаний
-      { mode = "n"; key = "<leader>of"; action = "<cmd>Obsidian search<CR>"; options.desc = "Fuzzy Search Notes"; }
-
-      # gf: Провалиться внутрь ссылки [[WikiLink]] под курсором
-      { mode = "n"; key = "gf"; action = "<cmd>Obsidian follow<CR>"; options.desc = "Follow Link"; }
-
-      # Ctrl+O: Шаг назад (вернуться к предыдущей заметке из истории переходов)
-      { mode = "n"; key = "<C-o>"; action = "<C-o>"; options.desc = "Go Back"; }
     ];
   };
 }

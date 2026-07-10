@@ -1,6 +1,7 @@
 { ... }: {
   programs.nixvim = {
     # Настроки красивого смещения текста
+    /*
     plugins.no-neck-pain = {
       enable = true;
       settings = {
@@ -13,9 +14,17 @@
           };
         };
 
+        autocmds = {
+          skipEnteringNoNeckPainBuffer = true;
+        };
+
         buffers = {
           left.enabled = true;
-          right.enabled = true;
+          right.enabled = false;
+          scratchPad = {
+            enabled = true;
+          };
+
           wo = {
             wrap = true;
             linebreak = true;
@@ -36,5 +45,6 @@
         '';
       }
     ];
+    */
   };
 }
