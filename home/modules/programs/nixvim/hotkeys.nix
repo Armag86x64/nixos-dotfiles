@@ -6,7 +6,6 @@
 
     keymaps = [
       # --- Файловый менеджер и поиск ---
-      { mode = "n";         key = "<leader>e";  action = "<cmd>Neotree toggle<CR>";                      options.desc = "Toggle Neo-tree"; }
       { mode = "n";         key = "<leader>ff"; action = "<cmd>Telescope find_files<CR>";                options.desc = "Find files"; }
       { mode = "n";         key = "<C-l>";      action = "<cmd>Neotree toggle<CR>";                      options.desc = "Toggle Neo-tree via Ctrl+l"; }
       { mode = "i";         key = "<C-l>";      action = "<Esc><cmd>Neotree toggle<CR>";                 options.desc = "Toggle Neo-tree via Ctrl+l"; }
@@ -59,6 +58,22 @@
       { mode = "n"; key = "<M-7>"; action = "<cmd>7tabnext<CR>"; options.silent = true; }
       { mode = "n"; key = "<M-8>"; action = "<cmd>8tabnext<CR>"; options.silent = true; }
       { mode = "n"; key = "<M-9>"; action = "<cmd>9tabnext<CR>"; options.silent = true; }
+
+      # --- Работа с заметками ---
+      # Ctrl+N: Создание заметки Unnamed <Number> (Lua-скрипт сканирует папку на наличие свободных номеров)
+      { mode = "n"; key = "<C-n>"; action.__raw = "function() local i = 1; while vim.fn.filereadable(vim.fn.expand('~/Notes/Unnamed ' .. i .. '.md')) == 1 do i = i + 1 end; vim.cmd('edit ~/Notes/Unnamed\\ ' .. i .. '.md'); vim.cmd('startinsert') end"; options.desc = "New Unnamed Note (Insert Mode)"; }
+
+      # Ctrl+T: Открытие ежедневной заметки
+      { mode = "n"; key = "<C-t>"; action = "<cmd>Obsidian today<CR>"; options.desc = "Open Daily Note"; }
+
+      # <leader>of: Полнотекстовый поиск по всем заметкам базы знаний
+      { mode = "n"; key = "<leader>of"; action = "<cmd>Obsidian search<CR>"; options.desc = "Fuzzy Search Notes"; }
+
+      # gf: Провалиться внутрь ссылки [[WikiLink]] под курсором
+      { mode = "n"; key = "gf"; action = "<cmd>Obsidian follow<CR>"; options.desc = "Follow Link"; }
+
+      # Ctrl+O: Шаг назад (вернуться к предыдущей заметке из истории переходов)
+      { mode = "n"; key = "<C-o>"; action = "<C-o>"; options.desc = "Go Back"; }
     ];
   };
 }

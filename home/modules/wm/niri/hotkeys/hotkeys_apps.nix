@@ -29,10 +29,12 @@
       hotkey-overlay.title = "Run a apps launcher: wofi";
       action.spawn = [ "wofi" "--show" "drun" ];
     };
+    /*
     "Mod+O" = {
       hotkey-overlay.title = "Run a obsidian";
       action.spawn = [ "obsidian" ];
     };
+    */
     "Mod+B" = {
       hotkey-overlay.title = "Run a bottom";
       action.spawn = [ "foot" "btm" ];
@@ -55,6 +57,7 @@
 
     # --- V I M - m o d e ---
     "Shift+N".action.spawn-sh = [ "foot nvim $HOME/nixos-dotfiles" ];
+    "Mod+O".action.spawn-sh =   [ "foot nvim $HOME/Notes" ];
 
     # --- A T L A S   E C O S Y S T E M ---
     "Mod+A".action.spawn-sh = [ "foot $HOME/nixos-config/home/modules/niri/scripts/atlas_ecosystem/atlas_minimalism" ];

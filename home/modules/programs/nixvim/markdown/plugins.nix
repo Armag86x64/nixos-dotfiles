@@ -1,8 +1,22 @@
-{ pkgs, ... }: {
+{ unstable, ... }: {
   programs.nixvim = {
-    extraPackages = with pkgs; [
+    extraPackages = with unstable; [
       markdown-oxide
     ];
+
+    plugins.mkdnflow = {
+      enable = true;
+
+      defaultMappings = false;
+
+      settings = {
+        silent = true;
+        mappings = {
+          MkdnNextHeading = [ "n" "]]" ];
+          MkdnPrevHeading = [ "n" "[[" ];
+        };
+      };
+    };
 
     highlight = {
       MyMarkdownH1 = { fg = "#ffffff"; bold = true; }; # Кристально белый (главный акцент)
@@ -62,6 +76,8 @@
     plugins.obsidian = {
       enable = true;
       settings = {
+        mappings = {}; # Отключение встроенных хоткеев
+
         workspaces = [
           {
             name = "notes";
