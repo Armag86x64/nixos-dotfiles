@@ -68,7 +68,6 @@
             # --- ВСЕ НАСТРОЙКИ ---
             ./main-configuration/altair-laptop/default.nix
 
-            # Фиксация имени хоста
             ({ ... }: { networking.hostName = "altair-laptop"; })
             # ------------------------------------------
 

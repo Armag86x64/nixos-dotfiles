@@ -8,6 +8,8 @@
     cursor = {
       theme = config.home.pointerCursor.name;
       size = config.home.pointerCursor.size;
+
+      hide-when-typing = true;
     };
 
     layout = {

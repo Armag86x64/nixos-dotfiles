@@ -113,13 +113,14 @@ in
         # УДАЛЕНО: Все параметры "privacy.clearOnShutdown.*" удалены отсюда,
         # чтобы они не перезаписывали поведение белого списка из политик.
 
-        "browser.startup.homepage" = "https://google.com";
+        "browser.startup.homepage" = "about:newtab";
         "browser.startup.page" = 1;
 
         "ui.systemUsesDarkTheme" = 1;
         "devtools.theme" = "dark";
         "browser.theme.content-theme" = 0;
         "browser.theme.toolbar-theme" = 0;
+        "ui.key.menuAccessKeyFocuses" = false;
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
       
         # === 1. АППАРАТНОЕ УСКОРЕНИЕ ===
