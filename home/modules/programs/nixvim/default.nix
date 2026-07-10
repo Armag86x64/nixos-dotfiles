@@ -5,6 +5,7 @@
     ./ui.nix
     ./plugins.nix
     ./hotkeys.nix
+    ./markdown
   ];
 
   programs.nixvim = {
@@ -18,6 +19,8 @@
       tabstop = 2;
       expandtab = true;
       smartindent = true;
+      smarttab = true;
+      list = false;
       mouse = "a";
       clipboard = "unnamedplus";
     };

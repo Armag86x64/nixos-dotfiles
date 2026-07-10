@@ -1,14 +1,6 @@
 { pkgs, ... }:
 {
-  programs.nixvim = {
-    opts = {
-      expandtab = true;
-      shiftwidth = 2;
-      tabstop = 2;
-      smarttab = true;
-      list = false;
-    };
-   
+  programs.nixvim = {   
     extraPlugins = [
       (pkgs.vimUtils.buildVimPlugin {
         name = "monoglow-nvim";
