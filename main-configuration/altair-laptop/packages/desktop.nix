@@ -2,6 +2,7 @@
   environment.systemPackages = [
     unstable.telegram-desktop
     unstable.libreoffice
+    unstable.qbittorrent
     unstable.librewolf
     unstable.chromium
     unstable.waypaper

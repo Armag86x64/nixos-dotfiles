@@ -8,6 +8,13 @@
     extraPortals = [ unstable.xdg-desktop-portal-gtk ];
   };
 
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = [ "thunar.desktop" ];
+    };
+  };
+
   xdg = {
     enable = true;
     userDirs = {

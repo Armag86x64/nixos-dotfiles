@@ -83,6 +83,20 @@ in
           # Stepik
           "https://stepik.org"
           "https://www.stepik.org"
+
+          # Rutracker
+          "https://rutracker.org"
+          "https://www.rutracker.org"
+          "https://rutracker.net"
+          "https://www.rutracker.net"
+
+          # ivi.ru
+          "https://ivi.ru"
+          "https://www.ivi.ru"
+          "https://api.ivi.ru"          # для API запросов
+          "https://static.ivi.ru"       # для статического контента
+          "https://img.ivi.ru"          # для изображений
+          "https://video.ivi.ru" 
         ];
         # Параметр Default убран, чтобы избежать блокировки сохранения
       };

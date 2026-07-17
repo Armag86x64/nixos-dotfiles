@@ -1,5 +1,6 @@
 { unstable, stable, ... }: {
   programs.hyprland.enable = true;
+  programs.xwayland.enable = true;
 
   environment.systemPackages = [
     # W A L L P A P E R
