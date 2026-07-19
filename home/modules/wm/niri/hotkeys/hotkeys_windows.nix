@@ -34,15 +34,15 @@
       "Mod+L".action.focus-column-right = [ ];
 
       # --- ПЕРЕМЕЩЕНИЕ ОКОН ---
-      "Mod+Ctrl+Left".action.move-column-left = [ ];
-      "Mod+Ctrl+Down".action.move-window-to-workspace-down = [ ];
-      "Mod+Ctrl+Up".action.move-window-to-workspace-up = [ ];
-      "Mod+Ctrl+Right".action.move-column-right = [ ];
+      "Mod+Shift+Left".action.move-column-left = [ ];
+      "Mod+Shift+Down".action.move-window-to-workspace-down = [ ];
+      "Mod+Shift+Up".action.move-window-to-workspace-up = [ ];
+      "Mod+Shift+Right".action.move-column-right = [ ];
       
-      "Mod+Ctrl+H".action.move-column-left = [ ];
-      "Mod+Ctrl+J".action.move-window-to-workspace-down = [ ];
-      "Mod+Ctrl+K".action.move-window-to-workspace-up = [ ];
-      "Mod+Ctrl+L".action.move-column-right = [ ];
+      "Mod+Shift+H".action.move-column-left = [ ];
+      "Mod+Shift+J".action.move-window-to-workspace-down = [ ];
+      "Mod+Shift+K".action.move-window-to-workspace-up = [ ];
+      "Mod+Shift+L".action.move-column-right = [ ];
 
       # --- БЫСТРЫЙ ПЕРЕХОД В НАЧАЛО/КОНЕЦ ---
       "Mod+Home".action.focus-column-first = [ ];
