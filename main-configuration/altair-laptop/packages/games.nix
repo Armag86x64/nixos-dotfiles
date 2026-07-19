@@ -15,15 +15,16 @@ in {
   programs.steam = {
     enable = true;
     protontricks.enable = true;
-    remotePlay.openFirewall = true; # Открывает порты для Steam Remote Play
-    dedicatedServer.openFirewall = true; # Открывает порты для выделенных серверов
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
   };
 
   environment.systemPackages = [
     freesmlauncher.packages.${system}.freesmlauncher
-    unstable.mindustry-wayland
+    # unstable.mindustry-wayland
 
     # For gaming
+    stable.graalvmPackages.graalvm-ce
     stable.jdk8
   ];
 }
