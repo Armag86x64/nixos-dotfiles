@@ -22,8 +22,8 @@
       # action.spawn = [ "chromium" "--enable-features=UseOzonePlatform" "--ozone-platform=wayland" ];
     };
     "Mod+T" = {
-      hotkey-overlay.title = "Run a telegram";
-      action.spawn = [ "Telegram" ];
+      hotkey-overlay.title = "Run taskwarrior-tui";
+      action.spawn = [ "foot" "-e" "--app-id=taskwarrior-tui" "taskwarrior-tui" ];
     };
     "Mod+R" = {
       hotkey-overlay.title = "Run a apps launcher: wofi";
