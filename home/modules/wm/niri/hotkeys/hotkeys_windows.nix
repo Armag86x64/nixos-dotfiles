@@ -25,22 +25,23 @@
 
       # --- НАВИГАЦИЯ ПО ОКНАМ (Стрелочки и Vim-binds) ---
       "Mod+Left".action.focus-column-left = [ ];
-      "Mod+Down".action.focus-window-down = [ ];
-      "Mod+Up".action.focus-window-up = [ ];
+      "Mod+Down".action.focus-workspace-down = [ ];
+      "Mod+Up".action.focus-workspace-up = [ ];
       "Mod+Right".action.focus-column-right = [ ];
       "Mod+H".action.focus-column-left = [ ];
-      "Mod+J".action.focus-window-down = [ ];
-      "Mod+K".action.focus-window-up = [ ];
+      "Mod+J".action.focus-workspace-down = [ ];
+      "Mod+K".action.focus-workspace-up = [ ];
       "Mod+L".action.focus-column-right = [ ];
 
       # --- ПЕРЕМЕЩЕНИЕ ОКОН ---
       "Mod+Ctrl+Left".action.move-column-left = [ ];
-      "Mod+Ctrl+Down".action.move-window-down = [ ];
-      "Mod+Ctrl+Up".action.move-window-up = [ ];
+      "Mod+Ctrl+Down".action.move-window-to-workspace-down = [ ];
+      "Mod+Ctrl+Up".action.move-window-to-workspace-up = [ ];
       "Mod+Ctrl+Right".action.move-column-right = [ ];
+      
       "Mod+Ctrl+H".action.move-column-left = [ ];
-      "Mod+Ctrl+J".action.move-window-down = [ ];
-      "Mod+Ctrl+K".action.move-window-up = [ ];
+      "Mod+Ctrl+J".action.move-window-to-workspace-down = [ ];
+      "Mod+Ctrl+K".action.move-window-to-workspace-up = [ ];
       "Mod+Ctrl+L".action.move-column-right = [ ];
 
       # --- БЫСТРЫЙ ПЕРЕХОД В НАЧАЛО/КОНЕЦ ---
@@ -50,14 +51,14 @@
       "Mod+Ctrl+End".action.move-column-to-last = [ ];
 
       # --- НАВИГАЦИЯ МЕЖДУ МОНИТОРАМИ ---
-      "Mod+Shift+Left".action.focus-monitor-left = [ ];
-      "Mod+Shift+Down".action.focus-monitor-down = [ ];
-      "Mod+Shift+Up".action.focus-monitor-up = [ ];
-      "Mod+Shift+Right".action.focus-monitor-right = [ ];
-      "Mod+Shift+H".action.focus-monitor-left = [ ];
-      "Mod+Shift+J".action.focus-monitor-down = [ ];
-      "Mod+Shift+K".action.focus-monitor-up = [ ];
-      "Mod+Shift+L".action.focus-monitor-right = [ ];
+      # "Mod+Shift+Left".action.focus-monitor-left = [ ];
+      # "Mod+Shift+Down".action.focus-monitor-down = [ ];
+      # "Mod+Shift+Up".action.focus-monitor-up = [ ];
+      # "Mod+Shift+Right".action.focus-monitor-right = [ ];
+      # "Mod+Shift+H".action.focus-monitor-left = [ ];
+      # "Mod+Shift+J".action.focus-monitor-down = [ ];
+      # "Mod+Shift+K".action.focus-monitor-up = [ ];
+      # "Mod+Shift+L".action.focus-monitor-right = [ ];
 
       # --- ПЕРЕМЕЩЕНИЕ КОЛОНОК МЕЖДУ МОНИТОРАМИ ---
       "Mod+Shift+Ctrl+Left".action.move-column-to-monitor-left = [ ];
