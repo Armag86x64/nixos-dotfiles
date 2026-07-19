@@ -2,6 +2,11 @@
   services.udisks2.enable = true;
 
   environment.systemPackages = [
+    # D e s k t o p
+    stable.taskwarrior-tui
+    stable.taskwarrior3
+    
+    # I m p o r t a n t
     stable.brightnessctl
     stable.fastfetch
     stable.vim-full
