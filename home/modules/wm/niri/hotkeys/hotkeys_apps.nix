@@ -12,9 +12,9 @@
       action.spawn = [ "fuzzel" ];
     };
     "Mod+F" = {
-      hotkey-overlay.title = "Run a file manager: thunar";
+      hotkey-overlay.title = "Run a file manager: yazi";
       # action.spawn = [ "thunar" ];
-      action.spawn = [ "foot" "-e" "yazi" ];
+      action.spawn = [ "foot" "-e" "--app-id=yazi-terminal" "yazi" ];
     };
     "Mod+W" = {
       hotkey-overlay.title = "Run a browser: chromium";

@@ -6,10 +6,15 @@
       matches = [
         { app-id = "^org\\.wezfurlong\\.wezterm$"; }
       ];
-      # Сюда можно добавлять действия для этого правила, например:
-      # default-column-width = { };
     }
-    # Исправленное правило для mpv
+    {
+      matches = [ { app-id = "^foot$"; } ];
+      default-column-width = { proportion = 0.5; };
+    }
+    {
+      matches = [ { app-id = "^yazi-terminal$"; } ];
+      open-maximized = true;
+    }
     {
       matches = [
         { app-id = "^mpv$"; }
