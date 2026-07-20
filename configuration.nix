@@ -16,6 +16,11 @@ in
   # boot.kernelPackages = pkgs.lib.mkForce pkgs.linuxPackages_6_12;
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
+  services.dbus = {
+    enable = true;
+    implementation = "broker";
+  };
+
   documentation.enable = false;
   documentation.nixos.enable = false;
 

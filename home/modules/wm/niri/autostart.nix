@@ -5,7 +5,7 @@
     # { command = [ "waybar" ]; }
     { command = [ "xwayland-satellite" ]; }
     # { command = [ "waypaper" "--restore" ]; }
-    { command = [ "swww-daemon" ]; }
+    { command = [ "awww-daemon" ]; }
     # { command = [ "./scripts/restore_wallpaper.sh" ]; }
   ];
 }
