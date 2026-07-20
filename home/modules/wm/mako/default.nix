@@ -17,6 +17,8 @@
       margin = "10";
       border-radius = 0;
       text-alignment = "left";
+      default-timeout=2000;
+      ignore-timeout=1;
     };
 
     # Секция для специфичных условий (критические уведомления)

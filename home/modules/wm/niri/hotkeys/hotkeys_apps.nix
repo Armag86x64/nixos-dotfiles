@@ -33,7 +33,7 @@
     };
 
     # --- С К Р И Н Ш О Т Ы ---
-    "Print".action.spawn = [ "flameshot" "gui" ];
+    "Print".action.spawn = [ "sh" "-c" "grim -g \"$(slurp)\" - | satty --filename -" ];
     "Ctrl+Print".action.screenshot-screen = [ ];
     "Alt+Print".action.screenshot-window = [ ];
 

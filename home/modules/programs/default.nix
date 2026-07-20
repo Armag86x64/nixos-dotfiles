@@ -2,7 +2,6 @@
   imports = [
     ./virtualization
     ./fastfetch
-    ./flameshot
     ./obsidian
     ./firefox
     ./nixvim
