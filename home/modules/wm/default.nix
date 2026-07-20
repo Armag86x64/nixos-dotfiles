@@ -1,7 +1,6 @@
 { ... }: {
   imports = [
     ./screenshots
-    ./hyprland
     ./widgets
     ./waybar
     ./theme
