@@ -1,9 +1,9 @@
-{ unstable, ... }: {
-  home.packages = [ unstable.grim ];
+{ pkgs, ... }: {
+  home.packages = [ pkgs.grim ];
 
   services.flameshot = {
     enable = true;
-    package = unstable.flameshot;
+    package = pkgs.flameshot;
 
     settings = {
       General = {

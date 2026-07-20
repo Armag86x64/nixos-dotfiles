@@ -1,4 +1,4 @@
-{ inputs, pkgs, stable, ... }:
+{ inputs, config, pkgs, stable, ... }:
 let
   system = pkgs.stdenv.hostPlatform.system;
 in
@@ -10,6 +10,9 @@ in
   programs.firefox = {
     enable = true;
     package = stable.firefox;
+
+    # nativeMessagingHosts = [ ]; 
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
 
     # === Глобальные корпоративные политики Firefox ===
     policies = {
@@ -104,6 +107,7 @@ in
 
     profiles.soundwave = {
       isDefault = true;
+      id = 0;
 
       extensions.packages = with inputs.firefox-addons.packages.${system}; [
         darkreader
@@ -114,18 +118,18 @@ in
         privacy-badger
         decentraleyes
         ublock-origin
-
-        # smartproxy
       ];
 
       settings = {
         "extensions.autoDisableScopes" = 0;
 
         # Активация темы black21
-        "lightweightThemes.selectedThemeID" = "black21@xi-addons.mozilla.org";
+        # "lightweightThemes.selectedThemeID" = "black21@xi-addons.mozilla.org";
 
         # УДАЛЕНО: Все параметры "privacy.clearOnShutdown.*" удалены отсюда,
         # чтобы они не перезаписывали поведение белого списка из политик.
+        "browser.urlbar.suggest.weather" = false;
+        "browser.newtabpage.activity-stream.showWeather" = false;
 
         "browser.startup.homepage" = "about:newtab";
         "browser.startup.page" = 1;

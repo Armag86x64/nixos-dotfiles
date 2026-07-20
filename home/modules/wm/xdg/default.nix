@@ -1,11 +1,11 @@
-{ config, unstable, ... }:
+{ config, pkgs, ... }:
 
 {
-  home.packages = [ unstable.xdg-user-dirs ];
+  # home.packages = [ unstable.xdg-user-dirs ];
 
   xdg.portal = {
     enable = true;
-    extraPortals = [ unstable.xdg-desktop-portal-gtk ];
+    extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   };
 
   xdg.mimeApps = {
@@ -20,6 +20,8 @@
     userDirs = {
       enable = true;
       createDirectories = true;
+
+      setSessionVariables = false;
       
       download = "${config.home.homeDirectory}/Downloads";
       documents = "${config.home.homeDirectory}/Documents";

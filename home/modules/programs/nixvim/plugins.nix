@@ -14,7 +14,7 @@
       treesitter = {
         enable = true;
         settings.highlight.enable = true;
-        ensureInstalled = [ "lua" "nix" "rust" "bash"]; 
+        # ensureInstalled = [ "lua" "nix" "rust" "bash"]; 
       };
 
       nvim-autopairs = {

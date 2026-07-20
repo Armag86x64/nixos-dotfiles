@@ -5,7 +5,7 @@
   environment.systemPackages = [
     # W A L L P A P E R
     stable.mpvpaper
-    stable.swww
+    stable.awww
 
     # В с п о м о г а т е л ь н о е
     unstable.capitaine-cursors

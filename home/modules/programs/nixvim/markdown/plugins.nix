@@ -22,7 +22,7 @@
     plugins.mkdnflow = {
       enable = true;
 
-      defaultMappings = false;
+      # defaultMappings = false;
 
       settings = {
         silent = true;
@@ -76,6 +76,7 @@
       };
     };
 
+    /*
     plugins.lsp = {
       servers.markdown_oxide = {
         enable = true;
@@ -88,5 +89,6 @@
         };
       };
     };
+    */
   };
 }
