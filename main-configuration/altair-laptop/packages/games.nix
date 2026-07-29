@@ -26,5 +26,9 @@ in {
     # For gaming
     stable.graalvmPackages.graalvm-ce
     stable.jdk8
+
+    # E X E  -  f i l e s
+    stable.wineWow64Packages.wayland
+    stable.winetricks
   ];
 }
