@@ -1,4 +1,5 @@
 { unstable, ... }: {
+  # VPN-client
   programs.throne = {
     enable = true;
     tunMode.enable = true;
@@ -10,7 +11,8 @@
   };
 
   environment.systemPackages = [
-    unstable.throne
+    unstable.localsend
+
     unstable.v2ray-geoip
     unstable.v2ray-domain-list-community
   ];
