@@ -84,6 +84,9 @@
             host = "#d5d5d5";
           };
         }
+
+        /* Basic hardware */ 
+
         {
           type = "custom";
           format = "┌──────────────────────────────────────────┐\n";
@@ -113,6 +116,31 @@
         }
         {
           type = "disk";
+          key = "  Disk (/)"; 
+          folders = "/"; 
+          format = "{1} / {2} ({3})"; 
+          keyColor = "#6f7987";
+        }
+        {
+          type = "battery";
+          key = "  Battery";
+          keyColor = "#677987";
+        }
+        { type = "custom"; format = ""; }
+        {
+          type = "custom";
+          format = "└──────────────────────────────────────────┘";
+        }
+
+        /* T i m e */
+
+        {
+          type = "custom";
+          format = "┌──────────────────────────────────────────┐\n";
+        }
+
+        {
+          type = "disk";
           key = "  OS Age";
           folders = "/";
           keyColor = "#6f7987";
@@ -123,14 +151,25 @@
           key = "  Uptime";
           keyColor = "#6f7987";
         }
-        {
-          type = "custom";
-          format = "";
-        }
+
+        { type = "custom"; format = ""; }
         {
           type = "custom";
           format = "└──────────────────────────────────────────┘";
         }
+
+        /* D I S K */
+        /*
+        {
+          type = "custom";
+          format = "┌──────────────────────────────────────────┐\n";
+        }
+
+        {
+          type = "custom";
+          format = "└──────────────────────────────────────────┘";
+        }
+        */
         {
           type = "colors";
           paddingLeft = 2;
