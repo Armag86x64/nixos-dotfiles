@@ -99,7 +99,21 @@ in
           "https://api.ivi.ru"          # для API запросов
           "https://static.ivi.ru"       # для статического контента
           "https://img.ivi.ru"          # для изображений
-          "https://video.ivi.ru" 
+          "https://video.ivi.ru"
+
+          # VK
+          "https://vk.ru"
+          "https://www.vk.ru"
+          "https://vk.me"
+          "https://vk.cc"
+
+          # X (Twitter)
+          "https://x.com"
+          "https://www.x.com"
+          "https://twitter.com"
+          "https://www.twitter.com"
+          "https://api.x.com"
+          "https://t.co"
         ];
         # Параметр Default убран, чтобы избежать блокировки сохранения
       };
