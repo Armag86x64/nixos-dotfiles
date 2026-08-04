@@ -1,6 +1,7 @@
 { unstable, ... }: {
   environment.systemPackages = [
     unstable.telegram-desktop
+    unstable.penpot-desktop
     unstable.libreoffice
     unstable.qbittorrent
     unstable.librewolf
