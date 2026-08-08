@@ -29,7 +29,7 @@
 
     niri = {
       url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "unstable"; # Следуем за вашей основной системной веткой
+      inputs.nixpkgs.follows = "unstable";
     };
   };
 
@@ -51,7 +51,31 @@
       config = nixpkgsConfig;
     };
   in {
-    nixosConfigurations.altair-laptop = stable.lib.nixosSystem {
+    nixosConfigurations = {
+      default = stable.lib.nixosSystem {
+        system = "x86_64-linux";
+        
+        specialArgs = { 
+            inherit inputs;
+            stable = stable-pkgs; 
+            unstable = unstable-pkgs; 
+        };
+
+        modules = [
+          disko.nixosModules.disko
+          ./main-configuration/default/disko-config.nix
+
+          # --- ВСЕ НАСТРОЙКИ ---
+          ./main-configuration/default/default.nix
+
+          ({ ... }: { networking.hostName = "altair-laptop"; })
+          # ------------------------------------------
+
+          ./configuration.nix
+        ];
+      };
+
+      altair-laptop = stable.lib.nixosSystem {
         system = "x86_64-linux";
 
         specialArgs = { 
@@ -91,6 +115,7 @@
                 };
             }
         ];
+      };
     };
   };
 }
