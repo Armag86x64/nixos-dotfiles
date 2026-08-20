@@ -68,7 +68,7 @@
           # --- ВСЕ НАСТРОЙКИ ---
           ./main-configuration/default/default.nix
 
-          ({ ... }: { networking.hostName = "altair-laptop"; })
+          ({ ... }: { networking.hostName = "default"; })
           # ------------------------------------------
 
           ./configuration.nix
