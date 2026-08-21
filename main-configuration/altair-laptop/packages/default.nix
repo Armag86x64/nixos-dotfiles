@@ -1,5 +1,6 @@
 { ... }: {
   imports = [
+    ./dwl
     ./cli.nix
     ./games.nix
     ./fonts.nix
