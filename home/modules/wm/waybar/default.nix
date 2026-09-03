@@ -17,7 +17,7 @@
         # ------------
         # Р А С П О Л О Ж Е Н И Е
         # ------------
-        modules-left = [ "custom/void-left" "niri/workspaces" ];
+        modules-left = [ "custom/void-left" "niri/workspaces" "dwl/tags" /* "dwl/window"*/ ];
         modules-center = [
           "custom/void-center"
           "disk"
@@ -64,6 +64,17 @@
           all-outputs = true;
           sort-by-number = true;
         };
+        
+        "dwl/tags" = {
+          num-tags = 9;
+          title-length = 20;
+        };
+
+        /*
+        "dwl/window" = {
+          "format" = "{}";
+        };
+        */
 
         # ------------
         # Ц Е Н Т Р

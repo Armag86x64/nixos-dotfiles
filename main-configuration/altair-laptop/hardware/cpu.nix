@@ -32,6 +32,10 @@
           ON_BAT - при отсутствии питания
         */ 
 
+      # Для максимального энергосбережния
+      # CPU_MIN_PERF_ON_BAT = 0;
+      # CPU_MAX_PERF_ON_BAT = 30;
+
       # Регулятор частоты для драйвера intel_pstate
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
@@ -46,7 +50,7 @@
 
       # Позволяем Intel Thread Director самому эффективно распределять задачи по P/E ядрам
       CPU_MAX_PERF_ON_AC = 100;
-      CPU_MAX_PERF_ON_BAT = 100;
+      CPU_MAX_PERF_ON_BAT = 100; # РАССКОМЕНТИРОВАТЬ!
 
       # Базовое управление графикой Intel
       INTEL_GPU_MAX_FREQ_ON_AC = 1400;
@@ -62,7 +66,7 @@
 
       # Пороги заряда:
       START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 80;
+      STOP_CHARGE_THRESH_BAT0 = 100;
 
       # Это защитит шину тачпада на любом современном ноутбуке Intel/AMD
       RUNTIME_PM_DRIVER_DENYLIST = "i2c_designware intel_lpss_pci";

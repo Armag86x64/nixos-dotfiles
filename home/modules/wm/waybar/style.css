@@ -85,7 +85,7 @@ window#waybar > box {
 /* W O R K S P A C E S */
 #workspaces button {
 /* Это критически важно: обнуляем встроенную высоту GTK */
-    win-height: 0;
+    min-height: 0;
           
     /* Убираем вертикальные отступы, которые дают лишние пиксели */
     padding-top: 0;

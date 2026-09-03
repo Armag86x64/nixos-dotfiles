@@ -4,7 +4,7 @@ let
   myDwl = pkgs.dwl.overrideAttrs (oldAttrs: {
     preConfigure = ''
       # Копируем все файлы конфигурации
-      cp ${./config.h} config.h
+      cp ${./config.h} dwl-config.h
       cp ${./appearance.h} appearance.h
       cp ${./keys.h} keys.h
       cp ${./rules.h} rules.h
@@ -16,6 +16,7 @@ let
     # Если у вас есть патчи
     patches = oldAttrs.patches or [] ++ [
       # ./some-patch.patch
+      ./patches/ipc.patch
     ];
   });
 in {
