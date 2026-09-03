@@ -17,6 +17,7 @@
     # W A Y L A N D
     unstable.xwayland-satellite
     unstable.wl-clipboard
+    unstable.wlr-randr
     unstable.xwayland
   ];
 }
