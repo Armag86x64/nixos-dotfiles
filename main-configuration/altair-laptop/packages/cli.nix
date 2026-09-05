@@ -5,6 +5,7 @@
     # D e s k t o p
     stable.taskwarrior-tui
     stable.taskwarrior3
+    stable.ffmpeg
     stable.yt-dlp         # Download video from youtube
     
     # I m p o r t a n t
