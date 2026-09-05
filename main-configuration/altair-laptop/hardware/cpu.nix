@@ -66,7 +66,7 @@
 
       # Пороги заряда:
       START_CHARGE_THRESH_BAT0 = 70;
-      STOP_CHARGE_THRESH_BAT0 = 100;
+      STOP_CHARGE_THRESH_BAT0 = 80;
 
       # Это защитит шину тачпада на любом современном ноутбуке Intel/AMD
       RUNTIME_PM_DRIVER_DENYLIST = "i2c_designware intel_lpss_pci";
