@@ -14,6 +14,7 @@
 
 /* ===== КОМАНДЫ ДЛЯ ЗАПУСКА ПРИЛОЖЕНИЙ ===== */
 static const char *termcmd[] = { "foot", NULL };
+static const char *waypaper[] = { "waypaper", NULL };
 static const char *menucmd[] = { "fuzzel", NULL };
 static const char *woficmd[] = { "wofi", "--show", "drun", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
@@ -48,6 +49,8 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_t,    spawn, {.v = taskcmd} },        /* Mod+T - Taskwarrior */
     { MODKEY,                    XKB_KEY_r,    spawn, {.v = woficmd} },        /* Mod+R - Wofi (drun) */
     { MODKEY,                    XKB_KEY_b,    spawn, {.v = bottomcmd} },      /* Mod+B - Bottom */
+    { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,    spawn, {.v = waypaper} },       /* Переместить на все теги */
+
     
     /* ===== VIM-режим: открытие конфигов ===== */
     { WLR_MODIFIER_SHIFT,        XKB_KEY_N,    spawn, {.v = nvimconfigcmd} },  /* Shift+N - NixOS конфиг */

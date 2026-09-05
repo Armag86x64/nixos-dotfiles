@@ -6,6 +6,7 @@
 static int log_level = WLR_ERROR;
 
 /* Включаем все остальные файлы */
+#include "autostart.h"
 #include "appearance.h"
 #include "layouts.h"
 #include "rules.h"

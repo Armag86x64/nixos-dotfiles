@@ -1,7 +1,23 @@
 { unstable, pkgs, config, ... }:
+let
+  waybar-dwl-script = pkgs.writeShellApplication {
+    name = "waybar-dwl";
+    
+    # Добавляем все зависимости, которые использует скрипт внутри
+    runtimeInputs = with pkgs; [ 
+      coreutils 
+      procps 
+      gnugrep 
+      gnused 
+      gawk 
+      inotify-tools 
+    ];
 
+    text = builtins.readFile ./waybar-dwl.sh;
+  };
+in
 {
-  # services.network-manager-applet.enable = true;
+  home.packages = [ waybar-dwl-script ];
 
   programs.waybar = {
     enable = true;
@@ -17,7 +33,7 @@
         # ------------
         # Р А С П О Л О Ж Е Н И Е
         # ------------
-        modules-left = [ "custom/void-left" "niri/workspaces" "dwl/tags" /* "dwl/window"*/ ];
+        modules-left = [ "custom/void-left" "niri/workspaces" "custom/dwl" ];
         modules-center = [
           "custom/void-center"
           "disk"
@@ -41,6 +57,13 @@
         "custom/void-left" = {
           format = "   ";
           min-length = 5;
+        };
+
+        "custom/dwl" = {
+          exec = "${waybar-dwl-script}/bin/waybar-dwl eDP-1";
+          format = "{}";
+          return-type = "json";
+          max-length = 150;
         };
 
         "niri/workspaces" = {
@@ -69,12 +92,6 @@
           num-tags = 9;
           title-length = 20;
         };
-
-        /*
-        "dwl/window" = {
-          "format" = "{}";
-        };
-        */
 
         # ------------
         # Ц Е Н Т Р
