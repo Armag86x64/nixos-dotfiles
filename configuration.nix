@@ -14,7 +14,7 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # boot.kernelPackages = pkgs.lib.mkForce pkgs.linuxPackages_6_12;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # boot.kernelPackages = pkgs.linuxPackages_latest;
 
   services.dbus = {
     enable = true;

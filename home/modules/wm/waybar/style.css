@@ -33,8 +33,10 @@ window#waybar > box {
     border: none;
     
     /* Внутренние отступы, чтобы текст модулей стоял красиво и не прилипал к краям */
+    /*
     padding-left: 40px;
     padding-right: 40px;
+    */
     padding-top: 4px;
     padding-bottom: 4px;
 }
@@ -61,15 +63,9 @@ window#waybar > box {
     background-color: #000;
 }
 
-/*
 #custom-logo {
-    font-size: 20px;
-    background-image: url("${config.home.homeDirectory}/.config/waybar/images/main_logo_1.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+  font-size: 25px;
 }
-*/
 
 #cpu {
     background-color: #000;
@@ -113,3 +109,18 @@ window#waybar > box {
     margin: 0;
     padding: 0;
 }
+
+
+
+
+/* С Т А Р Ь Ё */
+/*
+#custom-logo {
+    font-size: 20px;
+    background-image: url("${config.home.homeDirectory}/.config/waybar/images/main_logo_1.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+*/
+

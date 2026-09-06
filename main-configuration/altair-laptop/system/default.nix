@@ -1,5 +1,6 @@
 { ... }: {
 	imports = [
+    ./kernel.nix
     ./user.nix
     ./variables.nix
 		./bootloader.nix
