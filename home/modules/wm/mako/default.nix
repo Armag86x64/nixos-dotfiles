@@ -21,10 +21,15 @@
       ignore-timeout=1;
     };
 
-    # Секция для специфичных условий (критические уведомления)
     extraConfig = ''
       [urgency=critical]
-      border-color=#ffffff
+      border-color=#fc0b03
+      border-size=2
+      default-timeout=10000
+      padding=10,15
+
+      [urgency=low]
+      border-color=#ffb700
       border-size=2
       default-timeout=10000
       padding=10,15
