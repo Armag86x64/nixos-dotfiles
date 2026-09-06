@@ -12,7 +12,7 @@ let
       inotify-tools 
     ];
 
-    text = builtins.readFile ../waybar-dwl.sh;
+    text = builtins.readFile ../scripts/waybar-dwl.sh;
   };
 in
 {

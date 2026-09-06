@@ -1,5 +1,8 @@
 @import "theme.css";
-/* Cascadia Code */
+@import "modules/left.css";
+@import "modules/right.css";
+@import "modules/center.css";
+
 * {
     font-family: "JetBrainsMono Nerd Font:style=Bold";
     font-weight: bold;
@@ -40,77 +43,6 @@ window#waybar > box {
     padding-top: 4px;
     padding-bottom: 4px;
 }
-
-
-/* L E F T */
-
-#custom-dwl {
-    background-color: #000000;
-    padding: 2px 10px;         /* Отступы внутри модуля (сверху/снизу, слева/справа) */
-    margin: 0 4px;             /* Отступы между другими модулями */
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 14px;
-}
-
-
-/* C E N T E R */
-
-#disk {
-    background-color: #000;
-}
-
-#memory {
-    background-color: #000;
-}
-
-#custom-logo {
-  font-size: 25px;
-}
-
-#cpu {
-    background-color: #000;
-}
-
-#temperature {
-    background-color: #000;
-}
-
-/* L E F T */
-
-/* R I G H T */
-#backlight
-#pulseaudio
-
-#pulseaudio box {
-  padding: 0;
-  margin: 0;
-}
-
-#battery {
-  background-color: #000;
-}
-
-/* W O R K S P A C E S */
-#workspaces button {
-/* Это критически важно: обнуляем встроенную высоту GTK */
-    min-height: 0;
-          
-    /* Убираем вертикальные отступы, которые дают лишние пиксели */
-    padding-top: 0;
-    padding-bottom: 0;
-          
-    /* Ограничиваем внешние границы */
-    margin-top: 0;
-    margin-bottom: 0;
-}
-
-#workspaces {
-    /* Убираем отступы у самого контейнера */
-    margin: 0;
-    padding: 0;
-}
-
-
 
 
 /* С Т А Р Ь Ё */

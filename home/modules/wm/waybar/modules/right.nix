@@ -20,7 +20,6 @@
       max-length = 15;
       tooltip = false;
 
-      # Управление яркостью при прокрутке
       on-scroll-up = "${pkgs.brightnessctl}/bin/brightnessctl set 5%+";
       on-scroll-down = "${pkgs.brightnessctl}/bin/brightnessctl set 5%-";
     };

@@ -12,10 +12,10 @@
     cpu = {
       interval = 10;
       format = "CPU: {usage}% / {load}";
-      format-warning = "CPU: {usage}%";
-      format-critical = "CPU: {usage}%";
+      format-warning = "CPU: {usage}% / {load}";
+      format-critical = "CPU: {usage}% / {load}";
       states = {
-        warning = 75;
+        warning = 70;
         critical = 90;
       };
       tooltip = false;
@@ -68,7 +68,6 @@
 
     /* R I G H T  -  N E T W O R K*/
 
-
     network = {
       interface = "wlp0s20f3";
       format = "{ifname}";
@@ -87,8 +86,7 @@
     bluetooth = {
 	    format = "blue: {status}";
 	    format-connected = "blue: {device_alias}";
-	    format-connected-battery = " {device_alias} {device_battery_percentage}%";
-	    # "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+	    format-connected-battery = "blue: {device_alias} ({device_battery_percentage})%";
 	    tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
 	    tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
 	    tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";

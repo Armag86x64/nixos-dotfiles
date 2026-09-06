@@ -1,0 +1,29 @@
+/* L E F T */
+
+#custom-dwl {
+    background-color: #000000;
+    padding: 2px 10px;         /* Отступы внутри модуля (сверху/снизу, слева/справа) */
+    margin: 0 4px;             /* Отступы между другими модулями */
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+}
+
+/* W O R K S P A C E S */
+#workspaces button {
+/* Это критически важно: обнуляем встроенную высоту GTK */
+    min-height: 0;
+          
+    /* Убираем вертикальные отступы, которые дают лишние пиксели */
+    padding-top: 0;
+    padding-bottom: 0;
+          
+    /* Ограничиваем внешние границы */
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#workspaces {
+    /* Убираем отступы у самого контейнера */
+    margin: 0;
+    padding: 0;
+}

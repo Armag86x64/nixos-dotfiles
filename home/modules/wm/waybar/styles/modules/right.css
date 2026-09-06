@@ -1,0 +1,22 @@
+/* R I G H T */
+
+#backlight
+#pulseaudio
+
+#pulseaudio box {
+  padding: 0;
+  margin: 0;
+}
+
+
+/* B A T T E R Y */
+
+#battery {
+  background-color: #000;
+}
+#battery.warning {
+    color: #ffb700;
+}
+#battery.critical {
+    color: #fc0b03;
+}

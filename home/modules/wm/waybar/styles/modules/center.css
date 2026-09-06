@@ -1,0 +1,51 @@
+/* C E N T E R */
+
+#disk {
+    background-color: #000;
+}
+
+
+/* M E M O R Y */
+
+#memory {
+    background-color: #000;
+}
+#memory.warning {
+    color: #ffb700;
+}
+#memory.critical {
+    color: #fc0b03;
+}
+
+
+/* L O G O */
+
+#custom-logo {
+  font-size: 25px;
+}
+
+
+/* C P U */
+
+#cpu {
+    background-color: #000;
+}
+#cpu.warning {
+    color: #ffb700;
+}
+#cpu.critical {
+    color: #fc0b03;
+}
+
+
+/* T E M P */
+
+#temperature {
+    background-color: #000;
+}
+#temperature.warning {
+    color: #ffb700;
+}
+#temperature.critical {
+    color: #fc0b03;
+}
