@@ -2,6 +2,7 @@
   imports =
   [ 
     # ./hardware-configuration.nix
+    ./external-devs.nix
     ./bluetooth.nix
     ./audio.nix
     ./gpu.nix
