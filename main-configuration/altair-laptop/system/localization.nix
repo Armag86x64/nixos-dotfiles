@@ -2,10 +2,12 @@
   i18n.defaultLocale = "ru_RU.UTF-8";
 
   console = {
-    font = "ter-v16b"; 
+    font = "ter-v32b";
+    earlySetup = true;
     packages = [ pkgs.terminus_font ]; 
     
-    # Английский по умолчанию, русский по Alt+Shift
     keyMap = "ruwin_alt_sh-UTF-8"; 
+
+    # useXkbConfig = true; 
   };
 }
