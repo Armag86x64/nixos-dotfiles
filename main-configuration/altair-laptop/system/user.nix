@@ -1,7 +1,7 @@
 { pkgs, ... }: {
   users.users.soundwave = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "networkmanager" ];
+    extraGroups = [ "wheel" "networkmanager" "wireshark"];
     shell = pkgs.zsh;
   };
 

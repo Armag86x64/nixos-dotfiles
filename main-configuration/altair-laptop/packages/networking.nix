@@ -1,8 +1,13 @@
-{ unstable, ... }: {
+{ unstable, stable, ... }: {
   # VPN-client
   programs.throne = {
     enable = true;
     tunMode.enable = true;
+  };
+
+  programs.wireshark = {
+    enable = true;
+    package = unstable.wireshark;
   };
 
   /*
@@ -14,6 +19,9 @@
 
   environment.systemPackages = [
     unstable.localsend
+    
+    stable.nginx
+
 
     # unstable.v2ray-geoip
     # unstable.v2ray-domain-list-community
