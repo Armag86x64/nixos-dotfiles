@@ -7,7 +7,7 @@
     settings = {
       main = {
         pad = "8x8 center";
-        font = "CaskaydiaCove Nerd Font:size=8, Symbols Nerd Font Mono:size=11";
+        font = "CaskaydiaCove Nerd Font:size=10, Symbols Nerd Font Mono:size=11";
         resize-delay-ms = 2500;
         dpi-aware = "yes";
         term = "foot";
