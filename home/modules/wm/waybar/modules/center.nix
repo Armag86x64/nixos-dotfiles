@@ -86,7 +86,7 @@
     bluetooth = {
 	    format = "blue: {status}";
 	    format-connected = "blue: {device_alias}";
-	    format-connected-battery = "blue: {device_alias} ({device_battery_percentage})%";
+	    format-connected-battery = "    bl({device_battery_percentage}%): {device_alias}";
 	    tooltip-format = "{controller_alias}\t{controller_address}\n\n{num_connections} connected";
 	    tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}";
 	    tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
