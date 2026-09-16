@@ -33,8 +33,8 @@
         */ 
 
       # Для максимального энергосбережния
-      # CPU_MIN_PERF_ON_BAT = 0;
-      # CPU_MAX_PERF_ON_BAT = 30;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 30;
 
       # Регулятор частоты для драйвера intel_pstate
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
@@ -50,7 +50,7 @@
 
       # Позволяем Intel Thread Director самому эффективно распределять задачи по P/E ядрам
       CPU_MAX_PERF_ON_AC = 100;
-      CPU_MAX_PERF_ON_BAT = 100; # РАССКОМЕНТИРОВАТЬ!
+      # CPU_MAX_PERF_ON_BAT = 100; # РАССКОМЕНТИРОВАТЬ!
 
       # Базовое управление графикой Intel
       INTEL_GPU_MAX_FREQ_ON_AC = 1400;
