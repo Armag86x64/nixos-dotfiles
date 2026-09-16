@@ -88,9 +88,9 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_e,    togglefullscreen, {0} },        /* Полноэкранный режим */
     
     /* ===== РАСКЛАДКИ ===== */
-    { MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_t,    setlayout, {.v = &layouts[0]} }, /* Тайл */
-    { MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_f,    setlayout, {.v = &layouts[1]} }, /* Плавающая (если layouts[1] = NULL) */
-    { MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_m,    setlayout, {.v = &layouts[2]} }, /* Монокль */
+    { MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_m,    setlayout, {.v = &layouts[0]} }, /* Монокль */
+    { MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_t,    setlayout, {.v = &layouts[1]} }, /* Тайлинг */
+    { MODKEY|WLR_MODIFIER_CTRL,                    XKB_KEY_f,    setlayout, {.v = &layouts[2]} }, /* FLOT */
     { MODKEY,                    XKB_KEY_space, setlayout, {0} },              /* Циклично */
     
     /* ===== ТЕГИ ===== */
