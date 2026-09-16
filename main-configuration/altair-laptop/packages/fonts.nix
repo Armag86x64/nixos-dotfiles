@@ -5,6 +5,7 @@
 
   fonts = {
     packages = with unstable; [
+      monocraft
       cascadia-code
       nerd-fonts.caskaydia-cove
       nerd-fonts.jetbrains-mono
