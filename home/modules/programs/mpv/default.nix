@@ -11,18 +11,33 @@
       ];
     };
 
-    # Конфигурация mpv.conf
-    config = {
-      gpu-context = "wayland";
-      vo = "gpu-next";
-      hwdec = "auto-safe";
-      osc = false;
-      border = false;
-    };
+  config = {
+    vo = "gpu-next";
+    gpu-context = "auto";
+    
+    hwdec = "vaapi-copy";
 
-    # Настройка параметров плагинов
+    profile = "gpu-hq";
+
+    deband = "yes";
+    deband-iterations = 3;
+    deband-threshold = 48;
+    deband-range = 24;
+    deband-grain = 16;
+
+    scale = "spline36";
+    cscale = "spline36";
+    dscale = "mitchell";
+
+    sharpen = "0.5";
+
+    scale-antiring = "0.6";
+    cscale-antiring = "0.6";
+
+    dither-depth = "auto";
+  };
+
     scriptOpts = {
-      # Секция настроек для uosc
       uosc = {
         autohide = false;
         timeline_proximity_threshold = 0;
