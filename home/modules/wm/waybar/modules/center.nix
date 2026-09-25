@@ -69,7 +69,7 @@
     /* R I G H T  -  N E T W O R K*/
 
     network = {
-      interface = "wlp0s20f3";
+      # interface = "wlp0s20f3";
       format = "{ifname}";
       format-wifi = "WiFi: {essid}/{ipaddr} ({signalStrength}%)";
       format-ethernet = "Ethernet: {ipaddr}/{cidr} ";
