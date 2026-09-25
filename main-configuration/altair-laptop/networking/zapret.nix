@@ -2,22 +2,20 @@
 
 {
   services.zapret = {
-    enable = true;
+    enable = false;
     
-    httpSupport = true;
+    httpSupport = false;
     udpSupport = true;
-    udpPorts = [ "443" "50000:65535" ];
+    udpPorts = [ "443" ];
 
     configureFirewall = true;
 
     params = [
-      "--dpi-desync=fake,disorder2"
-      "--dpi-desync-repeats=6"
-      "--dpi-desync-ttl=2"
-      "--dpi-desync-autottl=2"
-      "--dpi-desync-fooling=badseq"
-      "--dpi-desync-split-pos=midsld"
-      "--dpi-desync-any-protocol=1"
+    "--dpi-desync=split2"
+    "--dpi-desync-split-pos=2"
+    "--dpi-desync-repeats=6"
+    "--dpi-desync-fooling=md5sig"
+    "--dpi-desync-ttl=5"
     ];
 
     whitelist = [
