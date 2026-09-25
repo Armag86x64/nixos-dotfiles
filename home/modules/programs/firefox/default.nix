@@ -136,6 +136,7 @@ in
 
       settings = {
         "extensions.autoDisableScopes" = 0;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
 
         # Активация темы black21
         # "lightweightThemes.selectedThemeID" = "black21@xi-addons.mozilla.org";
