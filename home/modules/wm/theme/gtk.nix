@@ -19,9 +19,9 @@
     };
 
     font = {
-      name = "JetBrainsMono Nerd Font"; # Имя шрифта и его размер
+      name = "JetBrainsMono Nerd Font";
       size = 11;
-      package = unstable.nerd-fonts.jetbrains-mono; # Автоматическая установка пакета
+      package = unstable.nerd-fonts.jetbrains-mono;
     };
   };
 
@@ -29,10 +29,7 @@
 
   xdg.portal = {
     enable = true;
-    config.common.default = "gtk";
   };
-
-  # fonts.fontconfig.enable = true;
 
   dconf.settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
 }
