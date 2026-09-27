@@ -10,7 +10,7 @@
 
     /* 2. Задаем контейнеру размеры и центрируем yаш собственный логотип */
     .logo-and-wordmark {
-      background-image: url("file://${./images/main_logo_1.jpg}") !important;
+      background-image: url("file://${./images/main_logo_2.png}") !important;
       background-size: contain !important;
       background-position: center !important;
       background-repeat: no-repeat !important;
