@@ -12,6 +12,18 @@
 
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
+/* ===== СИСТЕМНЫЕ КОМАНДЫ ===== */
+
+void kill_with_sound(const Arg *arg) {
+    killclient(arg);
+    system("pw-play --volume=0.5 /home/soundwave/nixos-dotfiles/main-configuration/altair-laptop/packages/dwl/media/close_window.mp3 &");
+}
+
+void focus_with_sound(const Arg *arg) {
+    focusstack(arg);
+    system("pw-play --volume=0.5 /home/soundwave/nixos-dotfiles/main-configuration/altair-laptop/packages/dwl/media/sound_1.wav &");
+}
+
 /* ===== КОМАНДЫ ДЛЯ ЗАПУСКА ПРИЛОЖЕНИЙ ===== */
 static const char *termcmd[] = { "foot", NULL };
 static const char *waypaper[] = { "waypaper", NULL };
@@ -72,8 +84,8 @@ static const Key keys[] = {
     { WLR_MODIFIER_ALT,          XKB_KEY_Print,                 spawn, {.v = screenshot_window_cmd} }, /* Alt+Print - окно */
     
     /* ===== НАВИГАЦИЯ ПО ОКНАМ ===== */
-    { MODKEY,                    XKB_KEY_j,    focusstack, {.i = +1} },         /* Следующее окно */
-    { MODKEY,                    XKB_KEY_k,    focusstack, {.i = -1} },        /* Предыдущее окно */
+    { MODKEY,                    XKB_KEY_j,    focus_with_sound, {.i = +1} },         /* Следующее окно */
+    { MODKEY,                    XKB_KEY_k,    focus_with_sound, {.i = -1} },        /* Предыдущее окно */
     { MODKEY,                    XKB_KEY_Return, zoom, {0} },                  /* Сделать окно мастером */
     
     /* ===== УПРАВЛЕНИЕ МАСТЕР-ОБЛАСТЬЮ ===== */

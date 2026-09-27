@@ -26,20 +26,24 @@ in {
     enable = true;
     package = myDwl;
     extraSessionCommands = ''
-       
+      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+    
+      systemctl --user stop xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr 2>/dev/null || true
+      systemctl --user start xdg-desktop-portal
     '';
   };
 
+  services.dbus.enable = true;
+  xdg.portal.enable = true;
+
   environment.systemPackages = with pkgs; [
-   (writeShellScriptBin "dwl-start" ''
+    (writeShellScriptBin "dwl-start" ''
       #!/bin/sh
 
-      # 1. Настройка XDG директорий
       export XDG_CURRENT_DESKTOP="dwl"
       export XDG_SESSION_DESKTOP="dwl"
       export XDG_SESSION_TYPE="wayland"
 
-      # 2. Принудительное включение Wayland для GTK и Qt приложений
       export MOZ_ENABLE_WAYLAND=1
       export QT_QPA_PLATFORM="wayland;xcb"
       export GDK_BACKEND="wayland,x11"
@@ -49,13 +53,10 @@ in {
       mkdir -p "$HOME"/.cache
       > "$HOME"/.cache/dwltags
 
-      # "$HOME"/nixos-dotfiles/main-configuration/altair-laptop/packages/dwl/scripts/autoload.sh
-
-      # exec заменяет процесс скрипта на dwl, это должна быть финальная точка
-      # "$HOME"/nixos-dotfiles/main-configuration/altair-laptop/packages/dwl/scripts/autoload.sh
       exec dwl > "$HOME"/.cache/dwltags 2>&1
-  '')
-];
+      # exec dbus-launch --exit-with-session dwl > "$HOME"/.cache/dwltags 2>&1
+    '')
+  ];
 }
 
 /*
