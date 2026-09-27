@@ -95,7 +95,7 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_d,    incnmaster, {.i = -1} },        /* -1 окно в мастере */
     
     /* ===== ДЕЙСТВИЯ С ОКНАМИ ===== */
-    { MODKEY, XKB_KEY_c,    killclient, {0} },              /* Закрыть окно */
+    { MODKEY, XKB_KEY_c,    kill_with_sound, {0} },                            /* Закрыть окно */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_space, togglefloating, {0} },         /* Плавающий режим */
     { MODKEY,                    XKB_KEY_e,    togglefullscreen, {0} },        /* Полноэкранный режим */
     
