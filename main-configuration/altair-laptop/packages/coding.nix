@@ -6,8 +6,13 @@
     unstable.poetry
     unstable.rustup
     unstable.helix
-    stable.nodejs       # стабильный Node.js
-    stable.gcc          # стабильный компилятор
+    stable.nodejs
+    stable.gcc
+
+    # unstable.radare2
+    # unstable.ghidra
+    # unstable.gdb
+    # unstable.gef
 
     stable.pkg-config
     stable.openssl
