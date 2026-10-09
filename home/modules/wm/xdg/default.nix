@@ -12,12 +12,24 @@
         pkgs.xdg-desktop-portal-termfilechooser
       ];
 
-      config = {  
-        common = {
-          default = [ "wlr" "gtk" ];
-          "org.freedesktop.portal.Screenshot" = pkgs.lib.mkForce [ "cosmic" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+      config = {
+        dwl = {
+          default = [ "gtk" "wlr" ];
+          # "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
         };
+        common = {
+          default = [ "gtk" "wlr" ];
+          "org.freedesktop.portal.Screenshot" = pkgs.lib.mkForce [ "cosmic" ];
+          # "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+        };
+      };
+    };
+
+    mimeApps = {
+      enable = true;
+      defaultApplications = {
+         "inode/directory" = [ "thunar.desktop" ];
       };
     };
     
