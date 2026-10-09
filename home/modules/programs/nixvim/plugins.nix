@@ -44,6 +44,13 @@
                 enableExperimental = false;
               };
               checkOnSave = false;
+              inlayHints = {
+                bindingModeHints.enable = true;
+                chainingHints.enable = true;
+                closingBraceHints.enable = true;
+                parameterHints.enable = true;
+                typeHints.enable = true;
+              };
             };
           };
         };
@@ -83,6 +90,7 @@
     opts.updatetime = 300;
 
     extraConfigLua = ''
+      vim.lsp.inlay_hint.enable(true)
       -- Настройка внешнего вида (отработает только там, где диагностика разрешена)
       vim.diagnostic.config({
         virtual_text = {
