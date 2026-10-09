@@ -34,6 +34,9 @@
         text = [
           { run = "nvim \"$@\""; block = true; desc = "Редактировать в Neovim"; }
         ];
+        motrix_torrent = [
+          { run = "motrix %*"; block = false; desc = "Open with Motrix"; }
+        ];
       };
 
       open = {
@@ -99,7 +102,11 @@
           # 8. Текстовые форматы по MIME-типу
           { mime = "text/*"; use = "text"; }
 
-          # 9. КОРРЕКТНЫЙ ФОЛБЕК ДЛЯ ОСТАЛЬНЫХ ФАЙЛОВ (Использует url вместо name)
+          # 9. Торрент-файлы
+          { url = "*.torrent"; use = "motrix_torrent"; }
+          { mime = "application/x-bittorrent"; use = "motrix_torrent"; }
+
+          # 10. КОРРЕКТНЫЙ ФОЛБЕК ДЛЯ ОСТАЛЬНЫХ ФАЙЛОВ (Использует url вместо name)
           { url = "*"; use = "text"; }
         ];
       };
