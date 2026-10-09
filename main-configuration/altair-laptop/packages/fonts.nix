@@ -3,6 +3,7 @@
     unstable.nerd-fonts.caskaydia-cove
   ]; 
 
+
   fonts = {
     packages = with unstable; [
       monocraft
@@ -12,6 +13,8 @@
       noto-fonts-color-emoji
       twemoji-color-font # Дополнительный пак, если Noto где-то забагует
     ];
+
+    fontDir.enable = true;
 
     fontconfig = {
       enable = true;
