@@ -3,10 +3,8 @@
 
   environment.systemPackages = [
     # D e s k t o p
-    stable.taskwarrior-tui
-    stable.taskwarrior3
     stable.ffmpeg
-    stable.yt-dlp         # Download video from youtube
+    stable.yt-dlp
     
     # I m p o r t a n t
     stable.brightnessctl
