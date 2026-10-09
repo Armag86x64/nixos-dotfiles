@@ -30,6 +30,8 @@ in {
     
       systemctl --user stop xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-wlr 2>/dev/null || true
       systemctl --user start xdg-desktop-portal
+
+      _JAVA_AWT_WM_NONREPARENTING = "1";
     '';
   };
 
