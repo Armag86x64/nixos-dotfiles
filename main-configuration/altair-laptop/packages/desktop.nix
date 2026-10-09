@@ -1,4 +1,4 @@
-{ unstable, ... }: {
+{ stable, unstable, ... }: {
   services.desktopManager.cosmic = {
     enable = true;
   };
@@ -13,6 +13,11 @@
     unstable.waypaper
     unstable.foliate
     unstable.thunar
+    unstable.motrix
     unstable.eog     # Eye of GNOME
+
+    stable.super-productivity
+    stable.freecad
+    stable.krita
   ];
 }
