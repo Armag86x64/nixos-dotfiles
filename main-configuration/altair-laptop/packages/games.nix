@@ -21,7 +21,6 @@ in {
 
   environment.systemPackages = [
     freesmlauncher.packages.${system}.freesmlauncher
-    # unstable.mindustry-wayland
 
     # For gaming
     stable.graalvmPackages.graalvm-ce
