@@ -1,7 +1,8 @@
 { unstable, ... }: {
   home.packages = [ 
     unstable.grim 
-    unstable.slurp 
+    unstable.slurp
+    unstable.wayfreeze
   ];
 
   programs.satty = {
