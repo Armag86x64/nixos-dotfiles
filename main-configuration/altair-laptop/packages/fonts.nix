@@ -8,6 +8,7 @@
     packages = with unstable; [
       monocraft
       cascadia-code
+      terminus_font
       nerd-fonts.caskaydia-cove
       nerd-fonts.jetbrains-mono
       noto-fonts-color-emoji
