@@ -12,6 +12,7 @@
     stable.vim-full
     stable.udiskie
     stable.bottom
+    stable.lsof
     stable.nano
     stable.wget
     stable.ncdu
