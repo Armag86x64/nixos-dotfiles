@@ -18,7 +18,6 @@
     extraConfigLua = ''
       -- Применяем тему оформления
       require("monoglow").setup({
-      -- Настройки
       })
 
       -- Переопределяем цвета для rainbow-delimiters через событие ColorScheme
@@ -43,6 +42,12 @@
           vim.api.nvim_set_hl(0, 'GitSignsChange',         { fg = '#1bfd9c' })
         end,
       })
+
+      -- Смена цвета фона на полностью чёрный
+      vim.api.nvim_set_hl(0, "Normal", { bg = "#000000" })
+      vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#000000" })
+      vim.api.nvim_set_hl(0, "SignColumn", { bg = "#000000" })
+
 
       -- Постепенное затухание скобок (от ярко-белого к темно-серому)
       vim.api.nvim_set_hl(0, 'RainbowDelimiterRed',    { fg = '#ffffff' })
