@@ -13,7 +13,7 @@ readonly dwl_output_filename="$HOME"/.cache/dwltags                  # File to w
 readonly labels=( " 1 " " 2 " " 3 " " 4 " " 5 " " 6 " " 7 " " 8 " " 9 " )              # Number of lables must match dwl's config.h tagcount
 pango_tag_default="<span                      foreground='#ffffff'>" # Pango span style for 'default' tags
 pango_tag_active="<span                       foreground='#aaaaaa'>" # Pango span style for 'active' tags
-pango_tag_selected="<span                     foreground='#aaaaaa'>" # Pango span style for 'selected' tags
+pango_tag_selected="<span                     foreground='#39c89d'>" # Pango span style for 'selected' tags
 pango_tag_urgent="<span                       background='#444444'>" # Pango span style for 'urgent' tags
 pango_layout="<span                           foreground='#444444'>" # Pango span style for 'layout' character
 pango_title="<span                            foreground='#444444'>" # Pango span style for 'title' monitor
@@ -31,6 +31,7 @@ full_components_list+=("layout" "title")
 
 monitor="$1"
 
+
 _cycle() {
     output_text=""
     if [[ "$selmon" = 0 ]]; then
@@ -47,9 +48,12 @@ _cycle() {
                 if [[ "$hide_unused_tags" = true ]] && ! (( ("$activetags" | "$urgenttags" | "$selectedtags") & mask )); then
                     continue
                 fi
-                if (( "$activetags"   & mask )) 2>/dev/null; then tag_text="${pango_tag_active}${tag_text}</span>"; fi
-                if (( "$urgenttags"   & mask )) 2>/dev/null; then tag_text="${pango_tag_urgent}${tag_text}</span>"; fi
-                if (( "$selectedtags" & mask )) 2>/dev/null; then tag_text="${pango_tag_selected}${tag_text}</span>"
+                if (( "$urgenttags" & mask )) 2>/dev/null; then
+                    tag_text="${pango_tag_urgent}${tag_text}</span>"
+                elif (( "$selectedtags" & mask )) 2>/dev/null; then
+                    tag_text="${pango_tag_selected}${tag_text}</span>"
+                elif (( "$activetags" & mask )) 2>/dev/null; then
+                    tag_text="${pango_tag_active}${tag_text}</span>"
                 else
                     tag_text="${pango_tag_default}${tag_text}</span>"
                 fi
@@ -67,6 +71,7 @@ _cycle() {
         esac
     done
 }
+
 
 # Первая принудительная отрисовка при запуске Waybar
 if [[ -f "$dwl_output_filename" ]]; then
