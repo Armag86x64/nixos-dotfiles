@@ -5,177 +5,157 @@
     enable = true;
     settings = {
       "$schema" = "https://github.com";
+
+      padding = {
+        top = 2;
+      };
       
       display = {
-        separator = ": ";
+        separator = " ::  ";
+        color = {
+          separator = "#465450"; # Приглушённый цвет разделителя ::
+        };
       };
 
       logo = {
+        padding = {
+          top = 5;
+        };
         color = {
-          # "1" = "#cccccc";
-          "1" = "#aaaaaa";
-          "2" = "#7a7a7a";
-          "3" = "#555555";
-          "4" = "#444444";
-          "5" = "#2a2a2a";
-          "6" = "#191919";
+          "1" = "#4ce0a8";
+          "2" = "#4ce0a8";
+          "3" = "#4ce0a8";
+          "4" = "#4ce0a8";
+          "5" = "#4ce0a8";
+          "6" = "#4ce0a8";
         };
       };
 
       modules = [
+        "break"
+        "break"
+        "break"
         {
           type = "custom";
-          format = "┌──────────────────────────────────────────┐\n";
+          format = "{#264038}┌────────────────    B A S E    ────────────────┐\n";
         }
         {
           type = "chassis";
-          key = "  Chassis";
+          key = "   ";
           format = "{1} {2} {3}";
-          keyColor = "#6f7987";
+          keyColor = "#4ce0a8";
         }
         {
           type = "os";
-          key = "  OS";
+          key = "   ";
           format = "{2}";
-          keyColor = "#6f7987";
+          keyColor = "#4ce0a8";
         }
         {
           type = "kernel";
-          key = "  Kernel";
+          key = "  󰌽 ";
           format = "{2}";
-          keyColor = "#6f7987";
+          keyColor = "#4ce0a8";
         }
         {
           type = "packages";
-          key = "  Packages";
-          keyColor = "#6f7987";
+          key = "   ";
+          keyColor = "#4ce0a8";
         }
         {
           type = "display";
-          key = "  Display";
+          key = "  󰍹 ";
           format = "{1}x{2} @ {3}Hz [{7}]";
-          keyColor = "#6f7987";
+          keyColor = "#4ce0a8";
         }
         {
           type = "terminal";
-          key = "  Terminal";
-          keyColor = "#6f7987";
+          key = "   ";
+          keyColor = "#4ce0a8";
         }
         {
           type = "wm";
-          key = "  DE/WM";
+          key = "   ";
           format = "{2}";
-          keyColor = "#6f7987";
+          keyColor = "#4ce0a8";
         }
         {
           type = "custom";
           format = "";
         }
-        {
-          type = "custom";
-          format = "└──────────────────────────────────────────┘";
-        }
-        "break"
-        {
-          type = "title";
-          key = " ";
-          color = {
-            user = "#d5d5d5";
-            at = "#d5d5d5";
-            host = "#d5d5d5";
-          };
-        }
 
         /* Basic hardware */ 
-
         {
           type = "custom";
-          format = "┌──────────────────────────────────────────┐\n";
+          format = "├────────────────    H A R D    ────────────────┤\n";
         }
+
         {
           type = "cpu";
-          format = "{1} @ {7}";
-          key = "  CPU";
-          keyColor = "#6f7987";
+          format = "{name}";
+          key = "   ";
+          keyColor = "#4ce0a8";
         }
         {
           type = "gpu";
-          format = "{1} {2}";
-          key = "  GPU:";
-          keyColor = "#6f7987";
-        }
-        {
-          type = "gpu";
-          format = "{3}";
-          key = "  GPU Driver";
-          keyColor = "#6f7987";
+          format = "{1} {2} ({3})";
+          key = "  󰨇 ";
+          keyColor = "#4ce0a8";
         }
         {
           type = "memory";
-          key = "  Memory";
-          keyColor = "#6f7987";
+          key = "   ";
+          keyColor = "#4ce0a8";
         }
         {
           type = "disk";
-          key = "  Disk (/)"; 
+          key = "   "; 
           folders = "/"; 
           format = "{1} / {2} ({3})"; 
-          keyColor = "#6f7987";
+          keyColor = "#4ce0a8";
         }
         {
           type = "battery";
-          key = "  Battery";
-          keyColor = "#677987";
+          key = "   ";
+          format = "{capacity} [{status}]";
+          keyColor = "#4ce0a8";
         }
+
         { type = "custom"; format = ""; }
         {
           type = "custom";
-          format = "└──────────────────────────────────────────┘";
+          format = "├────────────────    T I M E    ────────────────┤";
         }
+        { type = "custom"; format = ""; }
 
         /* T i m e */
-
-        {
-          type = "custom";
-          format = "┌──────────────────────────────────────────┐\n";
-        }
-
         {
           type = "disk";
-          key = "  OS Age";
+          key = "  󰃰 ";
           folders = "/";
-          keyColor = "#6f7987";
-          format = "{days} days";
+          keyColor = "#4ce0a8";
+          format = "{days} days"; # OS Age
         }
         {
           type = "uptime";
-          key = "  Uptime";
-          keyColor = "#6f7987";
+          key = "  󰃰 ";
+          keyColor = "#4ce0a8";
         }
 
         { type = "custom"; format = ""; }
         {
           type = "custom";
-          format = "└──────────────────────────────────────────┘";
+          format = "└───────────────────────────────────────────────┘";
         }
-
-        /* D I S K */
         /*
-        {
-          type = "custom";
-          format = "┌──────────────────────────────────────────┐\n";
-        }
-
-        {
-          type = "custom";
-          format = "└──────────────────────────────────────────┘";
-        }
-        */
         {
           type = "colors";
           paddingLeft = 2;
           symbol = "circle";
         }
+        */
+        "break"
+        "break"
         "break"
       ];
     };
