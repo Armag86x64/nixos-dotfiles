@@ -5,6 +5,7 @@
     ./obsidian
     ./firefox
     ./nixvim
+    ./kitty
     ./shell
     ./foot
     ./wofi
