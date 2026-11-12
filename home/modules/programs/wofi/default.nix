@@ -6,17 +6,17 @@
     package = unstable.wofi;
     
     settings = {
-      width = 650;        # Немного увеличили ширину для более широкого шрифта
-      height = 450;       # Добавили высоты для лучшего распределения строк
+      width = 650;
+      height = 450;
       no_actions = true;
       hide_scroll = true;
       show_icons = true;
       allow_images = true;
-      columns = 2;        # Переключили на 2 колонки, как на вашем скриншоте
-      image_size = 24;    # Увеличили иконки до 24px, чтобы они не казались мелкими рядом с JetBrainsMono
+      columns = 2;
+      image_size = 24; 
       icon_theme = "Tela-circle-black-dark";
-      term = "foot bash -i -c";
-      prompt = "Search programm";
+      term = "kitty";
+      prompt = "Search applications";
     };
 
     style = ''
@@ -25,8 +25,8 @@
           background-color: #000000;
           color: #d1d1d1;
           font-family: "JetBrainsMono Nerd Font";
-          font-size: 13px; /* Оптимальный размер для JetBrainsMono */
-          border: 1px solid #333333;
+          font-size: 13px;
+          border: 2px solid #242428;
       }
 
       /* Поле поиска */
@@ -73,7 +73,6 @@
 
       #text {
           margin: 0;
-          vertical-align: middle; /* Выравнивание текста строго по центру иконки */
       }
 
       #scroll {
@@ -91,7 +90,6 @@
       /* Иконки приложений */
       #img {
           margin-right: 12px;
-          vertical-align: middle;
           opacity: 0.8;
       }
 

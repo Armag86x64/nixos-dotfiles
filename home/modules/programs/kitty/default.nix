@@ -10,6 +10,11 @@
       size = 16;
     };
 
+    keybindings = {
+      "ctrl+tab" = "";
+      "ctrl+shift+tab" = "";
+    };
+
     settings = {
       # --- Окно и отступы ---
       window_padding_width = 8; # Аналог pad = "8x8 center"
