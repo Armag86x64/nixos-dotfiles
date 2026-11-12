@@ -30,8 +30,7 @@ static const char *waypaper[] = { "waypaper", NULL };
 static const char *menucmd[] = { "fuzzel", NULL };
 static const char *woficmd[] = { "wofi", "--show", "drun", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
-static const char *filemanagercmd[] = { "foot", "-e", "--app-id=yazi-terminal", "yazi", NULL };
-static const char *taskcmd[] = { "foot", "-e", "--app-id=taskwarrior-tui", "taskwarrior-tui", NULL };
+static const char *filemanagercmd[] = { "kitty", "yazi", NULL };
 static const char *bottomcmd[] = { "foot", "btm", NULL };
 static const char *nvimconfigcmd[] = { "foot", "nvim", "/home/soundwave/nixos-dotfiles", NULL };
 static const char *nvimnotescmd[] = { "foot", "nvim", "/home/soundwave/Notes", NULL };
@@ -58,7 +57,6 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_d,    spawn, {.v = menucmd} },        /* Mod+D - Fuzzel */
     { MODKEY,                    XKB_KEY_f,    spawn, {.v = filemanagercmd} }, /* Mod+F - Файловый менеджер */
     { MODKEY,                    XKB_KEY_w,    spawn, {.v = browsercmd} },     /* Mod+W - Браузер */
-    { MODKEY,                    XKB_KEY_t,    spawn, {.v = taskcmd} },        /* Mod+T - Taskwarrior */
     { MODKEY,                    XKB_KEY_r,    spawn, {.v = woficmd} },        /* Mod+R - Wofi (drun) */
     { MODKEY,                    XKB_KEY_b,    spawn, {.v = bottomcmd} },      /* Mod+B - Bottom */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,    spawn, {.v = waypaper} },       /* Переместить на все теги */
