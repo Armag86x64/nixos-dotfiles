@@ -1,6 +1,7 @@
 { ... }: {
   imports = [
     ./virtualization
+    ./cli-music
     ./fastfetch
     ./obsidian
     ./firefox

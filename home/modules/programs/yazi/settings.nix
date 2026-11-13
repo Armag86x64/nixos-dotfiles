@@ -14,7 +14,7 @@
           { run = "mpv \"$@\""; orphan = true; desc = "Открыть видео в MPV"; }
         ];
         audio = [
-          { run = "mpv --no-video \"$@\""; block = true; desc = "Слушать аудио в MPV"; }
+          { run = "cd %d && rmpc update && rmpc"; block = true; desc = "Слушать аудио в MPV"; }
         ];
         image = [
           { run = "eog \"$@\""; orphan = true; desc = "Открыть в Eye of Gnome"; }

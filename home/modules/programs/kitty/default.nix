@@ -19,7 +19,7 @@
       # --- Окно и отступы ---
       window_padding_width = 8; # Аналог pad = "8x8 center"
       placement_strategy = "center";
-      background_opacity = "0.95"; # Аналог alpha = "0.95"
+      # background_opacity = "1"; # Аналог alpha = "0.95"
       resize_debounce_time = "0.1";
       confirm_os_window_close = 0;
 
