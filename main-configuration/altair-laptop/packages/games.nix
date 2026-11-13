@@ -1,4 +1,4 @@
-{ pkgs, stable, unstable, freesmlauncher, ... }:
+{ pkgs, stable, freesmlauncher, ... }:
 let
   system = pkgs.stdenv.hostPlatform.system;  
 in {

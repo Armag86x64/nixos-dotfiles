@@ -5,6 +5,7 @@
     # D e s k t o p
     stable.ffmpeg
     stable.yt-dlp
+    stable.rmpc
     
     # I m p o r t a n t
     stable.brightnessctl
