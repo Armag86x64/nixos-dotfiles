@@ -1,13 +1,9 @@
 { stable, unstable, ... }: {
-  services.desktopManager.cosmic = {
-    enable = true;
-  };
-
   environment.systemPackages = [
     unstable.telegram-desktop
-    unstable.cosmic-session
     unstable.qbittorrent
     unstable.librewolf
+    unstable.keepassxc
     unstable.chromium
     unstable.waypaper
     unstable.foliate

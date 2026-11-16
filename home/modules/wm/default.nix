@@ -3,7 +3,6 @@
     ./screenshots
     ./widgets
     ./waybar
-    ./cosmic
     ./theme
     ./mako
     ./niri
