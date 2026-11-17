@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+  imports = [
+    ./yazi.nix
+  ];
+
   xdg = {
     portal = {
       enable = true;
@@ -8,15 +12,13 @@
       extraPortals = [ 
         pkgs.xdg-desktop-portal-gtk
         pkgs.xdg-desktop-portal-wlr
-        pkgs.xdg-desktop-portal-cosmic 
         pkgs.xdg-desktop-portal-termfilechooser
       ];
 
       config = {
         dwl = {
-          default = [ "gtk" "wlr" ];
-          # "org.freedesktop.impl.portal.Screenshot" = [ "wlr" ];
-          "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+          default = [ "gtk" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
         common = {
           default = [ "gtk" "wlr" ];
@@ -25,12 +27,14 @@
       };
     };
 
+    /*
     mimeApps = {
       enable = true;
       defaultApplications = {
          "inode/directory" = [ "thunar.desktop" ];
       };
     };
+    */
     
     userDirs = {
       enable = true;
