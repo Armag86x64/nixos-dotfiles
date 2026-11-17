@@ -5,6 +5,9 @@
   };
 
   xdg.configFile."swayimg/init.lua".text = ''
+    -- Подгружать остальные картинки из той же папки
+    swayimg.imagelist.enable_adjacent(true)
+
     -- Режим просмотра (Viewer)
     swayimg.viewer.on_key("j", function()
       swayimg.viewer.switch_image("next")
