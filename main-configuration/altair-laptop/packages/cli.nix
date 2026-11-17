@@ -1,8 +1,9 @@
-{ stable, ... }: {
+{ stable, unstable, ... }: {
   services.udisks2.enable = true;
 
   environment.systemPackages = [
     # D e s k t o p
+    unstable.wayshot
     stable.ffmpeg
     stable.yt-dlp
     

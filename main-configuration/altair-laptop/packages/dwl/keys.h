@@ -46,7 +46,7 @@ static const char *brightness_up_cmd[] = { "brightnessctl", "--class=backlight",
 static const char *brightness_down_cmd[] = { "brightnessctl", "--class=backlight", "set", "10%-", NULL };
 
 /* ===== КОМАНДЫ ДЛЯ СКРИНШОТОВ ===== */
-static const char *screenshot_area_cmd[] = { "sh", "-c", "grim -g \"$(slurp)\" - | satty --filename -", NULL };
+static const char *screenshot_area_cmd[] = { "sh", "-c", "wayshot -g -- - | satty --filename - --copy-command wl-copy --early-exit", NULL };
 static const char *screenshot_screen_cmd[] = { "grim", NULL };
 static const char *screenshot_window_cmd[] = { "sh", "-c", "grim -g \"$(slurp -f '%o:%x,%y %wx%h' -o focused)\" - | satty --filename -", NULL };
 
