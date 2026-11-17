@@ -14,10 +14,10 @@
           { run = "mpv \"$@\""; orphan = true; desc = "Открыть видео в MPV"; }
         ];
         audio = [
-          { run = "cd %d && rmpc update && rmpc"; block = true; desc = "Слушать аудио в MPV"; }
+          { run = "mpv --force-window=yes --loop-playlist=inf \"$@\""; orphan = true; desc = "Слушать аудио в MPV"; }
         ];
         image = [
-          { run = "eog \"$@\""; orphan = true; desc = "Открыть в Eye of Gnome"; }
+          { run = "swayimg \"$@\""; orphan = true; desc = "Открыть в swayimg"; }
         ];
         archives = [
           { run = "peazip \"$@\""; orphan = true; desc = "Менеджер архивов PeaZip"; }

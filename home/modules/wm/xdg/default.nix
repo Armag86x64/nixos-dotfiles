@@ -20,8 +20,7 @@
         };
         common = {
           default = [ "gtk" "wlr" ];
-          "org.freedesktop.portal.Screenshot" = pkgs.lib.mkForce [ "cosmic" ];
-          # "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
+          "org.freedesktop.impl.portal.FileChooser" = [ "termfilechooser" ];
         };
       };
     };

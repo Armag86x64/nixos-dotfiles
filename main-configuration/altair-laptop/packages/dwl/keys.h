@@ -31,9 +31,9 @@ static const char *menucmd[] = { "fuzzel", NULL };
 static const char *woficmd[] = { "wofi", "--show", "drun", NULL };
 static const char *browsercmd[] = { "firefox", NULL };
 static const char *filemanagercmd[] = { "kitty", "yazi", NULL };
+static const char *obsidian[] = { "obsidian", NULL };
 static const char *bottomcmd[] = { "foot", "btm", NULL };
 static const char *nvimconfigcmd[] = { "foot", "nvim", "/home/soundwave/nixos-dotfiles", NULL };
-static const char *nvimnotescmd[] = { "foot", "nvim", "/home/soundwave/Notes", NULL };
 
 /* ===== КОМАНДЫ ДЛЯ ЗВУКА (Wireplumber) ===== */
 static const char *vol_up_cmd[] = { "sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0", NULL };
@@ -60,11 +60,11 @@ static const Key keys[] = {
     { MODKEY,                    XKB_KEY_r,    spawn, {.v = woficmd} },        /* Mod+R - Wofi (drun) */
     { MODKEY,                    XKB_KEY_b,    spawn, {.v = bottomcmd} },      /* Mod+B - Bottom */
     { MODKEY|WLR_MODIFIER_SHIFT, XKB_KEY_w,    spawn, {.v = waypaper} },       /* Переместить на все теги */
+    { MODKEY,                    XKB_KEY_o,    spawn, {.v = obsidian} },   /* Mod+O - Obsidian */
 
     
     /* ===== VIM-режим: открытие конфигов ===== */
     { WLR_MODIFIER_SHIFT,        XKB_KEY_N,    spawn, {.v = nvimconfigcmd} },  /* Shift+N - NixOS конфиг */
-    { MODKEY,                    XKB_KEY_o,    spawn, {.v = nvimnotescmd} },   /* Mod+O - Заметки */
     
     /* ===== ЗВУК (Wireplumber) ===== */
     { 0,                         XKB_KEY_XF86AudioRaiseVolume, spawn, {.v = vol_up_cmd} },   /* Громкость + */

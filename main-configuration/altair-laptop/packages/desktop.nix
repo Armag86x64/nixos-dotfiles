@@ -10,7 +10,6 @@
     unstable.blanket
     unstable.thunar
     unstable.motrix
-    unstable.eog     # Eye of GNOME
 
     stable.super-productivity
     stable.freecad

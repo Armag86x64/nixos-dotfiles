@@ -4,6 +4,7 @@
     ./cli-music
     ./fastfetch
     ./obsidian
+    ./swayimg
     ./firefox
     ./nixvim
     ./kitty
