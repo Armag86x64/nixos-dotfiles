@@ -10,6 +10,11 @@
 
     keymap = {
       mgr.prepend_keymap = [
+        # --- [Копирование, вставка и вырезание] ---
+        { on = "y"; run = [ "yank" "plugin clipboard -- --action=copy" ]; desc = "Yank selected files (copy)"; }
+        { on = "x"; run = [ "yank --cut" "plugin clipboard -- --action=copy" ]; desc = "Yank selected files (cut)"; }
+        { on = "<C-p>"; run = [ "plugin clipboard -- --action=paste" ]; desc = "Paste yanked system clipboard files"; }
+
         # --- [Перемещение и навигация (WASD)] ---
         { on = [ "W" ]; run = "arrow -1";       desc = "Шаг вверх"; }
         { on = [ "S" ]; run = "arrow 1";        desc = "Шаг вниз"; }
