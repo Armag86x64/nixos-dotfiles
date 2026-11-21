@@ -3,16 +3,10 @@ let
   system = pkgs.stdenv.hostPlatform.system;
 in
 {
-  imports = [
-    ./ui.nix
-    ./white-list.nix
-  ];
-
   programs.firefox = {
     enable = true;
     package = stable.firefox;
 
-    # nativeMessagingHosts = [ ]; 
     configPath = "${config.xdg.configHome}/mozilla/firefox";
 
     # === Глобальные корпоративные политики Firefox ===
@@ -21,17 +15,9 @@ in
         "*" = {
           default_area = "navbar"; # Автоматически выносить все иконки на панель навигации
         };
-
-        ExtensionSettings = {
-          "black21@xi-addons.mozilla.org" = {
-            installation_mode = "force_installed";
-            install_url = "https://mozilla.org";
-          };
-        };
       };
 
       # === УМНАЯ ОЧИСТКА ПРИ ЗАКРЫТИИ ===
-      # Сюда мы передаем жесткий контроль. Поля выставлены в true.
       SanitizeOnShutdown = {
         Cache = true;
         Cookies = true;
@@ -60,9 +46,6 @@ in
       settings = {
         "extensions.autoDisableScopes" = 0;
         "widget.use-xdg-desktop-portal.file-picker" = 1;
-
-        # Активация темы black21
-        # "lightweightThemes.selectedThemeID" = "black21@xi-addons.mozilla.org";
 
         # УДАЛЕНО: Все параметры "privacy.clearOnShutdown.*" удалены отсюда,
         # чтобы они не перезаписывали поведение белого списка из политик.

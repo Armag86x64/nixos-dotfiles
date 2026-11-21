@@ -4,8 +4,8 @@
     ./cli-music
     ./fastfetch
     ./obsidian
+    ./browsers
     ./swayimg
-    ./firefox
     ./nixvim
     ./kitty
     ./shell
